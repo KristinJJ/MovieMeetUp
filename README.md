@@ -44,7 +44,7 @@ A group movie recommender built during CodeDay Labs 2021
 
 # Cadence
 - Meeting schedules
-  - Richard will send out when2meet to determine scheduling
+  - Mentor Richard will send out when2meet to determine scheduling
 - Sprints?
   - 1-week Sprints
 
