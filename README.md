@@ -6,6 +6,7 @@ A group movie recommender built during CodeDay Labs 2021
   - Users create an account
   - Sign-up and authentication model
     - Built-in or separate?
+      - If built-in: Lambda authorizer using Tokens?
   - Users rate movies
     - Movies they’ve seen
       - How much they liked it
@@ -39,7 +40,6 @@ A group movie recommender built during CodeDay Labs 2021
 - Scrum/Agile?
   - Agile
 - Work management tools?
-  - Trello
   - Github Projects
 
 # Cadence
@@ -55,8 +55,6 @@ A group movie recommender built during CodeDay Labs 2021
 # Next Steps
 - What are the hard problems?
 - What needs to be done first?
-  - Create Github repo
-  - Sign up for AWS accounts to research AWS Lambda
   - Research creating automated testing 
     - Cypress?
   - Research how to figure out which streaming services are playing that movie
