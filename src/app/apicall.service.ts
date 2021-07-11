@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Movies } from './movies';
+import { Movies, MovieItem } from './movies';
 //import * as Rx from "rxjs/Rx";
 import { from, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { environment } from "../environments/environment";
 
 interface ItemsResponse {
   movies: Array<Movies>;
 }
+
+// TODO: securely save API Key as variable to include in api calls
+// TODO: create variable for movie title from user entry in API call
+      //: future api calls--imdb id for full movie details
 
 @Injectable({
   providedIn: 'root'
@@ -16,18 +21,15 @@ export class ApicallService {
 
   constructor(private http: HttpClient) {}
 
-  getMovies(): Observable<Movies[]> {
-    return this.http.get<Movies[]>(`https://imdb-api.com/en/API/SearchMovie/k_rnch4z33/Star%20Wars`).
+  // user variable = ""
+  getMovies(movieName: string): Observable<MovieItem[]> {
+    return this.http.get<Movies>(`https://imdb-api.com/en/API/SearchMovie/${environment.imdbApiKey}/${encodeURIComponent(movieName)}`).
         pipe(
-          //map(result=>result.movies)
-           map((data: Movies[]) => {
-             console.log(data);
-             return data;
-           }), catchError( error => {
-             return throwError( 'Something went wrong!' );
-           })
+          map((data) => {
+            console.log(data);
+            return data.results ?? [];
+          })
         )
-        
     }
   // getMovieDetails?
   // other api calls types?

@@ -4,6 +4,7 @@ import { from, Observable } from 'rxjs';
 import { Movies } from './movies';
 import { ApicallService } from './apicall.service';
 import { OnInit } from '@angular/core';
+import type { MovieItem } from "./movies";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ import { OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  Movie: any = [];
+  Movie: MovieItem[] = [];
 
   constructor( public apicall: ApicallService) {}
 
@@ -21,15 +22,18 @@ export class AppComponent implements OnInit {
   }
 
   title = 'angular-test-app';
-  //title = this.Movie[1];
+  
 
  loadMovies() {
-   return this.apicall.getMovies().subscribe((data: {}) => {
+   return this.apicall.getMovies("Star Wars").subscribe((data) => {
      this.Movie = data;
      console.log(data);
-     // console.log(data[0].title) --> throws error
+     console.log(this.Movie[0]);
+     //this.title = this.Movie.results[0].title;
    })
  }
+ //console.log(Movie);
+ 
 }
 
 
