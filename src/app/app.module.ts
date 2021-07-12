@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SampleComponent } from './sample/sample.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -16,9 +17,11 @@ import {MatFormFieldModule} from "@angular/material/form-field";
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        DragDropModule
     ],
   providers: [],
+  entryComponents: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
