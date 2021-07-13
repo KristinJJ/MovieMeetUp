@@ -1,8 +1,5 @@
 import {Component} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-//import * as Rx from "rxjs/Rx";
-import { from, Observable } from 'rxjs';
-import { Movies } from './movies';
 import { ApicallService } from './apicall.service';
 import { OnInit } from '@angular/core';
 import type { MovieItem } from "./movies";
@@ -17,7 +14,6 @@ import type { MovieItem } from "./movies";
 })
 
 export class AppComponent implements OnInit {
-  // tslint:disable:max-line-length
   title = 'Movie Ranking';
   Movie: MovieItem[] = [];
 
