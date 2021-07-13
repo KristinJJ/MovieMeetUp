@@ -1,3 +1,6 @@
+<app-calendar></app-calendar>
+<h1>Rank the Movies!</h1>
+<p>First choice goes on the top of the list, last choice goes on the bottom of the list</p>
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
   <div class="example-box" *ngFor="let movie of movies" cdkDrag>
     {{movie.title}}

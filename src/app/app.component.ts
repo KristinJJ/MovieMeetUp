@@ -11,7 +11,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 })
 export class AppComponent {
   // tslint:disable:max-line-length
-  title = 'Movies';
+  title = 'Movie Ranking';
   movies = [
     {
       title: 'Episode I - The Phantom Menace',
