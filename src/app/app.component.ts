@@ -1,5 +1,11 @@
 import {Component} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+//import * as Rx from "rxjs/Rx";
+import { from, Observable } from 'rxjs';
+import { Movies } from './movies';
+import { ApicallService } from './apicall.service';
+import { OnInit } from '@angular/core';
+import type { MovieItem } from "./movies";
 
 /**
  * @title Drag&Drop custom preview
@@ -9,9 +15,12 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+
+export class AppComponent implements OnInit {
   // tslint:disable:max-line-length
-  title = 'Movie Ranking';
+
+  Movie: MovieItem[] = [];
+  // get the MovieItem data the same way as movies!
   movies = [
     {
       title: 'Episode I - The Phantom Menace',
@@ -50,9 +59,27 @@ export class AppComponent {
       poster: 'https://upload.wikimedia.org/wikipedia/en/a/af/Star_Wars_The_Rise_of_Skywalker_poster.jpg'
     }
   ];
-  // tslint:enable:max-line-length
 
+  constructor( public apicall: ApicallService) {}
+
+  ngOnInit() {
+    this.loadMovies();
+  }
+
+  title = 'angular-test-app';
+
+  loadMovies() {
+   return this.apicall.getMovies("Star Wars").subscribe((data) => {
+     this.Movie = data;
+     console.log(data);
+     console.log(this.Movie[0]);
+     //this.title = this.Movie.results[0].title;
+   })
+  }
+ //console.log(Movie);
   drop(event: CdkDragDrop<{title: string, poster: string}[]>) {
     moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
   }
 }
+
+

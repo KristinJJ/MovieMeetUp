@@ -6,4 +6,41 @@
     {{movie.title}}
     <img *cdkDragPreview [src]="movie.poster" [alt]="movie.title">
   </div>
+
+  <div>
+    <!--<h3>{{ Movie?.results?.[0].id ?? "Loading..." }}</h3>-->
+    <h3>
+      {{
+        Movie === undefined
+          ? "Loading..."
+          : Movie.length === 0
+          ? "No results"
+          : Movie[0].id
+      }}
+    </h3>
+  </div>
+
+  <div class="col-md-12">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Type</th>
+          <th scope="col">image</th>
+          <th scope="col">title</th>
+          <th scope="col">desc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let movie of Movie">
+          <td>{{ movie.id }}</td>
+          <td>{{ movie.resultType }}</td>
+          <td><img src="{{ movie.image }}" style="height: 100px" /></td>
+          <td>{{ movie.title }}</td>
+          <td>{{ movie.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
