@@ -5,13 +5,11 @@ import { AppComponent } from './app.component';
 import { SampleComponent } from './sample/sample.component';
 import { InputComponent } from "./input/input.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from "@angular/material/form-field";
-import { MatDatepickerModule} from "@angular/material/datepicker";
-import { MatNativeDateModule} from '@angular/material/core';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
 import { CalendarComponent } from "./calendar/calendar.component";
 import { HttpClientModule } from '@angular/common/http';
 import { DemoMaterialModule } from "./material.module";
-import {FormsModule} from "@angular/forms";
+import { FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -24,9 +22,6 @@ import {FormsModule} from "@angular/forms";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
     HttpClientModule,
     DemoMaterialModule,
     FormsModule
