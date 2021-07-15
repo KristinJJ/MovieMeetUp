@@ -16,6 +16,8 @@ import type { MovieItem } from "./movies";
 export class AppComponent implements OnInit {
   title = 'Movie Ranking';
   Movie: MovieItem[] = [];
+  value = '';
+  userID = 'no User ID entered';
 
   constructor( public apicall: ApicallService) {}
 
@@ -30,8 +32,23 @@ export class AppComponent implements OnInit {
      console.log(this.Movie[0]);
    })
   }
+
   drop(event: CdkDragDrop<{title: string, image: string}[]>) {
     moveItemInArray(this.Movie, event.previousIndex, event.currentIndex);
+  }
+
+  submitUserID() {
+    this.userID = this.value;
+    console.log("User ID: " + this.userID);
+  }
+
+  submitRanking() {
+    console.log("User ID: " + this.userID);
+    for (let index in this.Movie) {
+      console.log("ranking: " + index);
+      console.log(this.Movie[index].id);
+      console.log(this.Movie[index].title);
+    }
   }
 }
 
