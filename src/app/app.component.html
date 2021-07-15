@@ -31,7 +31,8 @@
 
 <h1>Current Movie Ranking: </h1>
 <div *ngFor="let movie of Movie; let indexElement=index">
-  Ranking info: {{userID}}
+  Ranking info:
+  User ID: {{userID}}
   , ranking: {{indexElement}}
   , movie: {{movie.title}}
   , id: {{movie.id}}
