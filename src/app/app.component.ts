@@ -58,11 +58,11 @@ export class AppComponent implements OnInit {
 
   findTopMovie() {
     let topMovie = '';
-    let maxValue = 0;
+    let minValue = 10000;
     for (let key of this.movieRankings.keys()) {
       let newValue = this.movieRankings.get(key);
-      if (newValue > maxValue) {
-        maxValue = newValue;
+      if (newValue < minValue) {
+        minValue = newValue;
         topMovie = key;
       }
     }
