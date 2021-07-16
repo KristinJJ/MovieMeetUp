@@ -8,11 +8,13 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
 import { HttpClientModule } from '@angular/common/http';
 import { DemoMaterialModule } from "./material.module";
 import { FormsModule} from "@angular/forms";
+import { EventComponent } from './event/event.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SampleComponent,
+    EventComponent,
   ],
   imports: [
     BrowserModule,
