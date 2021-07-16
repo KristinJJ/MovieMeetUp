@@ -20,21 +20,22 @@ export class AppComponent implements OnInit {
   userID = 'no User ID entered';
   movieRankings = new Map();
 
-  constructor( public apicall: ApicallService) {}
+  constructor(public apicall: ApicallService) {
+  }
 
   ngOnInit() {
     this.loadMovies();
   }
 
   loadMovies() {
-   return this.apicall.getMovies("Star Wars").subscribe((data) => {
-     this.Movie = data;
-     console.log(data);
-     console.log(this.Movie[0]);
-   })
+    return this.apicall.getMovies("Star Wars").subscribe((data) => {
+      this.Movie = data;
+      console.log(data);
+      console.log(this.Movie[0]);
+    })
   }
 
-  drop(event: CdkDragDrop<{title: string, image: string}[]>) {
+  drop(event: CdkDragDrop<{ title: string, image: string }[]>) {
     moveItemInArray(this.Movie, event.previousIndex, event.currentIndex);
   }
 
@@ -44,7 +45,7 @@ export class AppComponent implements OnInit {
   }
 
   rankMovies() {
-    for (let i = this.Movie.length - 1; i > 0; i--) {
+    for (let i = 0; i < this.Movie.length; i++) {
       if (this.movieRankings.has(this.Movie[i].title)) {
         let newRanking = i + this.movieRankings.get(this.Movie[i].title)
         this.movieRankings.set(this.Movie[i].title, newRanking);
@@ -74,12 +75,10 @@ export class AppComponent implements OnInit {
     console.log("Highest rank: " + this.findTopMovie());
 
     console.log("User ID: " + this.userID);
-    for (let i = 0; i < this.Movie.length; i++) {
-      console.log("ranking: " + i);
-      console.log(this.Movie[i].id);
-      console.log(this.Movie[i].title);
+
+    for (let entry of this.movieRankings.entries()) {
+      console.log(entry[0], entry[1]);
     }
   }
+
 }
-
-
