@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   Movie: MovieItem[] = [];
   value = '';
   userID = 'no User ID entered';
+  movieRankings = new Map();
 
   constructor( public apicall: ApicallService) {}
 
@@ -42,12 +43,41 @@ export class AppComponent implements OnInit {
     console.log("User ID: " + this.userID);
   }
 
+  rankMovies() {
+    for (let i = this.Movie.length - 1; i > 0; i--) {
+      if (this.movieRankings.has(this.Movie[i].title)) {
+        let newRanking = i + this.movieRankings.get(this.Movie[i].title)
+        this.movieRankings.set(this.Movie[i].title, newRanking);
+        console.log("movie title was found");
+      } else {
+        this.movieRankings.set(this.Movie[i].title, i);
+        console.log("movie title was not found");
+      }
+    }
+  }
+
+  findTopMovie() {
+    let topMovie = '';
+    let maxValue = 0;
+    for (let key of this.movieRankings.keys()) {
+      let newValue = this.movieRankings.get(key);
+      if (newValue > maxValue) {
+        maxValue = newValue;
+        topMovie = key;
+      }
+    }
+    return topMovie;
+  }
+
   submitRanking() {
+    this.rankMovies();
+    console.log("Highest rank: " + this.findTopMovie());
+
     console.log("User ID: " + this.userID);
-    for (let index in this.Movie) {
-      console.log("ranking: " + index);
-      console.log(this.Movie[index].id);
-      console.log(this.Movie[index].title);
+    for (let i = 0; i < this.Movie.length; i++) {
+      console.log("ranking: " + i);
+      console.log(this.Movie[i].id);
+      console.log(this.Movie[i].title);
     }
   }
 }
