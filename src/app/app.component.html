@@ -4,6 +4,7 @@
     <input matInput type="text" [(ngModel)]="value" (keyup.enter)="submitUserID()">
   </mat-form-field>
 </p>
+<h3>User ID: {{userID}}</h3>
 
 <h1>Rank the Movies!</h1>
 <p>First choice goes on the top of the list, last choice goes on the bottom of the list</p>
@@ -29,11 +30,5 @@
 
 <button mat-raised-button color="primary" (click)="submitRanking()">Submit</button>
 
-<h1>Current Movie Ranking: </h1>
-<div *ngFor="let movie of Movie; let indexElement=index">
-  Ranking info:
-  User ID: {{userID}}
-  , ranking: {{indexElement}}
-  , movie: {{movie.title}}
-  , id: {{movie.id}}
-</div>
+<h1>Current Highest Rank: {{highestRank}}</h1>
+

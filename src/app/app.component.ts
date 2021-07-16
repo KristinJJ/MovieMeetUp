@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   value = '';
   userID = 'no User ID entered';
   movieRankings = new Map();
+  highestRank = 'no highest rank';
 
   constructor(public apicall: ApicallService) {
   }
@@ -45,34 +46,36 @@ export class AppComponent implements OnInit {
   }
 
   rankMovies() {
+    let points = this.Movie.length
     for (let i = 0; i < this.Movie.length; i++) {
       if (this.movieRankings.has(this.Movie[i].title)) {
-        let newRanking = i + this.movieRankings.get(this.Movie[i].title)
+        let newRanking = points + this.movieRankings.get(this.Movie[i].title)
         this.movieRankings.set(this.Movie[i].title, newRanking);
-        console.log("movie title was found");
+        points--;
       } else {
-        this.movieRankings.set(this.Movie[i].title, i);
-        console.log("movie title was not found");
+        this.movieRankings.set(this.Movie[i].title, points);
+        points--;
       }
     }
+    this.findTopMovie();
   }
 
   findTopMovie() {
     let topMovie = '';
-    let minValue = 10000;
+    let maxValue = 0;
     for (let key of this.movieRankings.keys()) {
       let newValue = this.movieRankings.get(key);
-      if (newValue < minValue) {
-        minValue = newValue;
+      if (newValue > maxValue) {
+        maxValue = newValue;
         topMovie = key;
       }
     }
-    return topMovie;
+    this.highestRank = topMovie;
   }
 
   submitRanking() {
     this.rankMovies();
-    console.log("Highest rank: " + this.findTopMovie());
+    console.log("Highest rank: " + this.highestRank);
 
     console.log("User ID: " + this.userID);
 
