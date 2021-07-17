@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import type { MovieItem } from "../movies";
+import { Router, RouterModule } from '@angular/router';
 
 interface MovieEvent {
   eventID: string;

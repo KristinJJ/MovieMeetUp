@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { ApicallService } from './apicall.service';
 import { OnInit } from '@angular/core';
-import type { MovieItem } from "./movies";
-import { Router } from '@angular/router';
+import { MovieItem, movielist } from "./movies";
+import { Router, RouterModule } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 /**
  * @title Drag&Drop custom preview
@@ -34,11 +35,17 @@ export class AppComponent implements OnInit {
   }
 
   loadMovies() {
+    if (environment.production === false) {
+      this.Movie = <MovieItem[]>movielist
+      console.log("fake array: " + this.Movie);
+      return this.Movie;
+    } else {
     return this.apicall.getMovies("Star Wars").subscribe((data) => {
       this.Movie = data;
       console.log(data);
       console.log(this.Movie[0]);
-    })
+      })
+    }
   }
 
   drop(event: CdkDragDrop<{ title: string, image: string }[]>) {
