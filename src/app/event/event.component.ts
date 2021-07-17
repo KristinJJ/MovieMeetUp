@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import type { MovieItem } from "../movies";
 
 interface MovieEvent {
   eventID: string;
   eventDate: string;
   movies?: (MovieItem) [] | null;
-  invitees?: (EventInvitees) [] | null;
-  movieRankings?: (movieRankings) [] | null;
+  //invitees?: (EventInvitees) [] | null;
+  //movieRankings?: (movieRankings) [] | null;
 }
 
 @Component({
@@ -14,6 +15,8 @@ interface MovieEvent {
   templateUrl: './event.component.html',
   styleUrls: ['./event.component.scss']
 })
+
+@Injectable()
 export class EventComponent implements OnInit {
   eventID = '';
   eventDate = '';
@@ -22,23 +25,23 @@ export class EventComponent implements OnInit {
   invitees = [];
   movieRankings = [];
 
-  // Creates EventComponent, with req id and date paramaters
-  constructor(eventID: string, eventDate: string) { 
-    eventID = this.eventID;
-    eventDate= this.eventDate;
-  }
+ 
+  constructor() {}
+
 
   ngOnInit(): void {
   }
 
   createEvent(eventDate: string) {
-    // sets eventID to be 1 larger than current size, with added random number to prevent
-    //   overwriting should a previous event be deleted
-    this.eventID = `${this.events.size+1} + '-' + ${Math.random()*100}`;
-    this.eventDate = eventDate;
-
     // create newEvent with the provided variables above and adds to the events map.
-    let newEvent = new EventComponent(this.eventID, this.eventDate )
+    let newEvent = new EventComponent();
+    // sets eventID to be 1 larger than current size, with added random number to prevent
+    //   overwriting, should a previous event be deleted
+    newEvent.eventID = `${this.events.size+1} + '-' + ${Math.random()*100}`;
+    newEvent.eventDate = eventDate;
+
+    
+    
     this.events.set(this.eventID, newEvent);  
   }
 
@@ -52,8 +55,7 @@ export class EventComponent implements OnInit {
   // search for movies    
       // moves to searching for movies to add.
           // would need to have add button for each movie object in table
-              // add button would add movie to eventMovies
-  // add movies to eventMovies (via add button)
+              // add button would add movie to eventMovies array
   // add invitees to invitees
   // find existing event
   // update existing event

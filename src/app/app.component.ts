@@ -3,6 +3,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { ApicallService } from './apicall.service';
 import { OnInit } from '@angular/core';
 import type { MovieItem } from "./movies";
+import { Router } from '@angular/router';
 
 /**
  * @title Drag&Drop custom preview
@@ -21,11 +22,15 @@ export class AppComponent implements OnInit {
   movieRankings = new Map();
   highestRank = 'no highest rank';
 
-  constructor(public apicall: ApicallService) {
+  constructor(public apicall: ApicallService, private router: Router) {
   }
 
   ngOnInit() {
     this.loadMovies();
+  }
+
+  navigate() {
+    this.router.navigateByUrl('/events');
   }
 
   loadMovies() {

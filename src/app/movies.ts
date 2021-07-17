@@ -21,3 +21,7 @@ export interface MovieItem {
     title: string;
     description: string;
 }
+
+export const movielist = [
+    
+]

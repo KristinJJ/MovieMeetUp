@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DemoMaterialModule } from "./material.module";
 import { FormsModule} from "@angular/forms";
 import { EventComponent } from './event/event.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EventComponent } from './event/event.component';
     BrowserAnimationsModule,
     HttpClientModule,
     DemoMaterialModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
