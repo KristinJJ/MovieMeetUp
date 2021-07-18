@@ -10,13 +10,15 @@ import { DemoMaterialModule } from "./material.module";
 import { FormsModule} from "@angular/forms";
 import { EventComponent } from './event/event.component';
 import { RankingComponent } from "./ranking/ranking.component";
+import { HomeComponent} from "./home/home.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     SampleComponent,
     EventComponent,
-    RankingComponent
+    RankingComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
