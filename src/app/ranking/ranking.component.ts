@@ -1,20 +1,22 @@
 import {Component} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import { ApicallService } from './apicall.service';
+import { ApicallService } from '../apicall.service';
 import { OnInit } from '@angular/core';
-import { MovieItem, movielist } from "./movies";
-import { Router, RouterModule } from '@angular/router';
-//import { environment } from 'src/environments/environment';
-import { environment } from 'src/environments/environment.prod';
+import { Router } from '@angular/router';
+import { MovieItem, movielist } from '../movies';
+import { environment } from 'src/environments/environment';
 
+/**
+ * @title Drag&Drop custom preview
+ */
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-ranking',
+  templateUrl: './ranking.component.html',
+  styleUrls: ['./ranking.component.scss']
 })
 
-export class AppComponent implements OnInit {
-  title = 'Movie Ranking';
+export class RankingComponent implements OnInit {
+  title = 'Movie ranking';
   Movie: MovieItem[] = [];
   value = '';
   userID = 'no User ID entered';
@@ -35,7 +37,7 @@ export class AppComponent implements OnInit {
   loadMovies() {
     if (environment.production === false) {
       this.Movie = <MovieItem[]>movielist
-      console.log("fake array: " + this.Movie);
+      console.log("fake array: " + JSON.stringify(this.Movie));
       return this.Movie;
     } else {
     return this.apicall.getMovies("Star Wars").subscribe((data) => {

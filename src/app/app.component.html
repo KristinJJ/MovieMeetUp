@@ -1,33 +1,6 @@
-<p>
-  <mat-form-field appearance="fill">
-    <mat-label>Enter User ID</mat-label>
-    <input
-      matInput
-      type="text"
-      [(ngModel)]="value"
-      (keyup.enter)="submitUserID()"
-    />
-  </mat-form-field>
-</p>
-<h3>User ID: {{ userID }}</h3>
-
-<h1>Rank the Movies!</h1>
-<p>
-  First choice goes on the top of the list, last choice goes on the bottom of
-  the list
-</p>
-
-<div>
-  <h2>
-    Top Choice:
-    {{
-      Movie === undefined
-        ? "Loading..."
-        : Movie.length === 0
-        ? "No results"
-        : Movie[0].title + " " + Movie[0].description + " id: " + Movie[0].id
-    }}
-  </h2>
+<app-topNav></app-topNav>
+<div class="container">
+  <router-outlet></router-outlet>
 </div>
 
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
