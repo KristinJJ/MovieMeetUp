@@ -11,6 +11,7 @@ import { FormsModule} from "@angular/forms";
 import { EventComponent } from './event/event.component';
 import { RankingComponent } from "./ranking/ranking.component";
 import { HomeComponent} from "./home/home.component";
+import {TopNavComponent} from "./topNav/topNav.component";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomeComponent} from "./home/home.component";
     SampleComponent,
     EventComponent,
     RankingComponent,
-    HomeComponent
+    HomeComponent,
+    TopNavComponent
   ],
   imports: [
     BrowserModule,
