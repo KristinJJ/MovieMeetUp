@@ -9,13 +9,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { DemoMaterialModule } from "./material.module";
 import { FormsModule} from "@angular/forms";
 import { EventComponent } from './event/event.component';
-import { RouterModule } from '@angular/router';
+import { RankingComponent } from "./ranking/ranking.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     SampleComponent,
     EventComponent,
+    RankingComponent
   ],
   imports: [
     BrowserModule,
@@ -23,13 +24,11 @@ import { RouterModule } from '@angular/router';
     BrowserAnimationsModule,
     HttpClientModule,
     DemoMaterialModule,
-    FormsModule,
-    RouterModule
+    FormsModule
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
-  entryComponents: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
