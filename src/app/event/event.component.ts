@@ -2,9 +2,12 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import type { MovieItem } from "../movies";
 import { Router, RouterModule } from '@angular/router';
+import { FormControl, NgModel } from '@angular/forms';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 interface MovieEvent {
   eventID: string;
+  eventTitle: string;
   eventDate: string;
   movies?: (MovieItem) [] | null;
   //invitees?: (EventInvitees) [] | null;
@@ -20,30 +23,54 @@ interface MovieEvent {
 @Injectable()
 export class EventComponent implements OnInit {
   eventID = '';
+  eventTitle = '';
   eventDate = '';
   events = new Map();
   eventMovies = [];
   invitees = [];
   movieRankings = [];
+  value = '';
 
  
   constructor() {}
 
-
   ngOnInit(): void {
   }
 
-  createEvent(eventDate: string) {
-    // create newEvent with the provided variables above and adds to the events map.
-    let newEvent = new EventComponent();
-    // sets eventID to be 1 larger than current size, with added random number to prevent
-    //   overwriting, should a previous event be deleted
-    newEvent.eventID = `${this.events.size+1} + '-' + ${Math.random()*100}`;
-    newEvent.eventDate = eventDate;
+  setTitle() {
+    this.eventTitle = this.value;
+    console.log("New Event: " + this.eventTitle);
+  }
 
-    
-    
-    this.events.set(this.eventID, newEvent);  
+  setDate(event: MatDatepickerInputEvent<Date>) {
+    this.eventDate = `${event.value}`.substring(0, 16);
+    console.log("New EventDate: " + this.eventDate);
+  }
+
+  createEvent() {
+    // Create new eventID: sets eventID to be 1 larger than current events map size,
+    //   with added random number to prevent overwriting, should a previous event be deleted
+    this.eventID = `${this.events.size+1}` + '-' + `${Math.floor(Math.random()*1000)}`;
+    console.log(this.eventID);
+    // Create newEvent object of MovieEvent type with the provided elements
+    let newEvent: MovieEvent = {
+      eventID : this.eventID,
+      eventTitle : this.eventTitle,
+      eventDate : this.eventDate
+    };
+    // Verify newEvent object created with correct info successfully
+    console.log(JSON.stringify(newEvent));
+
+    // Add MovieEvent object to the events map, with the eventID as a key
+    this.events.set(this.eventID, newEvent);
+    // Verify MovieEvent was added to events map 
+    console.log(this.events.get(this.eventID));
+
+    // Display all MovieEvent objects in the events map
+    for (let entry of this.events.entries()) {
+      console.log(entry[0], entry[1]);
+    }
+    return newEvent;
   }
 
 

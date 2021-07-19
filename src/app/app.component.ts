@@ -4,8 +4,7 @@ import { ApicallService } from './apicall.service';
 import { OnInit } from '@angular/core';
 import { MovieItem, movielist } from "./movies";
 import { Router, RouterModule } from '@angular/router';
-//import { environment } from 'src/environments/environment';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +24,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadMovies();
+    //this.loadMovies();
   }
 
   navigate() {

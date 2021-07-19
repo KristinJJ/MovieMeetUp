@@ -1,10 +1,25 @@
+<h1>Create Your Event</h1>
+<p>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter Event Title</mat-label>
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="value"
+      (keyup.enter)="setTitle()"
+    />
+  </mat-form-field>
+</p>
+
 <mat-form-field appearance="fill">
-  <mat-label>Enter a date range</mat-label>
-  <mat-date-range-input [rangePicker]="picker">
-    <input matStartDate placeholder="Start date">
-    <input matEndDate placeholder="End date">
-  </mat-date-range-input>
+  <mat-label>Select a date</mat-label>
+  <input matInput [matDatepicker]="picker" (dateInput)="setDate($event)" />
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-date-range-picker #picker></mat-date-range-picker>
+  <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
 
+<p>
+  <button mat-raised-button color="primary" (click)="createEvent()">
+    Add Event
+  </button>
+</p>
