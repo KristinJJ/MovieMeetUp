@@ -4,6 +4,8 @@ import type { MovieItem } from "../movies";
 import { Router, RouterModule } from '@angular/router';
 import { FormControl, NgModel } from '@angular/forms';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import { Pipe, PipeTransform } from '@angular/core';
+
 
 interface MovieEvent {
   eventID: string;
@@ -42,12 +44,13 @@ export class EventComponent implements OnInit {
     console.log("New Event: " + this.eventTitle);
   }
 
+
   setDate(event: MatDatepickerInputEvent<Date>) {
     this.eventDate = `${event.value}`.substring(0, 16);
     console.log("New EventDate: " + this.eventDate);
   }
 
-  createEvent() {
+  createEvent() { // TO ADD: CONTENT VERIFICATION
     // Create new eventID: sets eventID to be 1 larger than current events map size,
     //   with added random number to prevent overwriting, should a previous event be deleted
     this.eventID = `${this.events.size+1}` + '-' + `${Math.floor(Math.random()*1000)}`;
@@ -68,12 +71,43 @@ export class EventComponent implements OnInit {
 
     // Display all MovieEvent objects in the events map
     for (let entry of this.events.entries()) {
-      console.log(entry[0], entry[1]);
+      console.log(entry[0], entry[1].eventTitle);
     }
+    this.events.forEach((value: string, key: string) => {
+      console.log("KV: " + key, value);
+    })
+    this.eventTitle = '';
+    this.eventDate = '';
     return newEvent;
   }
 
 
+}
+
+
+
+// Pipe added to get ngFor to work with mab iterables
+@Pipe({
+  name: 'iterable'
+})
+export class IterablePipe implements PipeTransform {
+  transform(iterable: any, args: any[]): any {
+    let result = [];
+
+    if (iterable.entries) {
+      iterable.forEach((key: any, value: any) => {
+        result.push({ key, value });
+      });
+    } else {
+      for (let key in iterable) {
+        if (iterable.hasOwnProperty(key)) {
+          result.push({ key, value: iterable[key] });
+        }
+      }
+    }
+
+    return result;
+  } 
 }
 
 // methods needed:

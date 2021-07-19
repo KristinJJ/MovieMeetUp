@@ -6,6 +6,7 @@ import { MovieItem, movielist } from "./movies";
 import { Router, RouterModule } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -24,7 +25,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.loadMovies();
+  // this function no longer required to auto display movie listings on the entry page
+    //this.loadMovies(); 
   }
 
   navigate() {

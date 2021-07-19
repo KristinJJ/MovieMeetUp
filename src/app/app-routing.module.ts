@@ -9,6 +9,7 @@ const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'ranking', pathMatch: 'full', component: RankingComponent },
     { path: 'event', component: EventComponent }
+    /* add path for movie selection */
 ];
 
 @NgModule({

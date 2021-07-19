@@ -23,3 +23,28 @@
     Add Event
   </button>
 </p>
+
+<h3>Created Events:</h3>
+
+<div class="col-md-12">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Event Name</th>
+        <th scope="col">Date</th>
+        <th scope="col">Movies Selected</th>
+        <!-- <th scope="col">Invitees Selected</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let viewing of events | keyvalue">
+        <td>{{ viewing.value.eventTitle }}</td>
+        <td>{{ viewing.value.eventDate }}</td>
+        <!--<td>{{ viewing.value.movies }}</td> -->
+        <td>button</td>
+        <!-- 'add movies' button to be added here later, with if statement if movies has already been set -->
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
