@@ -8,11 +8,20 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
 import { HttpClientModule } from '@angular/common/http';
 import { DemoMaterialModule } from "./material.module";
 import { FormsModule} from "@angular/forms";
+import { EventComponent, IterablePipe } from './event/event.component';
+import { RankingComponent } from "./ranking/ranking.component";
+import { HomeComponent} from "./home/home.component";
+import {TopNavComponent} from "./topNav/topNav.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     SampleComponent,
+    EventComponent,
+    RankingComponent,
+    HomeComponent,
+    TopNavComponent,
+    IterablePipe /* added for map template displaying */
   ],
   imports: [
     BrowserModule,
@@ -25,7 +34,6 @@ import { FormsModule} from "@angular/forms";
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
-  entryComponents: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
