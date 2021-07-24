@@ -1,8 +1,8 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import type { MovieItem } from "../movies";
+import type { MovieItem, PopMovieItem } from "../movies";
 import { Router, RouterModule } from '@angular/router';
-import { FormControl, NgModel } from '@angular/forms';
+import { FormControl, NgModel, Validators } from '@angular/forms';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { Pipe, PipeTransform } from '@angular/core';
 
@@ -11,7 +11,7 @@ interface MovieEvent {
   eventID: string;
   eventTitle: string;
   eventDate: string;
-  movies?: (MovieItem) [] | null;
+  movies?: (PopMovieItem) [] | null;
   //invitees?: (EventInvitees) [] | null;
   //movieRankings?: (movieRankings) [] | null;
 }
@@ -28,29 +28,42 @@ export class EventComponent implements OnInit {
   eventTitle = '';
   eventDate = '';
   events = new Map();
-  eventMovies = [];
+  eventMovies: MovieItem[] = [];
   invitees = [];
   movieRankings = [];
-  value = '';
+  errormsg = '';
+  date = new FormControl(new Date());
 
- 
   constructor() {}
 
   ngOnInit(): void {
   }
 
-  setTitle() {
+ /*  getErrorMessage() {
+    
+      return 'You must enter a value';
+    } */
+
+  /* setTitle() {
     this.eventTitle = this.value;
     console.log("New Event: " + this.eventTitle);
-  }
+  } */
 
 
   setDate(event: MatDatepickerInputEvent<Date>) {
-    this.eventDate = `${event.value}`.substring(0, 16);
+    console.log(event.value);
+    this.eventDate = `${event.value}`.substring(0, 15);
     console.log("New EventDate: " + this.eventDate);
   }
 
   createEvent() { // TO ADD: CONTENT VERIFICATION
+    if (this.eventTitle === '' || this.eventDate === '') {
+      this.errormsg = 'You must enter an Event Title and select a Date.';
+      return;
+    } if (this.eventDate === null) {
+      this.errormsg = 'You must select an actual Date.';
+      return;
+    } 
     // Create new eventID: sets eventID to be 1 larger than current events map size,
     //   with added random number to prevent overwriting, should a previous event be deleted
     this.eventID = `${this.events.size+1}` + '-' + `${Math.floor(Math.random()*1000)}`;
@@ -78,6 +91,8 @@ export class EventComponent implements OnInit {
     })
     this.eventTitle = '';
     this.eventDate = '';
+    this.errormsg = '';
+    this.date = new FormControl(new Date());
     return newEvent;
   }
 

@@ -2,22 +2,26 @@
 <p>
   <mat-form-field appearance="fill">
     <mat-label>Enter Event Title</mat-label>
-    <input
-      matInput
-      type="text"
-      [(ngModel)]="value"
-      (keyup.enter)="setTitle()"
-    />
+    <input matInput type="text" [(ngModel)]="eventTitle" />
+    <!--<mat-error>{{ getErrorMessage() }}</mat-error>-->
   </mat-form-field>
 </p>
 
 <mat-form-field appearance="fill">
-  <mat-label>Select a date</mat-label>
-  <input matInput [matDatepicker]="picker" (dateInput)="setDate($event)" />
+  <mat-label>Choose a Date</mat-label>
+  <input
+    matInput
+    [matDatepicker]="picker"
+    [value]="date.value"
+    (dateInput)="setDate($event)"
+  />
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
 
+<h3 style="color: red">
+  {{ errormsg }}
+</h3>
 <p>
   <button mat-raised-button color="primary" (click)="createEvent()">
     Add Event
@@ -40,8 +44,10 @@
       <tr *ngFor="let viewing of events | keyvalue">
         <td>{{ viewing.value.eventTitle }}</td>
         <td>{{ viewing.value.eventDate }}</td>
-        <!--<td>{{ viewing.value.movies }}</td> -->
-        <td>button</td>
+        <!--<td>{{ viewing.value.eventMovies }}</td> -->
+        <td>
+          <button mat-raised-button color="primary">Add Movies</button>
+        </td>
         <!-- 'add movies' button to be added here later, with if statement if movies has already been set -->
         <td></td>
       </tr>
