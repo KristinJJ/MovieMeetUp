@@ -5,6 +5,8 @@ import { Router, RouterModule } from '@angular/router';
 import { FormControl, NgModel, Validators } from '@angular/forms';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { Pipe, PipeTransform } from '@angular/core';
+// @ts-ignore
+import onScan from "../../../popMoviesScan.js";
 
 
 interface MovieEvent {
@@ -34,10 +36,12 @@ export class EventComponent implements OnInit {
   errormsg = '';
   date = new FormControl(new Date());
 
-  constructor() {}
+  constructor(private ddb: onScan) {}
 
   ngOnInit(): void {
   }
+
+  
 
  /*  getErrorMessage() {
     
