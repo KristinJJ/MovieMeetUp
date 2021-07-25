@@ -1,12 +1,15 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import type { MovieItem, PopMovieItem } from "../movies";
+import { ApicallService } from '../apicall.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormControl, NgModel, Validators } from '@angular/forms';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { Pipe, PipeTransform } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 // @ts-ignore
-import onScan from "../../../popMoviesScan.js";
+//import { onScan } from "../../../popMoviesScan.js";
 
 
 interface MovieEvent {
@@ -30,29 +33,28 @@ export class EventComponent implements OnInit {
   eventTitle = '';
   eventDate = '';
   events = new Map();
-  eventMovies: MovieItem[] = [];
+  eventMovies: PopMovieItem[] = [];
   invitees = [];
   movieRankings = [];
   errormsg = '';
   date = new FormControl(new Date());
 
-  constructor(private ddb: onScan) {}
+  constructor(public apicall: ApicallService, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
+    this.loadPopMovies();
   }
 
-  
-
- /*  getErrorMessage() {
-    
-      return 'You must enter a value';
-    } */
-
-  /* setTitle() {
-    this.eventTitle = this.value;
-    console.log("New Event: " + this.eventTitle);
-  } */
-
+  // CALL SCAN API GATEWAY HERE? --> https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/popMovies
+  // Attempt to create a function that references the getPopMovies from the apicallservice. This is probably the wrong way?
+  // Current gives CORS error and the GET fails.
+  loadPopMovies() {
+    return this.apicall.getPopMovies().subscribe((data) => {
+      this.eventMovies = data;
+      console.log(data);
+      console.log(this.eventMovies[0]);
+      })
+  }
 
   setDate(event: MatDatepickerInputEvent<Date>) {
     console.log(event.value);

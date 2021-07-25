@@ -37,7 +37,9 @@ var params = {
 console.log("Scanning PopMovies table.");
 docClient.scan(params, onScan);
 
-export function onScan(err, data) {
+// Lambda event handler including a let body, and returns the data in the body?
+
+function onScan(err, data) {
     if (err) {
         console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
     } else {
