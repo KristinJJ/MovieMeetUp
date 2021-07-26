@@ -34,6 +34,13 @@ export interface PopMovieItem {
     imDbRatingCount: number;
 }
 
+export interface PopMovies {
+    searchType: string;
+    expression: string;
+    results?: (PopMovieItem)[] | null;
+    errorMessage: string;
+}
+
 // SAMPLE-TEST ARRAYS
 
 //For MovieItems
