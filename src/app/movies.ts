@@ -21,6 +21,7 @@ export interface MovieItem {
     title: string;
     description: string;
 }
+
 export interface PopMovieItem {
     id: string;
     rank: number;
@@ -34,10 +35,11 @@ export interface PopMovieItem {
     imDbRatingCount: number;
 }
 
+
 export interface PopMovies {
     searchType: string;
     expression: string;
-    results?: (PopMovieItem)[] | null;
+    Items?: (PopMovieItem)[] | null;
     errorMessage: string;
 }
 

@@ -29,6 +29,7 @@ export class ApicallService {
         pipe(
           map((data) => {
             console.log(data);
+            console.log("getMovies() data.results: " + data.results);
             return data.results ?? [];
           })
         )
@@ -42,7 +43,8 @@ export class ApicallService {
       pipe(
         map((data) => {
           console.log(data);
-          return data.results ?? [];
+          console.log("getPopMovies() data.results: " + data.Items);
+          return data.Items ?? [];
         })
       )
   }

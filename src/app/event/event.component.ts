@@ -69,7 +69,7 @@ export class EventComponent implements OnInit {
     } if (this.eventDate === null) {
       this.errormsg = 'You must select an actual Date.';
       return;
-    } 
+    }
     // Create new eventID: sets eventID to be 1 larger than current events map size,
     //   with added random number to prevent overwriting, should a previous event be deleted
     this.eventID = `${this.events.size+1}` + '-' + `${Math.floor(Math.random()*1000)}`;
@@ -85,7 +85,7 @@ export class EventComponent implements OnInit {
 
     // Add MovieEvent object to the events map, with the eventID as a key
     this.events.set(this.eventID, newEvent);
-    // Verify MovieEvent was added to events map 
+    // Verify MovieEvent was added to events map
     console.log(this.events.get(this.eventID));
 
     // Display all MovieEvent objects in the events map
@@ -128,17 +128,17 @@ export class IterablePipe implements PipeTransform {
     }
 
     return result;
-  } 
+  }
 }
 
 // methods needed:
   // create new event (constructor)
       // creates event with an id and date (date picker?) required.
 
-  // search for movies    
+  // search for movies
       // moves to searching for movies to add.
           // would need to have add button for each movie object in table
-              // add button would add movie to eventMovies array
+              // add button would add movie to eventMovie array
   // add invitees to invitees
   // find existing event
   // update existing event
@@ -165,7 +165,7 @@ export class IterablePipe implements PipeTransform {
 			"rankDone": "boolean"
 		}
 	],
-	"rankings": [ 
+	"rankings": [
 		{
 			"userID": "string",
 			"rankedMovies": {
