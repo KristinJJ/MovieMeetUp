@@ -55,6 +55,23 @@
     </tbody>
   </table>
 
+  <!-- GRID TO DISPLAY MOVIES -->
+  <div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of eventMovies">
+        <mat-card (click)="onCardClick(movie)" class="clickable" [ngClass]="{'card-selected mat-elevation-z4': selected}">
+          <span [matTooltip]="selected ? 'true' : 'false'" class="selection">
+            <mat-icon>check_circle</mat-icon>
+          </span>
+          <mat-card-header>
+            <mat-card-title>{{ movie.title }}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="{{ movie.image }}" alt="Movie Poster of {{ movie.title }}">
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
   <!-- ATTEMPT AT DISPLAYING RESULTS FROM DYNAMODB popMoviesScan.js-->
   <!-- not sure how to reference the scan results, honestly -->
   <ul *ngFor="let title of eventMovies">
