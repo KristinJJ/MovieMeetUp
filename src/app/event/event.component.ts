@@ -107,6 +107,7 @@ export class EventComponent implements OnInit {
     console.log(PopMovieItem);
     this.selectedMovies.push(PopMovieItem);
     console.log(this.selectedMovies);
+    this.selected = !this.selected;
   }
 }
 
