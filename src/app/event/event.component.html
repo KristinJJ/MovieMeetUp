@@ -30,6 +30,7 @@
 
 <h3>Created Events:</h3>
 
+<!-- TABLE TO DISPLAY CREATED EVENTS -->
 <div class="col-md-12">
   <table class="table table-bordered">
     <thead>
@@ -53,4 +54,10 @@
       </tr>
     </tbody>
   </table>
+
+  <!-- ATTEMPT AT DISPLAYING RESULTS FROM DYNAMODB popMoviesScan.js-->
+  <!-- not sure how to reference the scan results, honestly -->
+  <ul *ngFor="let title of eventMovies">
+    <li>{{ title.title }}</li>
+  </ul>
 </div>

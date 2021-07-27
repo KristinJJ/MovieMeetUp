@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Movies, MovieItem } from './movies';
+import { Movies, MovieItem, PopMovies, PopMovieItem } from './movies';
 //import * as Rx from "rxjs/Rx";
 import { from, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { environment } from "../environments/environment";
 
 interface ItemsResponse {
   movies: Array<Movies>;
+  popMovies: Array<PopMovies>;
 }
 
 // TODO: securely save API Key as variable to include in api calls
@@ -18,6 +19,7 @@ interface ItemsResponse {
   providedIn: 'root'
 })
 export class ApicallService {
+  httpClient: any;
 
   constructor(private http: HttpClient) {}
 
@@ -27,12 +29,26 @@ export class ApicallService {
         pipe(
           map((data) => {
             console.log(data);
+            console.log("getMovies() data.results: " + data.results);
             return data.results ?? [];
           })
         )
     }
   // getMovieDetails?
   // other api calls types?
+
+    // attempt to create a function to call the API Gateway, to pass to the event.component.ts?
+  getPopMovies() : Observable<PopMovieItem[]> {
+    return this.http.get<PopMovies>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/popMovies').
+      pipe(
+        map((data) => {
+          console.log(data);
+          console.log("getPopMovies() data.results: " + data.Items);
+          return data.Items ?? [];
+        })
+      )
   }
+
+}
 
 

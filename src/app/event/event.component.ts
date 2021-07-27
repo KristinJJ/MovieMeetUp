@@ -1,10 +1,15 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import type { MovieItem, PopMovieItem } from "../movies";
+import { ApicallService } from '../apicall.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormControl, NgModel, Validators } from '@angular/forms';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { Pipe, PipeTransform } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+// @ts-ignore
+//import { onScan } from "../../../popMoviesScan.js";
 
 
 interface MovieEvent {
@@ -28,27 +33,28 @@ export class EventComponent implements OnInit {
   eventTitle = '';
   eventDate = '';
   events = new Map();
-  eventMovies: MovieItem[] = [];
+  eventMovies: PopMovieItem[] = [];
   invitees = [];
   movieRankings = [];
   errormsg = '';
   date = new FormControl(new Date());
 
-  constructor() {}
+  constructor(public apicall: ApicallService, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
+    this.loadPopMovies();
   }
 
- /*  getErrorMessage() {
-    
-      return 'You must enter a value';
-    } */
-
-  /* setTitle() {
-    this.eventTitle = this.value;
-    console.log("New Event: " + this.eventTitle);
-  } */
-
+  // CALL SCAN API GATEWAY HERE? --> https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/popMovies
+  // Attempt to create a function that references the getPopMovies from the apicallservice. This is probably the wrong way?
+  // Current gives CORS error and the GET fails.
+  loadPopMovies() {
+    return this.apicall.getPopMovies().subscribe((data) => {
+      this.eventMovies = data;
+      console.log(data);
+      console.log(this.eventMovies[0]);
+      })
+  }
 
   setDate(event: MatDatepickerInputEvent<Date>) {
     console.log(event.value);
@@ -63,7 +69,7 @@ export class EventComponent implements OnInit {
     } if (this.eventDate === null) {
       this.errormsg = 'You must select an actual Date.';
       return;
-    } 
+    }
     // Create new eventID: sets eventID to be 1 larger than current events map size,
     //   with added random number to prevent overwriting, should a previous event be deleted
     this.eventID = `${this.events.size+1}` + '-' + `${Math.floor(Math.random()*1000)}`;
@@ -79,7 +85,7 @@ export class EventComponent implements OnInit {
 
     // Add MovieEvent object to the events map, with the eventID as a key
     this.events.set(this.eventID, newEvent);
-    // Verify MovieEvent was added to events map 
+    // Verify MovieEvent was added to events map
     console.log(this.events.get(this.eventID));
 
     // Display all MovieEvent objects in the events map
@@ -122,17 +128,17 @@ export class IterablePipe implements PipeTransform {
     }
 
     return result;
-  } 
+  }
 }
 
 // methods needed:
   // create new event (constructor)
       // creates event with an id and date (date picker?) required.
 
-  // search for movies    
+  // search for movies
       // moves to searching for movies to add.
           // would need to have add button for each movie object in table
-              // add button would add movie to eventMovies array
+              // add button would add movie to eventMovie array
   // add invitees to invitees
   // find existing event
   // update existing event
@@ -159,7 +165,7 @@ export class IterablePipe implements PipeTransform {
 			"rankDone": "boolean"
 		}
 	],
-	"rankings": [ 
+	"rankings": [
 		{
 			"userID": "string",
 			"rankedMovies": {
