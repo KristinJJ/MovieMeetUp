@@ -59,15 +59,8 @@
   <div class="content">
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
       <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of eventMovies">
-        <mat-card (click)="onCardClick(movie)" class="clickable" [ngClass]="{'card-selected mat-elevation-z4': selected}">
-          <span [matTooltip]="selected ? 'true' : 'false'" class="selection">
-            <mat-icon>check_circle</mat-icon>
-          </span>
-          <mat-card-header>
-            <mat-card-title>{{ movie.title }}</mat-card-title>
-          </mat-card-header>
-          <img mat-card-image src="{{ movie.image }}" alt="Movie Poster of {{ movie.title }}">
-        </mat-card>
+        <app-movie-card [movie]="movie" (click)="onCardClick(movie)" class="clickable">
+        </app-movie-card>
       </div>
     </div>
   </div>

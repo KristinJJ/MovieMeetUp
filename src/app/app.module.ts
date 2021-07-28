@@ -13,6 +13,7 @@ import { RankingComponent } from "./ranking/ranking.component";
 import { HomeComponent} from "./home/home.component";
 import { TopNavComponent } from "./topNav/topNav.component";
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MovieCardComponent} from "./movieCard/movieCard.component";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     RankingComponent,
     HomeComponent,
     TopNavComponent,
+    MovieCardComponent,
     IterablePipe /* added for map template displaying */
   ],
   imports: [
