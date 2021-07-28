@@ -1,4 +1,4 @@
-<mat-card *ngIf="movie" (click)="onSelectCard()" [ngClass]="{'card-selected mat-elevation-z4': selected}">
+<mat-card *ngIf="movie" (click)="onSelectCard(movie)" [ngClass]="{'card-selected mat-elevation-z4': selected}">
   <span [matTooltip]="selected ? 'true' : 'false'" class="selection">
     <mat-icon>check_circle</mat-icon>
   </span>

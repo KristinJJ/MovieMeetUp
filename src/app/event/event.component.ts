@@ -29,8 +29,6 @@ interface MovieEvent {
 
 @Injectable()
 export class EventComponent implements OnInit {
-  selected = false;
-  selectedMovies: PopMovieItem[] = [];
   eventID = '';
   eventTitle = '';
   eventDate = '';
@@ -103,10 +101,8 @@ export class EventComponent implements OnInit {
     return newEvent;
   }
 
-  onCardClick(PopMovieItem: PopMovieItem){
-    console.log(PopMovieItem);
-    this.selectedMovies.push(PopMovieItem);
-    console.log(this.selectedMovies);
+  addMovies() {
+
   }
 }
 

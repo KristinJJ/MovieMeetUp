@@ -47,7 +47,7 @@
         <td>{{ viewing.value.eventDate }}</td>
         <!--<td>{{ viewing.value.eventMovies }}</td> -->
         <td>
-          <button mat-raised-button color="primary">Add Movies</button>
+          <button mat-raised-button color="primary" (click)="addMovies()">Add Movies</button>
         </td>
         <!-- 'add movies' button to be added here later, with if statement if movies has already been set -->
         <td></td>
@@ -59,7 +59,7 @@
   <div class="content">
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
       <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of eventMovies">
-        <app-movie-card [movie]="movie" (click)="onCardClick(movie)" class="clickable">
+        <app-movie-card [movie]="movie" >
         </app-movie-card>
       </div>
     </div>
