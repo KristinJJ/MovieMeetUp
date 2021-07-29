@@ -9,6 +9,10 @@ export class EventService {
   movies: PopMovieItem[] = [];
   constructor(private http: HttpClient) {}
 
+  getSelectedMovies(){
+    return this.movies;
+  }
+
   addMovieToEvent(popMovieItem: PopMovieItem) {
     this.movies.push(popMovieItem);
     console.log(this.movies);

@@ -24,34 +24,29 @@
 </h3>
 <p>
   <button mat-raised-button color="primary" (click)="createEvent()">
-    Add Event
+    Create Event
   </button>
 </p>
-
-<h3>Created Events:</h3>
 
 <!-- TABLE TO DISPLAY CREATED EVENTS -->
 <div class="col-md-12">
   <table class="table table-bordered">
     <thead>
-      <tr>
-        <th scope="col">Event Name</th>
-        <th scope="col">Date</th>
-        <th scope="col">Movies Selected</th>
-        <!-- <th scope="col">Invitees Selected</th> -->
-      </tr>
+    <tr>
+      <th scope="col">Event Name</th>
+      <th scope="col">Date</th>
+      <th scope="col">Movies Selected</th>
+      <!-- <th scope="col">Invitees Selected</th> -->
+    </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let viewing of events | keyvalue">
-        <td>{{ viewing.value.eventTitle }}</td>
-        <td>{{ viewing.value.eventDate }}</td>
-        <!--<td>{{ viewing.value.eventMovies }}</td> -->
-        <td>
-          <button mat-raised-button color="primary" (click)="addMovies()">Add Movies</button>
-        </td>
-        <!-- 'add movies' button to be added here later, with if statement if movies has already been set -->
-        <td></td>
-      </tr>
+    <tr *ngFor="let viewing of events | keyvalue">
+      <td>{{ viewing.value.eventTitle }}</td>
+      <td>{{ viewing.value.eventDate }}</td>
+      <td *ngFor="let selectedMovie of viewing.value.selectedMovies">
+      {{ selectedMovie.title }}</td>
+      <td></td>
+    </tr>
     </tbody>
   </table>
 
@@ -64,5 +59,4 @@
       </div>
     </div>
   </div>
-
 </div>

@@ -7,6 +7,7 @@ import { FormControl, NgModel, Validators } from '@angular/forms';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { Pipe, PipeTransform } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { EventService } from "../event.service";
 
 // @ts-ignore
 //import { onScan } from "../../../popMoviesScan.js";
@@ -17,6 +18,7 @@ interface MovieEvent {
   eventTitle: string;
   eventDate: string;
   movies?: (PopMovieItem) [] | null;
+  selectedMovies: PopMovieItem[];
   //invitees?: (EventInvitees) [] | null;
   //movieRankings?: (movieRankings) [] | null;
 }
@@ -36,10 +38,11 @@ export class EventComponent implements OnInit {
   eventMovies: PopMovieItem[] = [];
   invitees = [];
   movieRankings = [];
+  selectedMovies: PopMovieItem[] = [];
   errormsg = '';
   date = new FormControl(new Date());
 
-  constructor(public apicall: ApicallService, private httpClient: HttpClient) {}
+  constructor(public apicall: ApicallService, private httpClient: HttpClient, private eventService: EventService) {}
 
   ngOnInit(): void {
     this.loadPopMovies();
@@ -77,7 +80,8 @@ export class EventComponent implements OnInit {
     let newEvent: MovieEvent = {
       eventID : this.eventID,
       eventTitle : this.eventTitle,
-      eventDate : this.eventDate
+      eventDate : this.eventDate,
+      selectedMovies : this.eventService.getSelectedMovies()
     };
     // Verify newEvent object created with correct info successfully
     console.log(JSON.stringify(newEvent));
@@ -98,11 +102,8 @@ export class EventComponent implements OnInit {
     this.eventDate = '';
     this.errormsg = '';
     this.date = new FormControl(new Date());
+    this.selectedMovies = [];
     return newEvent;
-  }
-
-  addMovies() {
-
   }
 }
 
