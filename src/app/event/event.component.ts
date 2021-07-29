@@ -34,11 +34,11 @@ export class EventComponent implements OnInit {
   eventID = '';
   eventTitle = '';
   eventDate = '';
+  selectedMovies: PopMovieItem[] = [];
   events = new Map();
   eventMovies: PopMovieItem[] = [];
   invitees = [];
   movieRankings = [];
-  selectedMovies: PopMovieItem[] = [];
   errormsg = '';
   date = new FormControl(new Date());
 
@@ -81,7 +81,7 @@ export class EventComponent implements OnInit {
       eventID : this.eventID,
       eventTitle : this.eventTitle,
       eventDate : this.eventDate,
-      selectedMovies : this.eventService.getSelectedMovies()
+      selectedMovies : [...this.eventService.getSelectedMovies()]
     };
     // Verify newEvent object created with correct info successfully
     console.log(JSON.stringify(newEvent));

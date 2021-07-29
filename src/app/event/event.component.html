@@ -43,8 +43,8 @@
     <tr *ngFor="let viewing of events | keyvalue">
       <td>{{ viewing.value.eventTitle }}</td>
       <td>{{ viewing.value.eventDate }}</td>
-      <td *ngFor="let selectedMovie of viewing.value.selectedMovies">
-      {{ selectedMovie.title }}</td>
+      <h2 *ngFor="let selectedMovie of viewing.value.selectedMovies">
+        <h4>{{ selectedMovie.title }}</h4></h2>
       <td></td>
     </tr>
     </tbody>
