@@ -11,9 +11,13 @@ import { HttpClient } from '@angular/common/http';
 // @ts-ignore
 //import { onScan } from "../../../popMoviesScan.js";
 
-
-interface MovieEvent {
-  eventID: string;
+export interface MovieEvents {
+  searchType: string;
+  expression: string;
+  Items?: (MovieEventItem)[] | null;
+  errorMessage: string;
+}
+export interface MovieEventItem {
   eventTitle: string;
   eventDate: string;
   movies?: (PopMovieItem) [] | null;
@@ -34,6 +38,7 @@ export class EventComponent implements OnInit {
   eventDate = '';
   events = new Map();
   eventMovies: PopMovieItem[] = [];
+  selectedMovies: PopMovieItem[] = [];
   invitees = [];
   movieRankings = [];
   errormsg = '';
@@ -72,14 +77,16 @@ export class EventComponent implements OnInit {
     }
     // Create new eventID: sets eventID to be 1 larger than current events map size,
     //   with added random number to prevent overwriting, should a previous event be deleted
-    this.eventID = `${this.events.size+1}` + '-' + `${Math.floor(Math.random()*1000)}`;
-    console.log(this.eventID);
+    //this.eventID = `${this.events.size+1}` + '-' + `${Math.floor(Math.random()*1000)}`;
+    //console.log(this.eventID);
     // Create newEvent object of MovieEvent type with the provided elements
-    let newEvent: MovieEvent = {
-      eventID : this.eventID,
+    let newEvent: MovieEventItem = {
       eventTitle : this.eventTitle,
-      eventDate : this.eventDate
+      eventDate : this.eventDate,
+      movies : this.selectedMovies
     };
+    
+    this.apicall.addMovieEvent().subscribe((data) => newEvent = data);
     // Verify newEvent object created with correct info successfully
     console.log(JSON.stringify(newEvent));
 

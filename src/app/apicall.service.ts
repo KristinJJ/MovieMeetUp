@@ -5,6 +5,7 @@ import { Movies, MovieItem, PopMovies, PopMovieItem } from './movies';
 import { from, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from "../environments/environment";
+import { MovieEvents, MovieEventItem } from "../app/event/event.component";
 
 interface ItemsResponse {
   movies: Array<Movies>;
@@ -47,6 +48,13 @@ export class ApicallService {
           return data.Items ?? [];
         })
       )
+  }
+  
+  
+  addMovieEvent() : Observable<MovieEventItem[]> {
+    return this.http.put<MovieEvents>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/events', body)
+    
+    );
   }
 
 }
