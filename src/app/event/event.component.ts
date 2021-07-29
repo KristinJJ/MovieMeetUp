@@ -86,7 +86,7 @@ export class EventComponent implements OnInit {
       movies : this.selectedMovies
     };
     
-    this.apicall.addMovieEvent().subscribe((data) => newEvent = data);
+    
     // Verify newEvent object created with correct info successfully
     console.log(JSON.stringify(newEvent));
 
@@ -106,7 +106,7 @@ export class EventComponent implements OnInit {
     this.eventDate = '';
     this.errormsg = '';
     this.date = new FormControl(new Date());
-    return newEvent;
+    return this.apicall.addMovieEvent(newEvent).subscribe();
   }
 
 
