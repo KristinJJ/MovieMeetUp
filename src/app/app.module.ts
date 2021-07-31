@@ -11,7 +11,9 @@ import { FormsModule} from "@angular/forms";
 import { EventComponent, IterablePipe } from './event/event.component';
 import { RankingComponent } from "./ranking/ranking.component";
 import { HomeComponent} from "./home/home.component";
-import {TopNavComponent} from "./topNav/topNav.component";
+import { TopNavComponent } from "./topNav/topNav.component";
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MovieCardComponent} from "./movieCard/movieCard.component";
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import {TopNavComponent} from "./topNav/topNav.component";
     RankingComponent,
     HomeComponent,
     TopNavComponent,
+    MovieCardComponent,
     IterablePipe /* added for map template displaying */
   ],
   imports: [
@@ -29,7 +32,8 @@ import {TopNavComponent} from "./topNav/topNav.component";
     BrowserAnimationsModule,
     HttpClientModule,
     DemoMaterialModule,
-    FormsModule
+    FormsModule,
+    FlexLayoutModule
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },

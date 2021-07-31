@@ -1,4 +1,13 @@
-<h1>Create Your Event</h1>
+<h1>Build an Event</h1>
+
+<p>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter Host ID</mat-label>
+    <input matInput type="text" [(ngModel)]="hostID" />
+    <!--<mat-error>{{ getErrorMessage() }}</mat-error>-->
+  </mat-form-field>
+</p>
+
 <p>
   <mat-form-field appearance="fill">
     <mat-label>Enter Event Title</mat-label>
@@ -19,45 +28,48 @@
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
 
+<h3>Click on at least two Movies below to select them for your Event</h3>
+
 <h3 style="color: red">
   {{ errormsg }}
 </h3>
 <p>
   <button mat-raised-button color="primary" (click)="createEvent()">
-    Add Event
+    Create Event
   </button>
 </p>
-
-<h3>Created Events:</h3>
 
 <!-- TABLE TO DISPLAY CREATED EVENTS -->
 <div class="col-md-12">
   <table class="table table-bordered">
     <thead>
-      <tr>
-        <th scope="col">Event Name</th>
-        <th scope="col">Date</th>
-        <th scope="col">Movies Selected</th>
-        <!-- <th scope="col">Invitees Selected</th> -->
-      </tr>
+    <tr>
+      <th scope="col">Host ID</th>
+      <th scope="col">Event Name</th>
+      <th scope="col">Date</th>
+      <th scope="col">Movies Selected</th>
+      <!-- <th scope="col">Invitees Selected</th> -->
+    </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let viewing of events | keyvalue">
-        <td>{{ viewing.value.eventTitle }}</td>
-        <td>{{ viewing.value.eventDate }}</td>
-        <!--<td>{{ viewing.value.eventMovies }}</td> -->
-        <td>
-          <button mat-raised-button color="primary">Add Movies</button>
-        </td>
-        <!-- 'add movies' button to be added here later, with if statement if movies has already been set -->
-        <td></td>
-      </tr>
+    <tr *ngFor="let viewing of events | keyvalue">
+      <td>{{ viewing.value.hostID }}</td>
+      <td>{{ viewing.value.eventTitle }}</td>
+      <td>{{ viewing.value.eventDate }}</td>
+      <h2 *ngFor="let selectedMovie of viewing.value.selectedMovies">
+        <h4>{{ selectedMovie.title }}</h4></h2>
+      <mat-divider></mat-divider>
+    </tr>
     </tbody>
   </table>
 
-  <!-- ATTEMPT AT DISPLAYING RESULTS FROM DYNAMODB popMoviesScan.js-->
-  <!-- not sure how to reference the scan results, honestly -->
-  <ul *ngFor="let title of eventMovies">
-    <li>{{ title.title }}</li>
-  </ul>
+  <!-- GRID TO DISPLAY MOVIES -->
+  <div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of eventMovies">
+        <app-movie-card [movie]="movie" >
+        </app-movie-card>
+      </div>
+    </div>
+  </div>
 </div>
