@@ -2,19 +2,24 @@ img {
   max-height: 100%;
   max-width: 100%;
   margin: auto;
+  display: block;
+  //overflow: hidden;
   object-fit: cover;
   object-position: bottom;
 }
 
-.content {
-  padding: 16px;
+.movie-card {
+  //padding: auto;
   width: 250px;
   height: 370px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.content > mat-card {
-  margin-bottom: 16px;
-}
+//.content > mat-card {
+  //width: 200px;
+//}
 
 // start movie selection styles
 mat-card:hover .selection {
