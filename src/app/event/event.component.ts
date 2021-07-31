@@ -102,11 +102,12 @@ export class EventComponent implements OnInit {
     this.events.forEach((value: string, key: string) => {
       console.log("KV: " + key, value);
     })
+    this.apicall.addMovieEvent(newEvent).subscribe();
     this.eventTitle = '';
     this.eventDate = '';
     this.errormsg = '';
     this.date = new FormControl(new Date());
-    return this.apicall.addMovieEvent(newEvent).subscribe();
+    
   }
 
 

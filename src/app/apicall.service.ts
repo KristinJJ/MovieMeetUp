@@ -53,15 +53,15 @@ export class ApicallService {
   
   
   addMovieEvent(body: MovieEventItem) : Observable<MovieEventItem[]> {
-    //const headers = new HttpHeaders()
-    //.set('content-type', 'application/json')
-    //.set('Access-Control-Allow-Origin', '*');
-    //.set("Access-Control-Allow-Methods", "OPTIONS,POST,PUT,GET");
+    const headers = new HttpHeaders()
+    /* .set('content-type', 'application/json')
+    .set('Access-Control-Allow-Origin', '*')
+    .set("Access-Control-Allow-Methods", "OPTIONS,POST,PUT,GET"); */
       /* .append("Access-Control-Allow-Origin", "*")
       .append("Access-Control-Allow-Methods", "OPTIONS,POST,PUT,GET")
       .append("Access-Control-Allow-Headers" , "Content-Type"); */
   
-    return this.http.put<MovieEventItem>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/events', body, /*{ 'headers': headers }*/)
+    return this.http.put<MovieEventItem>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/events', body/*, { 'headers': headers }*/)
     .pipe(
       map((data) => {
         console.log(JSON.stringify(data));
