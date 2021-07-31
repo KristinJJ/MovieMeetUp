@@ -1,4 +1,11 @@
-<h1>Build an Event</h1>
+<mat-toolbar color="primary">
+  <span>Build an Event</span>
+  <div fxHide.lt-md>
+    <span class="column-label">Columns</span>
+    <mat-slider [max]="6" [min]="3" [(ngModel)]="gridColumns" [thumbLabel]="true">
+    </mat-slider>
+  </div>
+</mat-toolbar>
 
 <p>
   <mat-form-field appearance="fill">
@@ -66,7 +73,7 @@
   <!-- GRID TO DISPLAY MOVIES -->
   <div class="content">
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
-      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of eventMovies">
+      <div [fxFlex]="(100/gridColumns)" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of eventMovies">
         <app-movie-card [movie]="movie" >
         </app-movie-card>
       </div>

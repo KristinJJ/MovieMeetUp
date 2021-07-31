@@ -1,3 +1,13 @@
+
+.content {
+  padding: 16px;
+}
+
+.content > mat-card {
+  margin-bottom: 16px;
+}
+
+// start movie selection styles
 mat-card:hover .selection {
   opacity: 1;
 }
@@ -20,3 +30,4 @@ mat-card.mat-elevation-z4 .selection {
   height: 24px;
   width: 24px;
 }
+// end movie selection styles
