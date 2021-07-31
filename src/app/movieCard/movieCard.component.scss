@@ -1,6 +1,13 @@
 
+img {
+}
+
 .content {
   padding: 16px;
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+  object-position: bottom;
 }
 
 .content > mat-card {
