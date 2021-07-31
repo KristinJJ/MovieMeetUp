@@ -1,4 +1,13 @@
 <h1>Create Your Event</h1>
+
+<p>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter Host ID</mat-label>
+    <input matInput type="text" [(ngModel)]="hostID" />
+    <!--<mat-error>{{ getErrorMessage() }}</mat-error>-->
+  </mat-form-field>
+</p>
+
 <p>
   <mat-form-field appearance="fill">
     <mat-label>Enter Event Title</mat-label>
@@ -33,6 +42,7 @@
   <table class="table table-bordered">
     <thead>
     <tr>
+      <th scope="col">Host ID</th>
       <th scope="col">Event Name</th>
       <th scope="col">Date</th>
       <th scope="col">Movies Selected</th>
@@ -41,6 +51,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let viewing of events | keyvalue">
+      <td>{{ viewing.value.hostID }}</td>
       <td>{{ viewing.value.eventTitle }}</td>
       <td>{{ viewing.value.eventDate }}</td>
       <h2 *ngFor="let selectedMovie of viewing.value.selectedMovies">

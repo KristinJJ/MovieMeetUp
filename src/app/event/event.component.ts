@@ -14,6 +14,7 @@ import { EventService } from "../event.service";
 
 
 interface MovieEvent {
+  hostID: string;
   eventID: string;
   eventTitle: string;
   eventDate: string;
@@ -31,6 +32,7 @@ interface MovieEvent {
 
 @Injectable()
 export class EventComponent implements OnInit {
+  hostID = '';
   eventID = '';
   eventTitle = '';
   eventDate = '';
@@ -65,8 +67,8 @@ export class EventComponent implements OnInit {
   }
 
   createEvent() { // TO ADD: CONTENT VERIFICATION
-    if (this.eventTitle === '' || this.eventDate === '') {
-      this.errormsg = 'You must enter an Event Title and select a Date.';
+    if (this.hostID === '' || this.eventTitle === '' || this.eventDate === '') {
+      this.errormsg = 'You must enter a Host ID, an Event Title, and select a Date.';
       return;
     } if (this.eventDate === null) {
       this.errormsg = 'You must select an actual Date.';
@@ -78,6 +80,7 @@ export class EventComponent implements OnInit {
     console.log(this.eventID);
     // Create newEvent object of MovieEvent type with the provided elements
     let newEvent: MovieEvent = {
+      hostID: this.hostID,
       eventID : this.eventID,
       eventTitle : this.eventTitle,
       eventDate : this.eventDate,
