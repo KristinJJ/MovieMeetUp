@@ -73,7 +73,11 @@ export class EventComponent implements OnInit {
     } if (this.eventDate === null) {
       this.errormsg = 'You must select an actual Date.';
       return;
+    } if (this.eventService.getNumSelected() < 1) {
+      this.errormsg = 'You must select at least two Movies.';
+      return;
     }
+
     // Create new eventID: sets eventID to be 1 larger than current events map size,
     //   with added random number to prevent overwriting, should a previous event be deleted
     this.eventID = `${this.events.size+1}` + '-' + `${Math.floor(Math.random()*1000)}`;

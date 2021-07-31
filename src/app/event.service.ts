@@ -9,7 +9,11 @@ export class EventService {
   movies: PopMovieItem[] = [];
   constructor(private http: HttpClient) {}
 
-  getSelectedMovies(){
+  getNumSelected() {
+    return this.movies.length;
+  }
+
+  getSelectedMovies() {
     return this.movies;
   }
 
