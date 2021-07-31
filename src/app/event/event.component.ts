@@ -73,7 +73,7 @@ export class EventComponent implements OnInit {
     } if (this.eventDate === null) {
       this.errormsg = 'You must select an actual Date.';
       return;
-    } if (this.eventService.getNumSelected() < 1) {
+    } if (this.eventService.getNumSelected() < 2) {
       this.errormsg = 'You must select at least two Movies.';
       return;
     }
