@@ -1,13 +1,15 @@
-
 img {
+  max-height: 100%;
+  max-width: 100%;
+  margin: auto;
+  object-fit: cover;
+  object-position: bottom;
 }
 
 .content {
   padding: 16px;
-  width: 150px;
-  height: 200px;
-  object-fit: cover;
-  object-position: bottom;
+  width: 250px;
+  height: 370px;
 }
 
 .content > mat-card {
