@@ -48,7 +48,10 @@ export class EventComponent implements OnInit {
   invitees = [];
   movieRankings = [];
   errormsg = '';
+  confmsg = '';
+  public confirmed = false;
   date = new FormControl(new Date());
+  gridColumns = 3;
 
   constructor(public apicall: ApicallService, private httpClient: HttpClient, private eventService: EventService) {}
 
@@ -72,7 +75,17 @@ export class EventComponent implements OnInit {
     console.log("New EventDate: " + this.eventDate);
   }
 
+  confmessage(): void {
+    this.confirmed = true;
+    console.log("confirmed: " + this.confirmed);
+    setTimeout(() => {
+      this.confirmed = false;
+      console.log("confirmed: " + this.confirmed);
+    }, 4000);
+  }
+
   createEvent() { // TO ADD: CONTENT VERIFICATION
+    
     if (this.hostID === '' || this.eventTitle === '' || this.eventDate === '') {
       this.errormsg = 'You must enter a Host ID, an Event Title, and select a Date.';
       return;
@@ -118,6 +131,8 @@ export class EventComponent implements OnInit {
     this.errormsg = '';
     this.date = new FormControl(new Date());
     this.selectedMovies = [];
+    this.confmsg = `Your "${newEvent.eventTitle}" event has been created!`;
+    this.confmessage();
     //return newEvent;
   }
 }

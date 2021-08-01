@@ -1,5 +1,3 @@
-<h1>Build an Event</h1>
-
 <p>
   <mat-form-field appearance="fill">
     <mat-label>Enter Host ID</mat-label>
@@ -33,42 +31,48 @@
 <h3 style="color: red">
   {{ errormsg }}
 </h3>
-<p>
-  <button mat-raised-button color="primary" (click)="createEvent()">
-    Create Event
-  </button>
-</p>
+<div class="createBox">
+  <p>
+    <button mat-raised-button color="primary" (click)="createEvent()">
+      Create Event
+    </button>
+  </p>
+  <p *ngIf="confirmed" class="confirmation" style="color: green">
+    <strong>{{ confmsg }}</strong>
+  </p>
+</div>
 
 <!-- TABLE TO DISPLAY CREATED EVENTS -->
 <div class="col-md-12">
   <table class="table table-bordered">
     <thead>
-    <tr>
-      <th scope="col">Host ID</th>
-      <th scope="col">Event Name</th>
-      <th scope="col">Date</th>
-      <th scope="col">Movies Selected</th>
-      <!-- <th scope="col">Invitees Selected</th> -->
-    </tr>
+      <tr>
+        <th scope="col">Host ID</th>
+        <th scope="col">Event Name</th>
+        <th scope="col">Date</th>
+        <th scope="col">Movies Selected</th>
+        <!-- <th scope="col">Invitees Selected</th> -->
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let viewing of events | keyvalue">
-      <td>{{ viewing.value.hostID }}</td>
-      <td>{{ viewing.value.eventTitle }}</td>
-      <td>{{ viewing.value.eventDate }}</td>
-      <h2 *ngFor="let selectedMovie of viewing.value.selectedMovies">
-        <h4>{{ selectedMovie.title }}</h4></h2>
-      <mat-divider></mat-divider>
-    </tr>
+      <tr *ngFor="let viewing of events | keyvalue">
+        <td>{{ viewing.value.hostID }}</td>
+        <td>{{ viewing.value.eventTitle }}</td>
+        <td>{{ viewing.value.eventDate }}</td>
+        <h2 *ngFor="let selectedMovie of viewing.value.selectedMovies">
+          <h4>{{ selectedMovie.title }}</h4>
+        </h2>
+        <mat-divider></mat-divider>
+      </tr>
     </tbody>
   </table>
 
   <!-- GRID TO DISPLAY MOVIES -->
   <div class="content">
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
-      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of eventMovies">
-        <app-movie-card [movie]="movie" >
-        </app-movie-card>
+      <div class="content" *ngFor="let movie of eventMovies">
+        <app-movie-card [movie]="movie"> </app-movie-card>
+        <!--<h3>{{movie.title}}</h3>-->
       </div>
     </div>
   </div>

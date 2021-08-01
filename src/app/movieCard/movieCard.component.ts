@@ -10,11 +10,13 @@ import { EventService } from "../event.service";
 export class MovieCardComponent implements OnInit {
   @Input() movie!: PopMovieItem|undefined;
   @Output() notify = new EventEmitter();
+
+  selected = false;
+
   constructor(
     private eventService: EventService
   ) {}
 
-  selected = false;
   onSelectCard(popMovieItem: PopMovieItem) {
     this.selected = !this.selected;
     if (this.selected == false) {
