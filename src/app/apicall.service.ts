@@ -44,7 +44,7 @@ export class ApicallService {
       pipe(
         map((data) => {
           console.log(data);
-          console.log("getPopMovies() data.results: " + data.Items);
+          console.log("getPopMovies() data.Items: " + data.Items);
           return data.Items ?? [];
         })
       )
@@ -69,6 +69,18 @@ export class ApicallService {
         return JSON.parse(data.eventTitle);
       })
     )
+  }
+
+  // get Event data from DynamoDB
+  getMovieEvents() : Observable<MovieEvent[]> {
+    return this.http.get<MovieEvents>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/movieevents-scan').
+      pipe(
+        map((data) => {
+          console.log(data);
+          console.log("getMovieEvents() data.Items: " + data.Items);
+          return data.Items ?? [];
+        })
+      )
   }
 
 }
