@@ -12,10 +12,16 @@ import { EventService } from "../event.service";
 // @ts-ignore
 //import { onScan } from "../../../popMoviesScan.js";
 
+export interface MovieEvents {
+  searchType: string;
+  expression: string;
+  Items?: (MovieEvent)[] | null;
+  errorMessage: string;
+}
 
-interface MovieEvent {
+export interface MovieEvent {
   hostID: string;
-  eventID: string;
+  //eventID: string;
   eventTitle: string;
   eventDate: string;
   movies?: (PopMovieItem) [] | null;
@@ -81,12 +87,13 @@ export class EventComponent implements OnInit {
 
     // Create new eventID: sets eventID to be 1 larger than current events map size,
     //   with added random number to prevent overwriting, should a previous event be deleted
-    this.eventID = `${this.events.size+1}` + '-' + `${Math.floor(Math.random()*1000)}`;
-    console.log(this.eventID);
+    //this.eventID = `${this.events.size+1}` + '-' + `${Math.floor(Math.random()*1000)}`;
+    //console.log(this.eventID);
+
     // Create newEvent object of MovieEvent type with the provided elements
     let newEvent: MovieEvent = {
       hostID: this.hostID,
-      eventID : this.eventID,
+      //eventID : this.eventID,
       eventTitle : this.eventTitle,
       eventDate : this.eventDate,
       selectedMovies : [...this.eventService.getSelectedMovies()]
@@ -106,12 +113,13 @@ export class EventComponent implements OnInit {
     this.events.forEach((value: string, key: string) => {
       console.log("KV: " + key, value);
     })
+    this.apicall.addMovieEvent(newEvent).subscribe();
     this.eventTitle = '';
     this.eventDate = '';
     this.errormsg = '';
     this.date = new FormControl(new Date());
     this.selectedMovies = [];
-    return newEvent;
+    //return newEvent;
   }
 }
 
