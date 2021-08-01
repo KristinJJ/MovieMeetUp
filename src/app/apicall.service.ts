@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Movies, MovieItem, PopMovies, PopMovieItem } from './movies';
 //import * as Rx from "rxjs/Rx";
 import { from, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from "../environments/environment";
+import { MovieEvents, MovieEvent } from "../app/event/event.component";
 
 interface ItemsResponse {
   movies: Array<Movies>;
@@ -47,6 +48,27 @@ export class ApicallService {
           return data.Items ?? [];
         })
       )
+  }
+
+  addMovieEvent(body: MovieEvent) : Observable<MovieEvent[]> {
+    const headers = new HttpHeaders()
+    /* .set('content-type', 'application/json')
+    .set('Access-Control-Allow-Origin', '*')
+    .set("Access-Control-Allow-Methods", "OPTIONS,POST,PUT,GET"); */
+      headers.append('Origin','http://localhost:4200')
+      .append("Accept", "appliction/json")
+      .append("Content-Type", "application/json");
+  
+    return this.http.put<MovieEvent>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/events', body, { 'headers': headers })
+    .pipe(
+      map((data) => {
+        //console.log('body: ' + JSON.parse(body.eventTitle));
+        console.table(data);
+        console.log('data: ' + JSON.stringify(data,null,2));
+        return JSON.stringify(data);
+        return JSON.parse(data.eventTitle);
+      })
+    )
   }
 
 }
