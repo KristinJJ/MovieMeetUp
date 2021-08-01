@@ -72,7 +72,7 @@
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
       <div class="content" *ngFor="let movie of eventMovies">
         <app-movie-card [movie]="movie"> </app-movie-card>
-        <!--<h3>{{movie.title}}</h3>-->
+        <div class="movieTitle">{{movie.title}}</div>
       </div>
     </div>
   </div>

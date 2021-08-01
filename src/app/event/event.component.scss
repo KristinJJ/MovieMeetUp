@@ -13,6 +13,10 @@ mat-toolbar {
 
 .content {
   margin: 16px;
+  font-size: medium;
+  font-weight: bold;
+  padding: 20px;
+  overflow-wrap: normal;
 }
 
 .createBox p {
@@ -22,4 +26,11 @@ mat-toolbar {
 .confirmation {
   margin-left: 2em;
   font-size: 1.25rem;
+}
+
+.movieTitle {
+  font-size: medium;
+  font-weight: bold;
+  padding: 20px;
+  word-wrap: normal;
 }
