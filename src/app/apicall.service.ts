@@ -50,6 +50,7 @@ export class ApicallService {
       )
   }
 
+  // adds created event to the Event DynamoDB table
   addMovieEvent(body: MovieEvent) : Observable<MovieEvent[]> {
     const headers = new HttpHeaders()
     /* .set('content-type', 'application/json')
@@ -69,6 +70,16 @@ export class ApicallService {
         return JSON.parse(data.eventTitle);
       })
     )
+  }
+
+  // Add user SelectedRankings to the indicated eventid in the DynamoDb Event table
+  addUserRankings(/* (body: UserRanking) : Observable<UserRanking[]> */) {
+    const headers = new HttpHeaders()
+      headers.append('Origin','http://localhost:4200')
+      .append("Accept", "appliction/json")
+      .append("Content-Type", "application/json");
+
+    //return this.http.put<UserRanking>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/events/rankings', body, { 'headers': headers })  
   }
 
   // get Event data from DynamoDB

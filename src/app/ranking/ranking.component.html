@@ -1,15 +1,12 @@
 <p>
   <mat-form-field appearance="fill">
     <mat-label>Enter User ID</mat-label>
-    <input
-      matInput
-      type="text"
-      [(ngModel)]="value"
-      (keyup.enter)="submitUserID()"
-    />
+    <input matInput type="text" [(ngModel)]="userID" />
   </mat-form-field>
 </p>
-<h3>User ID: {{ userID }}</h3>
+<h3>EventTitle: {{ eventTitle === "" ? "No Title found" : eventTitle }}</h3>
+<h3>EventDate: {{ eventDate === "" ? "No Date found" : eventDate }}</h3>
+<h3>User ID: {{ userID === "" ? "No User ID entered" : userID }}</h3>
 
 <h1>Rank the Movies!</h1>
 <p>
@@ -19,20 +16,21 @@
 
 <div>
   <h2>
-    Top Choice:
+    {{ userID === "" ? "Your" : userID + "'s" }} Current Top Choice:
     {{
-      Movie === undefined
+      movie === undefined
         ? "Loading..."
-        : Movie.length === 0
+        : movie.length === 0
         ? "No results"
-        : Movie[0].title + " " + Movie[0].description + " id: " + Movie[0].id
+        : movie[0].title + " " + ", id: " + movie[0].id
     }}
   </h2>
 </div>
 
+<!-- Adjust this so they are dragging movie posters? -->
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-  <div class="example-box" *ngFor="let movie of Movie" cdkDrag>
-    {{ movie.title }} {{ movie.description }} id: {{ movie.id }}
+  <div class="example-box" *ngFor="let movie of movie" cdkDrag>
+    {{ movie.title }} id: {{ movie.id }}
     <img *cdkDragPreview [src]="movie.image" [alt]="movie.title" />
   </div>
 </div>
@@ -41,4 +39,4 @@
   Submit
 </button>
 
-<h1>Current Highest Rank: {{ highestRank }}</h1>
+<!-- <h1>Current Highest Rank: {{ highestRank }}</h1> -->

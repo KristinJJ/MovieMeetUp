@@ -3,8 +3,10 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { ApicallService } from '../apicall.service';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MovieItem, movielist } from '../movies';
+import { MovieItem, movielist, popMovieSamples, PopMovieItem } from '../movies';
 import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { MovieEvent } from '../event/event.component';
 
 /**
  * @title Drag&Drop custom preview
@@ -17,17 +19,23 @@ import { environment } from 'src/environments/environment';
 
 export class RankingComponent implements OnInit {
   title = 'Movie ranking';
-  Movie: MovieItem[] = [];
+
+  movieEvent: MovieEvent[] = []; // the event info the ranking is for
+  movie: PopMovieItem[] = [];    // the movies to be ranked (from event) -- does this need to be separate?
   value = '';
-  userID = 'no User ID entered';
-  movieRankings = new Map();
+  eventTitle = '';
+  eventDate = '';
+  userID = '';
+  movieRankings = new Map();  // 
   highestRank = 'no highest rank';
 
-  constructor(public apicall: ApicallService, private router: Router) {
+  constructor(public apicall: ApicallService, private router: Router, private httpClient: HttpClient) {
   }
 
   ngOnInit() {
-    this.loadMovies();
+    this.loadMovies(); 
+    // do a similar "load event" like home.component? get an eventID, populate above attributes?
+    //  FUTURE: eventID is in query string from the invite email?
   }
 
   navigate() {
@@ -36,20 +44,20 @@ export class RankingComponent implements OnInit {
 
   loadMovies() {
     if (environment.production === false) {
-      this.Movie = <MovieItem[]>movielist
-      console.log("fake array: " + JSON.stringify(this.Movie));
-      return this.Movie;
+      this.movie = <PopMovieItem[]><unknown>popMovieSamples
+      console.log("fake array: " + JSON.stringify(this.movie));
+      return this.movie;
     } else {
     return this.apicall.getMovies("Star Wars").subscribe((data) => {
-      this.Movie = data;
+      //this.movie = data;
       console.log(data);
-      console.log(this.Movie[0]);
+      console.log(this.movie[0]);
       })
     }
   }
 
   drop(event: CdkDragDrop<{ title: string, image: string }[]>) {
-    moveItemInArray(this.Movie, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.movie, event.previousIndex, event.currentIndex);
   }
 
   submitUserID() {
@@ -58,14 +66,14 @@ export class RankingComponent implements OnInit {
   }
 
   rankMovies() {
-    let points = this.Movie.length
-    for (let i = 0; i < this.Movie.length; i++) {
-      if (this.movieRankings.has(this.Movie[i].title)) {
-        let newRanking = points + this.movieRankings.get(this.Movie[i].title)
-        this.movieRankings.set(this.Movie[i].title, newRanking);
+    let points = this.movie.length
+    for (let i = 0; i < this.movie.length; i++) {
+      if (this.movieRankings.has(this.movie[i].title)) {
+        let newRanking = points + this.movieRankings.get(this.movie[i].title)
+        this.movieRankings.set(this.movie[i].title, newRanking);
         points--;
       } else {
-        this.movieRankings.set(this.Movie[i].title, points);
+        this.movieRankings.set(this.movie[i].title, points);
         points--;
       }
     }
@@ -86,7 +94,9 @@ export class RankingComponent implements OnInit {
   }
 
   submitRanking() {
-    this.rankMovies();
+    this.rankMovies(); 
+    // THEN invoke apicall to put rankings into the DB.
+    
     console.log("Highest rank: " + this.highestRank);
 
     console.log("User ID: " + this.userID);
