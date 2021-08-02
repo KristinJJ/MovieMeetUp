@@ -20,6 +20,7 @@ export interface MovieEvents {
 }
 
 export interface MovieEvent {
+  id?: string;
   hostID: string;
   //eventID: string;
   eventTitle: string;

@@ -7,7 +7,7 @@ import { HomeComponent } from "./home/home.component";
 const routes: Routes = [
     { path: 'home', pathMatch: 'full', component: HomeComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'ranking', pathMatch: 'full', component: RankingComponent },
+    { path: 'ranking/:eventID', component: RankingComponent },
     { path: 'event', component: EventComponent }
     /* add path for movie selection */
 ];
