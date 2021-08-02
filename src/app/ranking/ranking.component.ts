@@ -5,6 +5,8 @@ import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MovieItem, movielist } from '../movies';
 import { environment } from 'src/environments/environment';
+import { MovieEvent } from '../event/event.component';
+import { ActivatedRoute } from '@angular/router';
 
 /**
  * @title Drag&Drop custom preview
@@ -16,6 +18,7 @@ import { environment } from 'src/environments/environment';
 })
 
 export class RankingComponent implements OnInit {
+  event: MovieEvent | undefined;
   title = 'Movie ranking';
   Movie: MovieItem[] = [];
   value = '';
@@ -23,11 +26,17 @@ export class RankingComponent implements OnInit {
   movieRankings = new Map();
   highestRank = 'no highest rank';
 
-  constructor(public apicall: ApicallService, private router: Router) {
+  constructor(public apicall: ApicallService, private router: Router, private route: ActivatedRoute,) {
   }
 
   ngOnInit() {
     this.loadMovies();
+    // First get the event id from the current route.
+    const routeParams = this.route.snapshot.paramMap;
+    const eventIDFromRoute = Number(routeParams.get('EventID'));
+
+    // Find the event that correspond with the id provided in route.
+    //this.event = eventMovies.find((event) => event.id === eventIDFromRoute);
   }
 
   navigate() {
