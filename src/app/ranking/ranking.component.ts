@@ -49,7 +49,7 @@ export class RankingComponent implements OnInit {
 
   movieEvent: MovieEvent[] = []; // the event info the ranking is for
   movie: PopMovieItem[] = []; 
-  id = 'testid';   // the movies to be ranked (from event) -- does this need to be separate?
+  id = '3u0lmogh79d';   // the movies to be ranked (from event) -- does this need to be separate?
   value = '';
   eventTitle = '';
   eventDate = '';
