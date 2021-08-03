@@ -74,13 +74,13 @@ export class ApicallService {
   }
 
   // Add user SelectedRankings to the indicated eventid in the DynamoDb Event table
-  addUserRankings(body: RankUpdate) /*: Observable<UserRankings[]> */ {
+  addUserRankings(body: RankUpdate): Observable<RankUpdate> /*: Observable<UserRankings[]> */ {
     const headers = new HttpHeaders()
       headers.append('Origin','http://localhost:4200')
       .append("Accept", "appliction/json")
       .append("Content-Type", "application/json");
 
-    return this.http.put<[]>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/user-rankings', body, { 'headers': headers })  
+    return this.http.put<RankUpdate>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/user-rankings', body, { 'headers': headers })  
   }
 
   // get Event data from DynamoDB
