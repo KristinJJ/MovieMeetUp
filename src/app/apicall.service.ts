@@ -6,6 +6,7 @@ import { from, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from "../environments/environment";
 import { MovieEvents, MovieEvent } from "../app/event/event.component";
+import { UserRankings, RankUpdate } from '../app/ranking/ranking.component';
 
 interface ItemsResponse {
   movies: Array<Movies>;
@@ -73,13 +74,13 @@ export class ApicallService {
   }
 
   // Add user SelectedRankings to the indicated eventid in the DynamoDb Event table
-  addUserRankings(/* (body: UserRanking) : Observable<UserRanking[]> */) {
+  addUserRankings(body: RankUpdate) /*: Observable<UserRankings[]> */ {
     const headers = new HttpHeaders()
       headers.append('Origin','http://localhost:4200')
       .append("Accept", "appliction/json")
       .append("Content-Type", "application/json");
 
-    //return this.http.put<UserRanking>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/events/rankings', body, { 'headers': headers })  
+    return this.http.put<[]>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/user-rankings', body, { 'headers': headers })  
   }
 
   // get Event data from DynamoDB
