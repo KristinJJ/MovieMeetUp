@@ -7,6 +7,7 @@ import { MovieItem, movielist } from '../movies';
 import { environment } from 'src/environments/environment';
 import { MovieEvent } from '../event/event.component';
 import { ActivatedRoute } from '@angular/router';
+import { RankingService } from '../ranking.service';
 
 /**
  * @title Drag&Drop custom preview
@@ -25,20 +26,25 @@ export class RankingComponent implements OnInit {
   userID = 'no User ID entered';
   movieRankings = new Map();
   highestRank = 'no highest rank';
+  movieEvent: MovieEvent | undefined;
 
-  constructor(public apicall: ApicallService, private router: Router, private route: ActivatedRoute,) {
+  constructor(public apicall: ApicallService, private rankingService: RankingService, private router: Router, private route: ActivatedRoute,) {
   }
 
   ngOnInit() {
-    this.loadMovies();
     // First get the event id from the current route.
     const routeParams = this.route.snapshot.paramMap;
-    const eventIDFromRoute = Number(routeParams.get('EventID'));
+    //console.log(routeParams);
+    const eventIDFromRoute = String(routeParams.get('eventID'));
+    console.log("eventIDFromRoute: " + eventIDFromRoute);
 
     // Find the event that correspond with the id provided in route.
-    //this.event = eventMovies.find((event) => event.id === eventIDFromRoute);
+    this.movieEvent = this.rankingService.getMovieEventByEventID(eventIDFromRoute);
+    console.log("movieEvent: " + JSON.stringify(this.movieEvent));
+    // the methods to get the movieEvent aren't firing again if returning to the same page, figure out where to put these method calls instead
   }
 
+  /*
   navigate() {
     this.router.navigateByUrl('/events');
   }
@@ -56,6 +62,7 @@ export class RankingComponent implements OnInit {
       })
     }
   }
+  */
 
   drop(event: CdkDragDrop<{ title: string, image: string }[]>) {
     moveItemInArray(this.Movie, event.previousIndex, event.currentIndex);
