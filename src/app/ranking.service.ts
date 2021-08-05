@@ -15,7 +15,8 @@ export class RankingService {
     this.apicall.getMovieEvents().subscribe((data) => {
       console.log(data);
       for (let index in data) {
-        if (data[index].hostID == demoID) {
+        // make sure the hostID equals the demoID, and that the id does not already exist in the movieEvents array
+       if ((data[index].hostID == demoID) && (data[index].id != (this.movieEvents.find(event => event.id == data[index].id))?.id)) {
           this.movieEvents.push(data[index]);
         }
       }
