@@ -1,3 +1,6 @@
+<h1>Event: {{ eventTitle }}</h1>
+<h2>Event Date: {{ eventDate }}</h2>
+
 <p>
   <mat-form-field appearance="fill">
     <mat-label>Enter User ID</mat-label>
@@ -11,7 +14,11 @@
 </p>
 <h3>User ID: {{ userID }}</h3>
 
-<h1>Rank the Movies!</h1>
+<h3 style="color: red">
+  {{ errorMsg }}
+</h3>
+
+<h2>Rank the Movies!</h2>
 <p>
   First choice goes on the top of the list, last choice goes on the bottom of
   the list
@@ -25,14 +32,14 @@
         ? "Loading..."
         : movieItemArray.length === 0
         ? "No results"
-        : movieItemArray[0].title + " " + " id: " + movieItemArray[0].id
+        : movieItemArray[0].title 
     }}
   </h2>
 </div>
 
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
   <div class="example-box" *ngFor="let movie of movieItemArray" cdkDrag>
-    {{ movie.title }} id: {{ movie.id }}
+    {{ movie.title }} 
     <img *cdkDragPreview [src]="movie.image" [alt]="movie.title" />
   </div>
 </div>

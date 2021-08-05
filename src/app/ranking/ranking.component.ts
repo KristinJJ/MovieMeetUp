@@ -20,10 +20,13 @@ import { RankingService } from '../ranking.service';
 
 export class RankingComponent implements OnInit {
   event: MovieEvent | undefined;
+  eventTitle = '';
+  eventDate = '';
   title = 'Movie ranking';
   movieItemArray: (MovieItem) [] | undefined;
   value = '';
-  userID = 'no User ID entered';
+  userID = 'No User ID Entered';
+  errorMsg = '';
   movieRankings = new Map();
   highestRank = 'no highest rank';
   movieEvent: MovieEvent | undefined;
@@ -47,27 +50,11 @@ export class RankingComponent implements OnInit {
   loadMoviesFromEvent() {
     // if movieEvent is not undefined or null, assign movies to movieItemArray
     if (this.movieEvent != undefined) {
-      console.log("event title: " + this.movieEvent.eventTitle);
-      console.log("event date: " + this.movieEvent.eventDate);
-      console.log("event movies array: " + this.movieEvent.eventMovies);
+      this.eventTitle = this.movieEvent.eventTitle;
+      this.eventDate = this.movieEvent.eventDate;
       this.movieItemArray = this.movieEvent.eventMovies;
     }
   }
-  /*
-  loadMovies() {
-    if (environment.production === false) {
-      this.Movie = <MovieItem[]>movielist
-      console.log("fake array: " + JSON.stringify(this.Movie));
-      return this.Movie;
-    } else {
-    return this.apicall.getMovies("Star Wars").subscribe((data) => {
-      this.Movie = data;
-      console.log(data);
-      console.log(this.Movie[0]);
-      })
-    }
-  }
-  */
 
   drop(event: CdkDragDrop<{ title: string, image: string }[]>) {
     if (this.movieItemArray) {
@@ -76,7 +63,13 @@ export class RankingComponent implements OnInit {
   }
 
   submitUserID() {
-    this.userID = this.value;
+    if (this.value == '') {
+      this.errorMsg = 'You must enter a User ID.';
+      return;
+    } else {
+      this.userID = this.value;
+      this.errorMsg = '';
+    }
     console.log("User ID: " + this.userID);
   }
 
@@ -111,11 +104,14 @@ export class RankingComponent implements OnInit {
   }
 
   submitRanking() {
+    if (this.userID == '' || this.userID == 'No User ID Entered') {
+      this.errorMsg = 'You must enter a User ID.';
+      return;
+    }
     this.rankMovies();
     console.log("Highest rank: " + this.highestRank);
 
     console.log("User ID: " + this.userID);
-
     for (let entry of this.movieRankings.entries()) {
       console.log(entry[0], entry[1]);
     }
