@@ -3,7 +3,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { ApicallService } from '../apicall.service';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MovieItem, movielist } from '../movies';
+import { MovieItem, movielist, PopMovieItem } from '../movies';
 import { environment } from 'src/environments/environment';
 import { MovieEvent } from '../event/event.component';
 import { ActivatedRoute } from '@angular/router';
@@ -21,7 +21,7 @@ import { RankingService } from '../ranking.service';
 export class RankingComponent implements OnInit {
   event: MovieEvent | undefined;
   title = 'Movie ranking';
-  Movie: MovieItem[] = [];
+  movieItemArray: (MovieItem) [] | undefined;
   value = '';
   userID = 'no User ID entered';
   movieRankings = new Map();
@@ -34,21 +34,26 @@ export class RankingComponent implements OnInit {
   ngOnInit() {
     // First get the event id from the current route.
     const routeParams = this.route.snapshot.paramMap;
-    //console.log(routeParams);
     const eventIDFromRoute = String(routeParams.get('eventID'));
     console.log("eventIDFromRoute: " + eventIDFromRoute);
 
     // Find the event that correspond with the id provided in route.
     this.movieEvent = JSON.parse(JSON.stringify(this.rankingService.getMovieEventByEventID(eventIDFromRoute)));
+    //this.movieEvent = this.rankingService.getMovieEventByEventID(eventIDFromRoute);
     console.log("movieEvent: " + JSON.stringify(this.movieEvent));
-    // the methods to get the movieEvent aren't firing again if returning to the same page, figure out where to put these method calls instead
+    this.loadMoviesFromEvent();
   }
 
+  loadMoviesFromEvent() {
+    // if movieEvent is not undefined or null, assign movies to movieItemArray
+    if (this.movieEvent != undefined) {
+      console.log("event title: " + this.movieEvent.eventTitle);
+      console.log("event date: " + this.movieEvent.eventDate);
+      console.log("event movies array: " + this.movieEvent.eventMovies);
+      this.movieItemArray = this.movieEvent.eventMovies;
+    }
+  }
   /*
-  navigate() {
-    this.router.navigateByUrl('/events');
-  }
-
   loadMovies() {
     if (environment.production === false) {
       this.Movie = <MovieItem[]>movielist
@@ -65,7 +70,9 @@ export class RankingComponent implements OnInit {
   */
 
   drop(event: CdkDragDrop<{ title: string, image: string }[]>) {
-    moveItemInArray(this.Movie, event.previousIndex, event.currentIndex);
+    if (this.movieItemArray) {
+    moveItemInArray(this.movieItemArray, event.previousIndex, event.currentIndex);
+    }
   }
 
   submitUserID() {
@@ -74,15 +81,17 @@ export class RankingComponent implements OnInit {
   }
 
   rankMovies() {
-    let points = this.Movie.length
-    for (let i = 0; i < this.Movie.length; i++) {
-      if (this.movieRankings.has(this.Movie[i].title)) {
-        let newRanking = points + this.movieRankings.get(this.Movie[i].title)
-        this.movieRankings.set(this.Movie[i].title, newRanking);
-        points--;
-      } else {
-        this.movieRankings.set(this.Movie[i].title, points);
-        points--;
+    if (this.movieItemArray) {
+      let points = this.movieItemArray.length
+      for (let i = 0; i < this.movieItemArray.length; i++) {
+        if (this.movieRankings.has(this.movieItemArray[i].title)) {
+          let newRanking = points + this.movieRankings.get(this.movieItemArray[i].title)
+          this.movieRankings.set(this.movieItemArray[i].title, newRanking);
+          points--;
+        } else {
+          this.movieRankings.set(this.movieItemArray[i].title, points);
+          points--;
+        }
       }
     }
     this.findTopMovie();

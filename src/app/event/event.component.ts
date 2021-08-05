@@ -24,7 +24,7 @@ export interface MovieEvent {
   hostID: string;
   eventTitle: string;
   eventDate: string;
-  movies?: (PopMovieItem) [] | null;
+  eventMovies?: (PopMovieItem) [] | undefined;
   selectedMovies: PopMovieItem[];
   //invitees?: (EventInvitees) [] | null;
   //movieRankings?: (movieRankings) [] | null;
@@ -105,7 +105,6 @@ export class EventComponent implements OnInit {
     // Create newEvent object of MovieEvent type with the provided elements
     let newEvent: MovieEvent = {
       hostID: this.hostID,
-      //eventID : this.eventID,
       eventTitle : this.eventTitle,
       eventDate : this.eventDate,
       selectedMovies : [...this.eventService.getSelectedMovies()]

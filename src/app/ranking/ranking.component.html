@@ -21,18 +21,18 @@
   <h2>
     Top Choice:
     {{
-      Movie === undefined
+      movieItemArray === undefined
         ? "Loading..."
-        : Movie.length === 0
+        : movieItemArray.length === 0
         ? "No results"
-        : Movie[0].title + " " + Movie[0].description + " id: " + Movie[0].id
+        : movieItemArray[0].title + " " + " id: " + movieItemArray[0].id
     }}
   </h2>
 </div>
 
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-  <div class="example-box" *ngFor="let movie of Movie" cdkDrag>
-    {{ movie.title }} {{ movie.description }} id: {{ movie.id }}
+  <div class="example-box" *ngFor="let movie of movieItemArray" cdkDrag>
+    {{ movie.title }} id: {{ movie.id }}
     <img *cdkDragPreview [src]="movie.image" [alt]="movie.title" />
   </div>
 </div>
