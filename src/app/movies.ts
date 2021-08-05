@@ -23,6 +23,7 @@ export interface MovieItem {
 }
 
 export interface PopMovieItem {
+    points?: number
     id: string;
     rank: number;
     rankUpDown: string;

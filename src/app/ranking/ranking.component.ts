@@ -74,8 +74,8 @@ export class RankingComponent implements OnInit {
   loadMovies() {
     if (environment.production === false) {
       this.movie = <PopMovieItem[]><unknown>popMovieSamples
-      this.userRankings = <PopMovieItem[]><unknown>popMovieSamples;
-      console.log("fake array: " + JSON.stringify(this.movie));
+      this.userRankings = <UserRankings[]><unknown>popMovieSamples;
+      console.log("fake array: " + JSON.stringify(this.userRankings));
       return this.movie;
     } else {
     return this.apicall.getMovies("Star Wars").subscribe((data) => {
@@ -103,7 +103,7 @@ export class RankingComponent implements OnInit {
         this.movieRankings.set(this.movie[i].title, newRanking);
         points--;
       } else {
-        this.movieRankings.set(this.movie[i].title, points);
+        this.movieRankings.set(this.userRankings[i].title, points);
 
         // Adds points attribute with the value determined to the movie in userRankings array
         let movieIndex = this.userRankings.findIndex(x => x.title === this.movie[i].title);
@@ -141,6 +141,7 @@ export class RankingComponent implements OnInit {
       //this.userRankings.find(x => x.title === entry[0])
     }
     console.log(this.userRankings);
+    console.log(typeof(this.userRankings));
 
     // Still need to figure out how to target the movieEvent.id
     let rankingUpdate: RankUpdate = {
@@ -150,6 +151,7 @@ export class RankingComponent implements OnInit {
     }
     console.log('rankingUpdate: ' + JSON.stringify(rankingUpdate));
     console.log(typeof(rankingUpdate));
+    console.log('rankings: ' + JSON.stringify(rankingUpdate.rankings));
     // THEN invoke apicall to put rankings into the DB.
     this.apicall.addUserRankings(rankingUpdate).subscribe();
   }
