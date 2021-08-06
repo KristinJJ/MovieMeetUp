@@ -3,10 +3,11 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { ApicallService } from '../apicall.service';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MovieItem, movielist } from '../movies';
+import { MovieItem, movielist, PopMovieItem } from '../movies';
 import { environment } from 'src/environments/environment';
 import { MovieEvent } from '../event/event.component';
 import { ActivatedRoute } from '@angular/router';
+import { RankingService } from '../ranking.service';
 
 /**
  * @title Drag&Drop custom preview
@@ -19,63 +20,71 @@ import { ActivatedRoute } from '@angular/router';
 
 export class RankingComponent implements OnInit {
   event: MovieEvent | undefined;
+  eventTitle = '';
+  eventDate = '';
   title = 'Movie ranking';
-  Movie: MovieItem[] = [];
+  movieItemArray: (MovieItem) [] | undefined;
   value = '';
-  userID = 'no User ID entered';
+  userID = 'No User ID Entered';
+  errorMsg = '';
   movieRankings = new Map();
   highestRank = 'no highest rank';
+  movieEvent: MovieEvent | undefined;
 
-  constructor(public apicall: ApicallService, private router: Router, private route: ActivatedRoute,) {
+  constructor(public apicall: ApicallService, private rankingService: RankingService, private router: Router, private route: ActivatedRoute,) {
   }
 
   ngOnInit() {
-    this.loadMovies();
     // First get the event id from the current route.
     const routeParams = this.route.snapshot.paramMap;
-    const eventIDFromRoute = Number(routeParams.get('EventID'));
+    const eventIDFromRoute = String(routeParams.get('eventID'));
+    console.log("eventIDFromRoute: " + eventIDFromRoute);
 
     // Find the event that correspond with the id provided in route.
-    //this.event = eventMovies.find((event) => event.id === eventIDFromRoute);
+    this.movieEvent = JSON.parse(JSON.stringify(this.rankingService.getMovieEventByEventID(eventIDFromRoute)));
+    //this.movieEvent = this.rankingService.getMovieEventByEventID(eventIDFromRoute);
+    console.log("movieEvent: " + JSON.stringify(this.movieEvent));
+    this.loadMoviesFromEvent();
   }
 
-  navigate() {
-    this.router.navigateByUrl('/events');
-  }
-
-  loadMovies() {
-    if (environment.production === false) {
-      this.Movie = <MovieItem[]>movielist
-      console.log("fake array: " + JSON.stringify(this.Movie));
-      return this.Movie;
-    } else {
-    return this.apicall.getMovies("Star Wars").subscribe((data) => {
-      this.Movie = data;
-      console.log(data);
-      console.log(this.Movie[0]);
-      })
+  loadMoviesFromEvent() {
+    // if movieEvent is not undefined or null, assign movies to movieItemArray
+    if (this.movieEvent != undefined) {
+      this.eventTitle = this.movieEvent.eventTitle;
+      this.eventDate = this.movieEvent.eventDate;
+      this.movieItemArray = this.movieEvent.eventMovies;
     }
   }
 
   drop(event: CdkDragDrop<{ title: string, image: string }[]>) {
-    moveItemInArray(this.Movie, event.previousIndex, event.currentIndex);
+    if (this.movieItemArray) {
+    moveItemInArray(this.movieItemArray, event.previousIndex, event.currentIndex);
+    }
   }
 
   submitUserID() {
-    this.userID = this.value;
+    if (this.value == '') {
+      this.errorMsg = 'You must enter a User ID.';
+      return;
+    } else {
+      this.userID = this.value;
+      this.errorMsg = '';
+    }
     console.log("User ID: " + this.userID);
   }
 
   rankMovies() {
-    let points = this.Movie.length
-    for (let i = 0; i < this.Movie.length; i++) {
-      if (this.movieRankings.has(this.Movie[i].title)) {
-        let newRanking = points + this.movieRankings.get(this.Movie[i].title)
-        this.movieRankings.set(this.Movie[i].title, newRanking);
-        points--;
-      } else {
-        this.movieRankings.set(this.Movie[i].title, points);
-        points--;
+    if (this.movieItemArray) {
+      let points = this.movieItemArray.length
+      for (let i = 0; i < this.movieItemArray.length; i++) {
+        if (this.movieRankings.has(this.movieItemArray[i].title)) {
+          let newRanking = points + this.movieRankings.get(this.movieItemArray[i].title)
+          this.movieRankings.set(this.movieItemArray[i].title, newRanking);
+          points--;
+        } else {
+          this.movieRankings.set(this.movieItemArray[i].title, points);
+          points--;
+        }
       }
     }
     this.findTopMovie();
@@ -95,11 +104,14 @@ export class RankingComponent implements OnInit {
   }
 
   submitRanking() {
+    if (this.userID == '' || this.userID == 'No User ID Entered') {
+      this.errorMsg = 'You must enter a User ID.';
+      return;
+    }
     this.rankMovies();
     console.log("Highest rank: " + this.highestRank);
 
     console.log("User ID: " + this.userID);
-
     for (let entry of this.movieRankings.entries()) {
       console.log(entry[0], entry[1]);
     }

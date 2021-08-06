@@ -22,10 +22,9 @@ export interface MovieEvents {
 export interface MovieEvent {
   id?: string;
   hostID: string;
-  //eventID: string;
   eventTitle: string;
   eventDate: string;
-  movies?: (PopMovieItem) [] | null;
+  eventMovies?: (PopMovieItem) [] | undefined;
   selectedMovies: PopMovieItem[];
   //invitees?: (EventInvitees) [] | null;
   //movieRankings?: (movieRankings) [] | null;
@@ -54,7 +53,7 @@ export class EventComponent implements OnInit {
   date = new FormControl(new Date());
   gridColumns = 3;
 
-  constructor(public apicall: ApicallService, private httpClient: HttpClient, private eventService: EventService) {}
+  constructor(public apicall: ApicallService, private eventService: EventService, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
     this.loadPopMovies();
@@ -106,7 +105,6 @@ export class EventComponent implements OnInit {
     // Create newEvent object of MovieEvent type with the provided elements
     let newEvent: MovieEvent = {
       hostID: this.hostID,
-      //eventID : this.eventID,
       eventTitle : this.eventTitle,
       eventDate : this.eventDate,
       selectedMovies : [...this.eventService.getSelectedMovies()]
