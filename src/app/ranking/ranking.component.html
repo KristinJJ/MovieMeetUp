@@ -1,5 +1,11 @@
-<h1>Event: {{ eventTitle }}</h1>
+<h1>Event Title: {{ eventTitle }}</h1>
 <h2>Event Date: {{ eventDate }}</h2>
+
+<p>To invite someone to rank the movies, either <a href = "mailto:?subject={{eventTitle}}&body=Before%20{{eventDate}},%20rank%20the%20movies%20at:%0A%0A{{url}}%0A%0AThanks!">
+  email them
+  </a>
+  or direct them to {{ url }}
+</p>
 
 <p>
   <mat-form-field appearance="fill">
