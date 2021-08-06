@@ -20,6 +20,7 @@ import { RankingService } from '../ranking.service';
 
 export class RankingComponent implements OnInit {
   event: MovieEvent | undefined;
+  id = '';
   eventTitle = '';
   eventDate = '';
   title = 'Movie ranking';
@@ -30,6 +31,7 @@ export class RankingComponent implements OnInit {
   movieRankings = new Map();
   highestRank = 'no highest rank';
   movieEvent: MovieEvent | undefined;
+  url = 'http://localhost:4200/ranking/';
 
   constructor(public apicall: ApicallService, private rankingService: RankingService, private router: Router, private route: ActivatedRoute,) {
   }
@@ -53,6 +55,10 @@ export class RankingComponent implements OnInit {
       this.eventTitle = this.movieEvent.eventTitle;
       this.eventDate = this.movieEvent.eventDate;
       this.movieItemArray = this.movieEvent.eventMovies;
+      if (this.movieEvent.id) {
+        this.id = this.movieEvent.id;
+        this.url = this.url + this.id;
+      }
     }
   }
 
