@@ -149,11 +149,12 @@ export class RankingComponent implements OnInit {
       userID: this.userID,
       rankings: this.userRankings
     }
+    
     console.log('rankingUpdate: ' + JSON.stringify(rankingUpdate));
     console.log(typeof(rankingUpdate));
     console.log('rankings: ' + JSON.stringify(rankingUpdate.rankings));
     // THEN invoke apicall to put rankings into the DB.
-    this.apicall.addUserRankings(rankingUpdate).subscribe();
+    this.apicall.addUserRankings(rankingUpdate).subscribe(data => console.log(data));
   }
 
 }
