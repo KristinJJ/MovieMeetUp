@@ -1,3 +1,18 @@
+<h1>Event Title: {{ eventTitle }}</h1>
+<h2>Event Date: {{ eventDate }}</h2>
+
+<p>
+  To invite someone to rank the movies, either
+  <a
+    href="mailto:?subject={{ eventTitle }}?body=Before%20{{
+      eventDate
+    }},%20rank%20the%20movies%20at:%0A%0A{{ url }}%0A%0AThanks!"
+  >
+    email them
+  </a>
+  or direct them to {{ url }}
+</p>
+
 <p>
   <mat-form-field appearance="fill">
     <mat-label>Enter User ID</mat-label>
@@ -8,7 +23,11 @@
 <h3>EventDate: {{ eventDate === "" ? "No Date found" : eventDate }}</h3>
 <h3>User ID: {{ userID === "" ? "No User ID entered" : userID }}</h3>
 
-<h1>Rank the Movies!</h1>
+<h3 style="color: red">
+  {{ errorMsg }}
+</h3>
+
+<h2>Rank the Movies!</h2>
 <p>
   First choice goes on the top of the list, last choice goes on the bottom of
   the list
@@ -18,19 +37,19 @@
   <h2>
     {{ userID === "" ? "Your" : userID + "'s" }} Current Top Choice:
     {{
-      movie === undefined
+      movieItemArray === undefined
         ? "Loading..."
-        : movie.length === 0
+        : movieItemArray.length === 0
         ? "No results"
-        : movie[0].title + " " + ", id: " + movie[0].id
+        : movieItemArray[0].title
     }}
   </h2>
 </div>
 
 <!-- Adjust this so they are dragging movie posters? -->
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-  <div class="example-box" *ngFor="let movie of movie" cdkDrag>
-    {{ movie.title }} id: {{ movie.id }}
+  <div class="example-box" *ngFor="let movie of movieItemArray" cdkDrag>
+    {{ movie.title }}
     <img *cdkDragPreview [src]="movie.image" [alt]="movie.title" />
   </div>
 </div>

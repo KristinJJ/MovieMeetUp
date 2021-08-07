@@ -43,7 +43,7 @@
 </div>
 
 <!-- TABLE TO DISPLAY CREATED EVENTS -->
-<div class="col-md-12">
+<!--<div class="col-md-12">
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -51,7 +51,6 @@
         <th scope="col">Event Name</th>
         <th scope="col">Date</th>
         <th scope="col">Movies Selected</th>
-        <!-- <th scope="col">Invitees Selected</th> -->
       </tr>
     </thead>
     <tbody>
@@ -66,14 +65,15 @@
       </tr>
     </tbody>
   </table>
+</div>-->
 
   <!-- GRID TO DISPLAY MOVIES -->
   <div class="content">
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
       <div class="content" *ngFor="let movie of eventMovies">
         <app-movie-card [movie]="movie"> </app-movie-card>
-        <div class="movieTitle">{{movie.title}}</div>
+        <div>{{movie.title}}</div>
       </div>
     </div>
   </div>
-</div>
+

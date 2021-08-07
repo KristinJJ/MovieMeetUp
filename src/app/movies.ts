@@ -16,10 +16,11 @@ export interface Movies {
 
 export interface MovieItem {
     id: string;
-    resultType: string;
+    resultType?: string;
     image: string;
     title: string;
-    description: string;
+    points?: number;
+    description?: string;
 }
 
 export interface PopMovieItem {
