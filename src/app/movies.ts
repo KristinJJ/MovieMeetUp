@@ -19,10 +19,12 @@ export interface MovieItem {
     resultType?: string;
     image: string;
     title: string;
+    points?: number;
     description?: string;
 }
 
 export interface PopMovieItem {
+    points?: number
     id: string;
     rank: number;
     rankUpDown: string;
@@ -81,6 +83,69 @@ export const movielist = [
         image: "https://imdb-api.com/images/original/MV5BMjEwMzMxODIzOV5BMl5BanBnXkFtZTgwNzg3OTAzMDI@._V1_Ratio0.7273_AL_.jpg",
         title: "Rogue One: A Star Wars Story",
         description: "(2016)"
+        }
+]
+
+export const popMovieSamples = [
+        {
+        id: "tt3480822",
+        rank: "1",
+        rankUpDown: "+1",
+        title: "Black Widow",
+        fullTitle: "Black Widow (2021)",
+        year: "2021",
+        image: "https://imdb-api.com/images/original/MV5BNjRmNDI5MjMtMmFhZi00YzcwLWI4ZGItMGI2MjI0N2Q3YmIwXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_Ratio0.6716_AL_.jpg",
+        crew: "Cate Shortland (dir.), Scarlett Johansson, Florence Pugh",
+        imDbRating: "6.9",
+        imDbRatingCount: "111665"
+        },
+        {
+        id: "tt3554046",
+        rank: "2",
+        rankUpDown: "+29",
+        title: "Space Jam: A New Legacy",
+        fullTitle: "Space Jam: A New Legacy (2021)",
+        year: "2021",
+        image: "https://imdb-api.com/images/original/MV5BZTAzN2ZlZTEtOTA5ZS00MGFjLTliYWMtYTQzYTFlYTIwZDVmXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_Ratio0.6716_AL_.jpg",
+        crew: "Malcolm D. Lee (dir.), LeBron James, Don Cheadle",
+        imDbRating: "4.3",
+        imDbRatingCount: "19472"
+        },
+        {
+        id: "tt9777666",
+        rank: "3",
+        rankUpDown: "-2",
+        title: "The Tomorrow War",
+        fullTitle: "The Tomorrow War (2021)",
+        year: "2021",
+        image: "https://imdb-api.com/images/original/MV5BNTI2YTI0MWEtNGQ4OS00ODIzLWE1MWEtZGJiN2E3ZmM1OWI1XkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_Ratio0.6716_AL_.jpg",
+        crew: "Chris McKay (dir.), Chris Pratt, Yvonne Strahovski",
+        imDbRating: "6.6",
+        imDbRatingCount: "104077"
+        },
+        {
+        id: "tt9701940",
+        rank: "4",
+        rankUpDown: "+2",
+        title: "Fear Street: Part Two - 1978",
+        fullTitle: "Fear Street: Part Two - 1978 (2021)",
+        year: "2021",
+        image: "https://imdb-api.com/images/original/MV5BOTQxMWNiZmYtOGUzMi00OGU5LTkzMjctYWY4ZmJkZjZiYWI5XkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_Ratio0.6716_AL_.jpg",
+        crew: "Leigh Janiak (dir.), Sadie Sink, Emily Rudd",
+        imDbRating: "6.8",
+        imDbRatingCount: "21949"
+        },
+        {
+        id: "tt6566576",
+        rank: "5",
+        rankUpDown: "-2",
+        title: "Fear Street: Part One - 1994",
+        fullTitle: "Fear Street: Part One - 1994 (2021)",
+        year: "2021",
+        image: "https://imdb-api.com/images/original/MV5BNzQzYjIyZDQtMjBhZS00MzU3LTk0MTQtNTVmMDI3ZWY0ZWU3XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_Ratio0.6716_AL_.jpg",
+        crew: "Leigh Janiak (dir.), Kiana Madeira, Olivia Scott Welch",
+        imDbRating: "6.2",
+        imDbRatingCount: "34917"
         }
 ]
 

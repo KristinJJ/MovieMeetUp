@@ -1,8 +1,14 @@
 <h1>Event Title: {{ eventTitle }}</h1>
 <h2>Event Date: {{ eventDate }}</h2>
 
-<p>To invite someone to rank the movies, either <a href = "mailto:?subject={{eventTitle}}&body=Before%20{{eventDate}},%20rank%20the%20movies%20at:%0A%0A{{url}}%0A%0AThanks!">
-  email them
+<p>
+  To invite someone to rank the movies, either
+  <a
+    href="mailto:?subject={{ eventTitle }}&body=Before%20{{
+      eventDate
+    }},%20rank%20the%20movies%20at:%0A%0A{{ url }}%0A%0AThanks!"
+  >
+    email them
   </a>
   or direct them to {{ url }}
 </p>
@@ -10,15 +16,11 @@
 <p>
   <mat-form-field appearance="fill">
     <mat-label>Enter User ID</mat-label>
-    <input
-      matInput
-      type="text"
-      [(ngModel)]="value"
-      (keyup.enter)="submitUserID()"
-    />
+    <input matInput type="text" [(ngModel)]="userID" />
   </mat-form-field>
 </p>
-<h3>User ID: {{ userID }}</h3>
+
+<h3>User ID: {{ userID === "" ? "No User ID entered" : userID }}</h3>
 
 <h3 style="color: red">
   {{ errorMsg }}
@@ -32,20 +34,21 @@
 
 <div>
   <h2>
-    Top Choice:
+    {{ userID === "" ? "Your" : userID + "'s" }} Current Top Choice:
     {{
       movieItemArray === undefined
         ? "Loading..."
         : movieItemArray.length === 0
         ? "No results"
-        : movieItemArray[0].title 
+        : movieItemArray[0].title
     }}
   </h2>
 </div>
 
+<!-- Adjust this so they are dragging movie posters? -->
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
   <div class="example-box" *ngFor="let movie of movieItemArray" cdkDrag>
-    {{ movie.title }} 
+    {{ movie.title }}
     <img *cdkDragPreview [src]="movie.image" [alt]="movie.title" />
   </div>
 </div>
@@ -54,4 +57,4 @@
   Submit
 </button>
 
-<h1>Current Highest Rank: {{ highestRank }}</h1>
+<!-- <h1>Current Highest Rank: {{ highestRank }}</h1> -->

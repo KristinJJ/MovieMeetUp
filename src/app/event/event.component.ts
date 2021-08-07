@@ -24,7 +24,7 @@ export interface MovieEvent {
   hostID: string;
   eventTitle: string;
   eventDate: string;
-  eventMovies?: (PopMovieItem) [] | undefined;
+  eventMovies?: (PopMovieItem) [];
   selectedMovies: PopMovieItem[];
   //invitees?: (EventInvitees) [] | null;
   //movieRankings?: (movieRankings) [] | null;
