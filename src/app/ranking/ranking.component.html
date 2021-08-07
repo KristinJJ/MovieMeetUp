@@ -4,7 +4,7 @@
 <p>
   To invite someone to rank the movies, either
   <a
-    href="mailto:?subject={{ eventTitle }}?body=Before%20{{
+    href="mailto:?subject={{ eventTitle }}&body=Before%20{{
       eventDate
     }},%20rank%20the%20movies%20at:%0A%0A{{ url }}%0A%0AThanks!"
   >
@@ -19,8 +19,7 @@
     <input matInput type="text" [(ngModel)]="userID" />
   </mat-form-field>
 </p>
-<h3>EventTitle: {{ eventTitle === "" ? "No Title found" : eventTitle }}</h3>
-<h3>EventDate: {{ eventDate === "" ? "No Date found" : eventDate }}</h3>
+
 <h3>User ID: {{ userID === "" ? "No User ID entered" : userID }}</h3>
 
 <h3 style="color: red">

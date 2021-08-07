@@ -10,20 +10,6 @@ import { MovieEvent } from '../event/event.component';
 import { ActivatedRoute } from '@angular/router';
 import { RankingService } from '../ranking.service';
 
-//userrankings object--like movieEvent object, with array of popmovies, plus a score attribute
-export interface UserRank {
-  searchType: string;
-  expression: string;
-  Items?: (UserRankings)[] | null;
-  errorMessage: string;
-}
-
-export interface UserRankings {
-    id: string;
-    title: string;
-    image: string;
-    points?: number;
-}
 
 export interface RankUp {
   searchType: string;
@@ -34,7 +20,7 @@ export interface RankUp {
 export interface RankUpdate {
   eventID: string;
   userID: string;
-  rankings: Map<string, number>;
+  rankings: (PopMovieItem)[] | undefined;
 }
 
 /**
@@ -47,21 +33,15 @@ export interface RankUpdate {
 })
 
 export class RankingComponent implements OnInit {
-  event: MovieEvent | undefined;
   id = '';
   eventTitle = '';
   eventDate = '';
   value = '';
-  userID = 'No User ID Entered';
+  userID = '';
   title = 'Movie ranking';
-  movieItemArray: (MovieItem) [] | undefined;
-  userRankings: (MovieItem)[] | undefined;
+  movieItemArray: (PopMovieItem)[] | undefined;
   movieRankings = new Map();
   errorMsg = '';
-
-
-  //movie: PopMovieItem[] = []; 
-  //id = 'euef0q95jh8';   // the movies to be ranked (from event) -- does this need to be separate?
 
   highestRank = 'no highest rank';
   movieEvent: MovieEvent | undefined;
@@ -89,8 +69,7 @@ export class RankingComponent implements OnInit {
       this.eventTitle = this.movieEvent.eventTitle;
       this.eventDate = this.movieEvent.eventDate;
       this.movieItemArray = this.movieEvent.eventMovies;
-      this.userRankings = this.movieEvent.eventMovies;
-      //this.userRankings = <UserRankings[]><unknown>popMovieSamples;
+      
       if (this.movieEvent.id) {
         this.id = this.movieEvent.id;
         this.url = this.url + this.id;
@@ -125,11 +104,9 @@ if (this.movieItemArray) {
         points--;
       } else {
         this.movieRankings.set(this.movieItemArray[i].title, points);
-        //this.movieRankings.set(this.userRankings[i].title, points);
 
-        // Adds points attribute with the value determined to the movie in userRankings array
-        //let movieIndex = this.userRankings.findIndex(x => x.title === this.movieItemArray[i].title);
-        //this.userRankings[movieIndex].points = points;
+        // Adds points attribute with the value determined to the movie in movieItemArray
+        this.movieItemArray[i].points = points;
         points--;
       }
       }
@@ -162,22 +139,20 @@ if (this.movieItemArray) {
     for (let entry of this.movieRankings.entries()) {
       console.log('movie title: ' + entry[0])
       console.log('points: ' + entry[1]);
-      //find title in UserRankings array and update points?
-      //this.userRankings.find(x => x.title === entry[0])
     }
-    console.log(this.userRankings);
-    console.log(typeof(this.userRankings));
 
-    // Still need to figure out how to target the movieEvent.id
+
+    
     let rankingUpdate: RankUpdate = {
-      eventID: this.id, //this.movieEvent[0].id,
+      eventID: this.id,
       userID: this.userID,
-      rankings: this.movieRankings
+      rankings: this.movieItemArray
     }
     
     console.log('rankingUpdate: ' + JSON.stringify(rankingUpdate));
     console.log(typeof(rankingUpdate));
     console.log('rankings: ' + JSON.stringify(rankingUpdate.rankings));
+
     // THEN invoke apicall to put rankings into the DB.
     this.apicall.addUserRankings(rankingUpdate).subscribe(data => console.log(data));
   }
