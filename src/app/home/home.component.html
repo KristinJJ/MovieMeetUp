@@ -17,7 +17,7 @@
 </div>
 
 <!-- TABLE TO DISPLAY CREATED EVENTS -->
-<!--<div class="col-md-12">
+<div class="col-md-12">
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -25,6 +25,7 @@
         <th scope="col">Host ID</th>
         <th scope="col">Event Name</th>
         <th scope="col">Date</th>
+        <th scope="col">Rankings</th>
       </tr>
     </thead>
     <tbody>
@@ -33,7 +34,10 @@
         <td>{{ viewing.hostID}}</td>
         <td>{{ viewing.eventTitle }}</td>
         <td>{{ viewing.eventDate }}</td>
+        <td *ngIf="viewing.eventRankings">
+          <app-event-ranking-details [eventRankings]="viewing.eventRankings"> </app-event-ranking-details>
+        </td>
       </tr>
     </tbody>
   </table>
-</div>-->
+</div>
