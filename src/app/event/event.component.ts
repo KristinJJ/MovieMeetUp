@@ -8,6 +8,7 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { Pipe, PipeTransform } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EventService } from "../event.service";
+import { RankUpdate } from '../ranking/ranking.component';
 
 // @ts-ignore
 //import { onScan } from "../../../popMoviesScan.js";
@@ -27,7 +28,7 @@ export interface MovieEvent {
   eventMovies?: (PopMovieItem) [];
   selectedMovies: PopMovieItem[];
   //invitees?: (EventInvitees) [] | null;
-  //movieRankings?: (movieRankings) [] | null;
+  eventRankings?: (RankUpdate) [];
 }
 
 @Component({

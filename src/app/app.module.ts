@@ -14,6 +14,7 @@ import { HomeComponent} from "./home/home.component";
 import { TopNavComponent } from "./topNav/topNav.component";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MovieCardComponent} from "./movieCard/movieCard.component";
+import { FinalRankingComponent } from './finalRanking/final-ranking.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MovieCardComponent} from "./movieCard/movieCard.component";
     HomeComponent,
     TopNavComponent,
     MovieCardComponent,
-    IterablePipe /* added for map template displaying */
+    IterablePipe,
+    FinalRankingComponent /* added for map template displaying */
   ],
   imports: [
     BrowserModule,

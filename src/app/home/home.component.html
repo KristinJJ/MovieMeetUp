@@ -2,7 +2,18 @@
 <a mat-raised-button color="primary" routerLink="/event">Build an Event</a>
 <h2>Click on a link below to go to your Events</h2>
 <div *ngFor="let event of movieEvents">
-  <a mat-raised-button color="warn" [routerLink]="['/ranking', event.id]">{{event.eventTitle}}</a>
+  <a mat-raised-button color="warn" [routerLink]="['/ranking', event.id]">{{
+    event.eventTitle
+  }}</a>
+</div>
+
+<div *ngFor="let event of movieEvents">
+  <a
+    mat-raised-button
+    color="accent"
+    [routerLink]="['/finalranking', event.id]"
+    >{{ event.eventTitle }}</a
+  >
 </div>
 
 <!-- TABLE TO DISPLAY CREATED EVENTS -->
@@ -26,5 +37,3 @@
     </tbody>
   </table>
 </div>-->
-
-

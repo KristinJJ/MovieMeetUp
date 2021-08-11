@@ -29,6 +29,7 @@ export class RankingService {
   }
 
   getMovieEventByEventID(eventID: String){
+    console.log(this.movieEvents.length);
     return this.movieEvents.find(event => event.id == eventID);
   }
 }
