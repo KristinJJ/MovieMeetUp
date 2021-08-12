@@ -42,10 +42,11 @@ export class RankingComponent implements OnInit {
   movieItemArray: (PopMovieItem)[] | undefined;
   movieRankings = new Map();
   errorMsg = '';
-
+  eventIDFromRoute = '';
   highestRank = 'no highest rank';
   movieEvent: MovieEvent | undefined;
   url = 'http://localhost:4200/ranking/';
+  movieEvents: MovieEvent[] = [];
 
   constructor(public apicall: ApicallService, private rankingService: RankingService, private router: Router, private httpClient: HttpClient, private route: ActivatedRoute,) {
   }
@@ -53,11 +54,11 @@ export class RankingComponent implements OnInit {
   ngOnInit() {
     // First get the event id from the current route.
     const routeParams = this.route.snapshot.paramMap;
-    const eventIDFromRoute = String(routeParams.get('eventID'));
-    console.log("eventIDFromRoute: " + eventIDFromRoute);
+    this.eventIDFromRoute = String(routeParams.get('eventID'));
+    console.log("eventIDFromRoute: " + this.eventIDFromRoute);
 
-    // Find the event that correspond with the id provided in route.
-    this.movieEvent = JSON.parse(JSON.stringify(this.rankingService.getMovieEventByEventID(eventIDFromRoute)));
+    // Find the event that corresponds with the id provided in route.
+    this.movieEvent = this.rankingService.getMovieEventByEventID(environment.demoUserID, this.eventIDFromRoute);
     //this.movieEvent = this.rankingService.getMovieEventByEventID(eventIDFromRoute);
     console.log("movieEvent: " + JSON.stringify(this.movieEvent));
     this.loadMoviesFromEvent();

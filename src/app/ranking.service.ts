@@ -20,7 +20,7 @@ export class RankingService {
           this.movieEvents.push(data[index]);
         }
       }
-      console.log(this.movieEvents);
+      console.log("Ranking service MovieEvents: " + this.movieEvents);
       })
   }
 
@@ -28,7 +28,9 @@ export class RankingService {
     return this.movieEvents;
   }
 
-  getMovieEventByEventID(eventID: String){
+  getMovieEventByEventID(demoID: String, eventID: String){
+    this.loadMovieEventsByHostID(demoID);
+    console.log("getMoviesByEventID: "+this.movieEvents);
     return this.movieEvents.find(event => event.id == eventID);
   }
 }
