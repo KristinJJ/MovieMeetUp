@@ -70,6 +70,7 @@ export class FinalRankingComponent implements OnInit {
         console.log("specRank: " + JSON.stringify(specRank));
         // console.log("target: " + JSON.stringify(this.movieEvent.eventRankings[3]));
         console.log("target userID: " + specRank.userID);
+        
         console.log("target rankings: " + specRank.UserRankings);
         // cant seem to drill into the RankUpdate "rankings" attribute in any way--it's a PopMovieItem[], but I can't target just the first item, for example --> 'specRank.rankings[1]' doesn't work
         // JSON.stringify(specRank.rankings) doesnt change anything.
