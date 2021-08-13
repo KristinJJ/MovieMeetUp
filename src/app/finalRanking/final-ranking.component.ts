@@ -32,11 +32,11 @@ export class FinalRankingComponent implements OnInit {
   movieEvent: MovieEvent | undefined;
   url = 'http://localhost:4200/finalranking/';
   rankings: (RankUpdate)[] | undefined;
-
+  rankDetails: (PopMovieItem) [] | undefined;
   // TEMP VARIABLES - until ranking service but is fixed
   demoID = "DEMO";
   movieEvents: MovieEvent[] = [];
-
+  highestRank: PopMovieItem | undefined;
   constructor(public apicall: ApicallService, private rankingService: RankingService, private router: Router, private httpClient: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -65,17 +65,27 @@ export class FinalRankingComponent implements OnInit {
       this.movieItemArray = this.movieEvent.eventMovies;
       this.rankings = this.movieEvent.eventRankings;
 
+
       if (this.rankings != undefined) {
-        const specRank = this.rankings[3];
+        // this.rankDetails =;
+        const specRank = this.rankings[1];
         console.log("specRank: " + JSON.stringify(specRank));
         // console.log("target: " + JSON.stringify(this.movieEvent.eventRankings[3]));
         console.log("target userID: " + specRank.userID);
         
-        console.log("target rankings: " + specRank.UserRankings);
+        console.log("target rankings: " + JSON.stringify(specRank.UserRankings));
         if (specRank.UserRankings) {        
-          console.log("target first movie in UserRankings: " + specRank.UserRankings[3]);
+          console.log("target first movie in UserRankings: " + JSON.stringify(specRank.UserRankings[3]));
+          console.log("UserRankings length: " + specRank.UserRankings.length);
+          //let urank = JSON.parse(JSON.stringify(specRank.UserRankings[3]));
+          //console.log("test: " + urank);
+
+          //let urankings = specRank.UserRankings.join();
+          //console.log("urankings(JPJS): " + JSON.parse(JSON.stringify(urankings)));
+          //console.log("urankings lgth: " + urankings.length);
         }
-        console.log("target points: " + JSON.stringify(specRank.UserRankings![0]));
+        console.log("target points: " + specRank.UserRankings![1].points);
+        
         // cant seem to drill into the RankUpdate "rankings" attribute in any way--it's a PopMovieItem[], but I can't target just the first item, for example --> 'specRank.rankings[1]' doesn't work
         // JSON.stringify(specRank.rankings) doesnt change anything.
         
@@ -85,6 +95,23 @@ export class FinalRankingComponent implements OnInit {
         this.url = this.url + this.id;
       }
     }
+    this.findTopMovie();
+  }
+
+  findTopMovie() {
+    let topMovie;
+    let maxValue = 0;
+    if (this.rankings != undefined) { 
+    let specRank = this.rankings[1]
+    for (let i=0; i< specRank!.UserRankings!.length; i++) {
+      let newValue = this.rankings![1].UserRankings![i].points;
+      if (newValue != undefined && newValue > maxValue) {
+        maxValue = newValue;
+        topMovie = this.rankings![1].UserRankings![i];
+      }
+    }
+  }
+    this.highestRank = topMovie;
   }
 
 }

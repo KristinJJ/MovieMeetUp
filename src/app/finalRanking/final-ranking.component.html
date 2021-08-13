@@ -3,23 +3,25 @@
 
 <h3>The Top Selected Movie Is...</h3>
 
-<div class="content">
-  <div class="cardHeader" *ngIf="movieItemArray">
-    {{ movieItemArray[0].title }}
-  </div>
-  <mat-card *ngIf="movieItemArray" class="movie-card">
-    <div class="content">
-      <mat-card-header>
-        <!--<mat-card-title>{{ movieItemArray[0].title }}</mat-card-title> -->
-      </mat-card-header>
-      <img
-        mat-card-image
-        src="{{ movieItemArray[0].image }}"
-        alt="Movie Poster for {{ movieItemArray[0].title }}"
-      />
+<ng-container *ngIf="highestRank">
+  <div class="content">
+    <div class="cardHeader">
+      {{ highestRank.title }}
     </div>
-  </mat-card>
-</div>
+    <mat-card *ngIf="rankings" class="movie-card">
+      <div class="content">
+        <mat-card-header>
+          <!--<mat-card-title>{{ movieItemArray[0].title }}</mat-card-title> -->
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="{{ highestRank.image }}"
+          alt="Movie Poster for {{ highestRank.title }}"
+        />
+      </div>
+    </mat-card>
+  </div>
+</ng-container>
 
 <h3>Final Rankings:</h3>
 <div class="col-md-12">
@@ -31,11 +33,11 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngIf="movieItemArray">
-        <tr *ngFor="let movie of movieItemArray; let i = index">
+      <ng-container *ngIf="rankings">
+        <tr *ngFor="let movie of rankings[1].UserRankings; let i = index">
           <td>{{ movie.title }}</td>
           <!-- temporary number placeholder below -->
-          <td class="points">{{ movieItemArray.length - i }}</td>
+          <td class="points">{{ movie.points }}</td>
         </tr>
       </ng-container>
     </tbody>
