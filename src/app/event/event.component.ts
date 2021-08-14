@@ -52,11 +52,14 @@ export class EventComponent implements OnInit {
   public confirmed = false;
   date = new FormControl(new Date());
   gridColumns = 3;
+  minDate = new Date();
 
   constructor(public apicall: ApicallService, private eventService: EventService, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
     this.loadPopMovies();
+    // set minDate for datepicker to be 'tomorrow'--no past dates or picking today.
+    this.minDate.setDate(this.minDate.getDate() +1);
   }
 
   // CALL SCAN API GATEWAY HERE? --> https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/popMovies
@@ -70,6 +73,8 @@ export class EventComponent implements OnInit {
   }
 
   setDate(event: MatDatepickerInputEvent<Date>) {
+    
+    
     console.log(event.value);
     this.eventDate = `${event.value}`.substring(0, 15);
     console.log("New EventDate: " + this.eventDate);

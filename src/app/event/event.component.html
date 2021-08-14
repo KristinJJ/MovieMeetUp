@@ -18,8 +18,8 @@
   <mat-label>Choose a Date</mat-label>
   <input
     matInput
+    [min]="minDate"
     [matDatepicker]="picker"
-    [value]="date.value"
     (dateInput)="setDate($event)"
   />
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -67,13 +67,12 @@
   </table>
 </div>-->
 
-  <!-- GRID TO DISPLAY MOVIES -->
-  <div class="content">
-    <div fxLayout="row wrap" fxLayoutGap="16px grid">
-      <div class="content" *ngFor="let movie of eventMovies">
-        <app-movie-card [movie]="movie"> </app-movie-card>
-        <div>{{movie.title}}</div>
-      </div>
+<!-- GRID TO DISPLAY MOVIES -->
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div class="content" *ngFor="let movie of eventMovies">
+      <app-movie-card [movie]="movie"> </app-movie-card>
+      <div>{{ movie.title }}</div>
     </div>
   </div>
-
+</div>
