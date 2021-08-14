@@ -57,7 +57,7 @@ export class RankingComponent implements OnInit {
     console.log("eventIDFromRoute: " + eventIDFromRoute);
 
     // Find the event that correspond with the id provided in route.
-    this.movieEvent = JSON.parse(JSON.stringify(this.rankingService.getMovieEventByEventID(eventIDFromRoute)));
+    this.movieEvent = JSON.parse(JSON.stringify(this.rankingService.getMovieEventByEventID(environment.demoUserID, eventIDFromRoute)));
     //this.movieEvent = this.rankingService.getMovieEventByEventID(eventIDFromRoute);
     console.log("movieEvent: " + JSON.stringify(this.movieEvent));
     this.loadMoviesFromEvent();

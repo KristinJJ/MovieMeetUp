@@ -11,6 +11,7 @@ export class RankingService {
   movieEvents: MovieEvent[] = [];
   constructor(public apicall: ApicallService, private http: HttpClient) {}
 
+  
   loadMovieEventsByHostID(demoID: String) {
     this.apicall.getMovieEvents().subscribe((data) => {
       console.log(data);
@@ -20,7 +21,7 @@ export class RankingService {
           this.movieEvents.push(data[index]);
         }
       }
-      console.log(this.movieEvents);
+      console.log("Ranking service MovieEvents: " + this.movieEvents);
       })
   }
 
@@ -28,9 +29,23 @@ export class RankingService {
     return this.movieEvents;
   }
 
-  getMovieEventByEventID(eventID: String){
-    console.log(this.movieEvents.length);
+  getMovieEventByEventID(demoID: String, eventID: String){
+    this.loadMovieEventsByHostID(demoID);
+    
     return this.movieEvents.find(event => event.id == eventID);
+    /* if (this.movieEvents.length !== 0) {
+      console.log("moviEvents != 0: "+ this.movieEvents.length);
+      return this.movieEvents.find(event => event.id == eventID);
+    } else {
+      let mEvent;
+      setTimeout(() => {
+        console.log("awaiting movieEvents...");
+        mEvent = this.movieEvents.find(event => event.id == eventID);
+        
+      }, 2000);
+      console.log("trying again...?");
+      return mEvent;
+    } */
   }
 }
 
