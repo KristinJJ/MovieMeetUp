@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Movies, MovieItem, PopMovies, PopMovieItem } from './movies';
 //import * as Rx from "rxjs/Rx";
 import { from, Observable, throwError } from 'rxjs';
@@ -96,8 +96,11 @@ export class ApicallService {
   }
 
   // get FinalRanking data from DynamoDB
-  getFinalRankings() : Observable<MovieEvent[]> {
-    return this.http.get<MovieEvents>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/getFinalRankings').
+  // return the Final Rankings for an Event by eventID
+  getFinalRankings(eventID: string): Observable<MovieEvent[]> {
+    const params = new HttpParams()
+      params.append('eventID', eventID);
+    return this.http.get<MovieEvents>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/getFinalRankings', {'params': params}).
     pipe(
       map((data) => {
         console.log(data);
