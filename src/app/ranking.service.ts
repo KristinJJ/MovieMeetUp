@@ -15,7 +15,7 @@ export class RankingService {
 
   loadMovieEventsByHostID(demoID: String): MovieEvent[] {
     this.apicall.getMovieEvents().subscribe((data) => {
-      //console.log(data);
+      console.log(data);
       for (let index in data) {
         // make sure the hostID equals the demoID, and that the id does not already exist in the movieEvents array
         if ((data[index].hostID == demoID) && (data[index].id != (this.movieEvents.find(event => event.id == data[index].id))?.id)) {
@@ -24,6 +24,20 @@ export class RankingService {
       }
     }); 
     return this.movieEvents;
+  }
+
+  findMovieEventByEventID(hostID: String, eventID: String) {
+    console.log(this.movieEvents);
+    let temp: MovieEvent | undefined;
+    for (let index in this.movieEvents) {
+      // make sure the hostID and eventIDs match
+     if ((this.movieEvents[index].hostID == hostID && this.movieEvents[index].id == eventID )) {
+         temp = this.movieEvents[index];
+         console.log("found it!");
+      }
+    }
+    console.log(temp);
+    return temp;
   }
 
   getMovieEvents(){

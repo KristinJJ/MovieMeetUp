@@ -62,7 +62,7 @@ export class RankingComponent implements OnInit {
     // First get the event id from the current route.
     const routeParams = this.route.snapshot.paramMap;
     this.eventIDFromRoute = String(routeParams.get('eventID'));
-    console.log("eventIDFromRoute: " + this.eventIDFromRoute);
+    //console.log("eventIDFromRoute: " + this.eventIDFromRoute);
 
     // Find the event that corresponds with the id provided in route
     this.movieEvents = this.route.snapshot.data.movieEvent;
