@@ -15,6 +15,8 @@ import { TopNavComponent } from "./topNav/topNav.component";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MovieCardComponent} from "./movieCard/movieCard.component";
 import { ApicallService } from './apicall.service';
+import { EventRankingDetails } from "./eventRankingDetails/eventRankingDetails.component";
+import { FinalRankingComponent } from './finalRanking/final-ranking.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { ApicallService } from './apicall.service';
     HomeComponent,
     TopNavComponent,
     MovieCardComponent,
-    IterablePipe /* added for map template displaying */
+    EventRankingDetails,
+    IterablePipe,
+    FinalRankingComponent /* added for map template displaying */
   ],
   imports: [
     BrowserModule,

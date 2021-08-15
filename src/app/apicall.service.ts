@@ -95,6 +95,16 @@ export class ApicallService {
       )
   }
 
+  // get FinalRanking data from DynamoDB
+  getFinalRankings() : Observable<MovieEvent[]> {
+    return this.http.get<MovieEvents>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/getFinalRankings').
+    pipe(
+      map((data) => {
+        console.log(data);
+        console.log("getFinalRankings() data.Items: " + data.Items);
+        return data.Items ?? [];
+      })
+    )
+  }
+
 }
-
-

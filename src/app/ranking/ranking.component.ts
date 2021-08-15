@@ -20,7 +20,7 @@ export interface RankUp {
 export interface RankUpdate {
   eventID: string;
   userID: string;
-  rankings: (PopMovieItem)[] | undefined;
+  UserRankings: (PopMovieItem)[] | undefined;
 }
 
 /**
@@ -57,7 +57,7 @@ export class RankingComponent implements OnInit {
     private route: ActivatedRoute) {
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.movieEvents = this.route.snapshot.data.movieEvents;
     // First get the event id from the current route.
     const routeParams = this.route.snapshot.paramMap;
@@ -166,12 +166,12 @@ if (this.movieItemArray) {
     let rankingUpdate: RankUpdate = {
       eventID: this.id,
       userID: this.userID,
-      rankings: this.movieItemArray
+      UserRankings: this.movieItemArray
     }
     
     console.log('rankingUpdate: ' + JSON.stringify(rankingUpdate));
     console.log(typeof(rankingUpdate));
-    console.log('rankings: ' + JSON.stringify(rankingUpdate.rankings));
+    console.log('rankings: ' + JSON.stringify(rankingUpdate.UserRankings));
 
     // THEN invoke apicall to put rankings into the DB.
     this.apicall.addUserRankings(rankingUpdate).subscribe(data => console.log(data));
