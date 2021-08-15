@@ -33,7 +33,7 @@
 </p>
 
 <div>
-  <h2>
+  <h2 >
     {{ userID === "" ? "Your" : userID + "'s" }} Current Top Choice:
     {{
       movieItemArray === undefined
@@ -46,7 +46,7 @@
 </div>
 
 <!-- Adjust this so they are dragging movie posters? -->
-<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+<div *ngIf="movieEvents" cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
   <div class="example-box" *ngFor="let movie of movieItemArray" cdkDrag>
     {{ movie.title }}
     <img *cdkDragPreview [src]="movie.image" [alt]="movie.title" />

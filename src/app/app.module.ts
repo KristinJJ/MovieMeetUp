@@ -16,6 +16,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MovieCardComponent} from "./movieCard/movieCard.component";
 import { EventRankingDetails } from "./eventRankingDetails/eventRankingDetails.component";
 import { FinalRankingComponent } from './finalRanking/final-ranking.component';
+import { ApicallService } from './apicall.service';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { FinalRankingComponent } from './finalRanking/final-ranking.component';
     FlexLayoutModule
   ],
   providers: [
+    ApicallService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
   bootstrap: [AppComponent]
