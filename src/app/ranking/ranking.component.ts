@@ -21,6 +21,7 @@ export interface RankUpdate {
   eventID: string;
   userID: string;
   UserRankings: (PopMovieItem)[] | undefined;
+  points?: number;
 }
 
 /**

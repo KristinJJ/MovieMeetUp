@@ -11,8 +11,9 @@ import { RankUpdate } from '../ranking/ranking.component';
 export class EventRankingDetails implements OnInit {
   @Input() eventRankings!: RankUpdate[];
 
-  rankings: number[] | undefined;
   userRanking: PopMovieItem[] = [];
+  movieTitle: String[] = [];
+  points: (number | undefined)[] = [];
   constructor() { }
 
   ngOnInit(): void {
@@ -20,17 +21,19 @@ export class EventRankingDetails implements OnInit {
     for (let ranking of this.eventRankings) {
       if (ranking.UserRankings) {
         this.userRanking = JSON.parse(JSON.stringify(ranking.UserRankings));
-        console.log("userRanking: ", typeof this.userRanking);
+        // console.log("userRanking: ", typeof this.userRanking);
         if (this.userRanking) {
-          let points = this.userRanking.map((item) => item.points);
-          console.log("points: ", points);
-          if (points) {
-            //this.rankings.push(points);
-          };
+          console.log(this.userRanking.map((item) => item.points));
+          this.points = this.userRanking.map((item) => item.points);
+          }
+          console.log(this.userRanking.map((item) => item.title));
+          this.movieTitle = this.userRanking.map((item) => item.title);
+          for (let index in this.userRanking) {
+            //console.log("movie title: " + this.movieTitle[index] + " points: " + this.points[index]);
+          }
+          //console.log("points: ", points);
         } 
       }
       
     }
   }
-
-}

@@ -11,7 +11,7 @@ const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'ranking/:eventID', component: RankingComponent, resolve: {movieEvent: MovieEventResolve} },
     { path: 'event', component: EventComponent },
-    { path: 'finalranking/:eventID', component: FinalRankingComponent }
+    { path: 'finalranking/:eventID', component: FinalRankingComponent, resolve: {movieEvent: MovieEventResolve} }
     /* add path for movie selection */
 ];
 
