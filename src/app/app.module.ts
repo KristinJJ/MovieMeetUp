@@ -14,6 +14,7 @@ import { HomeComponent} from "./home/home.component";
 import { TopNavComponent } from "./topNav/topNav.component";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MovieCardComponent} from "./movieCard/movieCard.component";
+import { ApicallService } from './apicall.service';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { MovieCardComponent} from "./movieCard/movieCard.component";
     FlexLayoutModule
   ],
   providers: [
+    ApicallService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
   bootstrap: [AppComponent]

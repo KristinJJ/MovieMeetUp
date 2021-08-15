@@ -88,8 +88,8 @@ export class ApicallService {
     return this.http.get<MovieEvents>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/movieevents-scan').
       pipe(
         map((data) => {
-          console.log(data);
-          console.log("getMovieEvents() data.Items: " + data.Items);
+          //console.log(data);
+          //console.log("getMovieEvents() data.Items: " + data.Items);
           return data.Items ?? [];
         })
       )
