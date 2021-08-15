@@ -32,6 +32,7 @@ export class FinalRankingComponent implements OnInit {
   movieEvent: MovieEvent | undefined;
   url = 'http://localhost:4200/finalranking/';
   rankings: RankUpdate[] = [];
+  finalRankings: MovieEvent[] = [];
   rankDetails: (PopMovieItem) [] | undefined;
   // TEMP VARIABLES - until ranking service but is fixed
   demoID = "DEMO";
@@ -55,6 +56,8 @@ export class FinalRankingComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     this.eventIDFromRoute = String(routeParams.get('eventID'));
     //console.log("eventIDFromRoute: " + this.eventIDFromRoute);
+
+    this.apicall.getFinalRankings(this.eventIDFromRoute); // figure out why this isn't being called!!
 
     // Find the event that corresponds with the id provided in route
     this.movieEvents = this.route.snapshot.data.movieEvent;

@@ -98,8 +98,8 @@ export class ApicallService {
   // get FinalRanking data from DynamoDB
   // return the Final Rankings for an Event by eventID
   getFinalRankings(eventID: string): Observable<MovieEvent[]> {
-    const params = new HttpParams()
-      params.append('eventID', eventID);
+    const params = new HttpParams();
+    params.append('eventID', eventID);
     return this.http.get<MovieEvents>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/getFinalRankings', {'params': params}).
     pipe(
       map((data) => {
