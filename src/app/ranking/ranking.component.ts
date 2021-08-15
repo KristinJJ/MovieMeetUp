@@ -38,6 +38,7 @@ export class RankingComponent implements OnInit {
   eventDate = '';
   value = '';
   userID = '';
+  hostID = environment.demoUserID;
   title = 'Movie ranking';
   movieItemArray: (PopMovieItem)[] | undefined;
   movieRankings = new Map();
@@ -48,20 +49,38 @@ export class RankingComponent implements OnInit {
   url = 'http://localhost:4200/ranking/';
   movieEvents: MovieEvent[] = [];
 
-  constructor(public apicall: ApicallService, private rankingService: RankingService, private router: Router, private httpClient: HttpClient, private route: ActivatedRoute,) {
+  constructor(
+    public apicall: ApicallService, 
+    private rankingService: RankingService, 
+    private router: Router, 
+    private httpClient: HttpClient, 
+    private route: ActivatedRoute) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.movieEvents = this.route.snapshot.data.movieEvents;
     // First get the event id from the current route.
     const routeParams = this.route.snapshot.paramMap;
     this.eventIDFromRoute = String(routeParams.get('eventID'));
     console.log("eventIDFromRoute: " + this.eventIDFromRoute);
 
-    // Find the event that corresponds with the id provided in route.
-    this.movieEvent = this.rankingService.getMovieEventByEventID(environment.demoUserID, this.eventIDFromRoute);
-    //this.movieEvent = this.rankingService.getMovieEventByEventID(eventIDFromRoute);
-    console.log("movieEvent: " + JSON.stringify(this.movieEvent));
+    // Find the event that corresponds with the id provided in route
+    this.movieEvents = this.route.snapshot.data.movieEvent;
+    console.log("movieEvents?", this.movieEvents);
+    this.findMovieEventByEventID();
+    
     this.loadMoviesFromEvent();
+  }
+
+  findMovieEventByEventID() {
+    //console.log(this.movieEvents);
+    for (let index in this.movieEvents) {
+      // make sure the hostID and eventIDs match
+     if ((this.movieEvents[index].hostID == this.hostID && this.movieEvents[index].id == this.eventIDFromRoute )) {
+        this.movieEvent = this.movieEvents[index];
+        console.log("adding movieEvent: ", this.movieEvent);
+      }
+    }
   }
 
   loadMoviesFromEvent() {
