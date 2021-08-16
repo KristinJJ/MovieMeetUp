@@ -76,12 +76,29 @@ export class RankingComponent implements OnInit {
     //console.log(this.movieEvents);
     for (let index in this.movieEvents) {
       // make sure the hostID and eventIDs match
-     if ((this.movieEvents[index].hostID == this.hostID && this.movieEvents[index].id == this.eventIDFromRoute )) {
+      if ((this.movieEvents[index].hostID == this.hostID && this.movieEvents[index].id == this.eventIDFromRoute )) {
         this.movieEvent = this.movieEvents[index];
         console.log("adding movieEvent: ", this.movieEvent);
+        const testdate = new Date( Date.parse(this.movieEvent.eventDate) )
+        const today = new Date();
+        console.log("TESTDATE?: " + testdate);
+        if (this.getDifferenceInDays(today,testdate) < 1) {
+          this.router.navigateByUrl(`finalranking/${this.eventIDFromRoute}`);
+        }
+        console.log("today get time: " + today.getTime());
+        console.log("testdate get time: " + testdate.getTime());
+        console.log("getDifferenceInDays: " + this.getDifferenceInDays(today, testdate));
       }
     }
   }
+
+  
+    
+    
+      //this.eventDate.getDate() + 1)
+      //console.log(JSON.parse(this.eventDate));
+      
+  
 
   loadMoviesFromEvent() {
     // if movieEvent is not undefined or null, assign movies to movieItemArray
@@ -95,7 +112,15 @@ export class RankingComponent implements OnInit {
         this.url = this.url + this.id;
       }
     }
+    
+
   }
+
+  getDifferenceInDays(date1: Date, date2: Date) {
+    const diffInMs = Math.abs(date1.getTime() - date2.getTime());
+    return diffInMs / (1000 * 60 * 60 * 24);
+  }
+
 
   drop(event: CdkDragDrop<{ title: string, image: string }[]>) {
     if (this.movieItemArray) {
