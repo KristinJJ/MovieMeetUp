@@ -74,8 +74,6 @@ export class EventComponent implements OnInit {
   }
 
   setDate(event: MatDatepickerInputEvent<Date>) {
-    
-    
     console.log(event.value);
     this.eventDate = `${event.value}`.substring(0, 15);
     console.log("New EventDate: " + this.eventDate);
