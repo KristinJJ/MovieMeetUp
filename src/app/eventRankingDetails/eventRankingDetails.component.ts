@@ -2,6 +2,7 @@ import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
 import { Component, Input, OnInit } from '@angular/core';
 import { PopMovieItem } from '../movies';
 import { RankUpdate } from '../ranking/ranking.component';
+import { ApicallService } from '../apicall.service';
 
 @Component({
   selector: 'app-event-ranking-details',
@@ -14,10 +15,10 @@ export class EventRankingDetails implements OnInit {
   userRanking: PopMovieItem[] = [];
   movieTitle: String[] = [];
   points: (number | undefined)[] = [];
-  constructor() { }
+  constructor(private apicall: ApicallService) { }
 
   ngOnInit(): void {
-    
+
     for (let ranking of this.eventRankings) {
       if (ranking.UserRankings) {
         this.userRanking = JSON.parse(JSON.stringify(ranking.UserRankings));
