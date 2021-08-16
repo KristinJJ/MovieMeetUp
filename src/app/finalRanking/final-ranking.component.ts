@@ -57,7 +57,11 @@ export class FinalRankingComponent implements OnInit {
     this.eventIDFromRoute = String(routeParams.get('eventID'));
     //console.log("eventIDFromRoute: " + this.eventIDFromRoute);
 
-    console.log("get Final Rankings: ", this.apicall.getFinalRankings(this.eventIDFromRoute)); // figure out why this isn't being called!!
+    //this.apicall.getFinalRankings(this.eventIDFromRoute).subscribe(); // figure out why this isn't being called!!
+
+    
+    this.apicall.getFinalRankings(this.eventIDFromRoute).subscribe(data => console.log("Final Ranking: ", data));
+    
 
     // Find the event that corresponds with the id provided in route
     this.movieEvents = this.route.snapshot.data.movieEvent;

@@ -100,7 +100,7 @@ export class ApicallService {
   getFinalRankings(eventID: string): Observable<MovieEvent[]> {
     const options = eventID ? 
     { params : new HttpParams().set('id', eventID)} : {};
-    return this.http.get<MovieEvents>(`https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/getFinalRankings/${eventID}`, options).
+    return this.http.get<MovieEvents>(`https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/getFinalRankings`, options).
       pipe(
         map((data) => {
           console.log(data);
