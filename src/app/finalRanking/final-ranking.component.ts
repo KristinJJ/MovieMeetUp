@@ -40,6 +40,8 @@ export class FinalRankingComponent implements OnInit {
   highestRank: PopMovieItem | undefined;
   eventIDFromRoute = "";
   hostID = environment.demoUserID;
+  finalRanking = new Map();
+  userRankings: RankUpdate[] = [];
 
   constructor(
     public apicall: ApicallService, 
@@ -56,17 +58,18 @@ export class FinalRankingComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     this.eventIDFromRoute = String(routeParams.get('eventID'));
     //console.log("eventIDFromRoute: " + this.eventIDFromRoute);
-
-    //this.apicall.getFinalRankings(this.eventIDFromRoute).subscribe(); // figure out why this isn't being called!!
-
     
-    this.apicall.getFinalRankings(this.eventIDFromRoute).subscribe(data => console.log("Final Ranking: ", data));
-    
+
+    this.apicall.getFinalRankings(this.eventIDFromRoute).subscribe(data => console.log("Final Ranking: ", data)); 
+    //Why this isn't connecting to the getFinalRankings Lambda function?? 
+
 
     // Find the event that corresponds with the id provided in route
     this.movieEvents = this.route.snapshot.data.movieEvent;
     console.log("movieEvents?", this.movieEvents);
     this.findMovieEventByEventID();
+
+    this.calcFinalRanking();
     
     this.loadMoviesFromEvent();
   }
@@ -79,6 +82,18 @@ export class FinalRankingComponent implements OnInit {
         this.movieEvent = this.movieEvents[index];
         console.log("adding movieEvent: ", this.movieEvent);
       }
+    }
+  }
+
+  calcFinalRanking() {
+    console.log(this.movieEvent);
+    console.log(this.movieEvent?.eventRankings);
+    for (let userRanking in this.movieEvent?.eventRankings) {
+      console.log("userRanking: ", userRanking);
+      //this.userRankings.push(userRanking);
+      //for (let movieRanking in userRanking.) {
+        //this.finalRanking.set();
+      //}
     }
   }
 
