@@ -53,24 +53,32 @@ export class FinalRankingComponent implements OnInit {
 
   ngOnInit() {
     // temporary until real API call with ranked choice voting
-    this.movieEvents = this.route.snapshot.data.movieEvents;
+    //this.movieEvents = this.route.snapshot.data.movieEvents;
+
     // First get the event id from the current route.
     const routeParams = this.route.snapshot.paramMap;
     this.eventIDFromRoute = String(routeParams.get('eventID'));
     //console.log("eventIDFromRoute: " + this.eventIDFromRoute);
     
-
-    this.apicall.getFinalRankings(this.eventIDFromRoute).subscribe(data => console.log("Final Ranking: ", data)); 
-    //Why this isn't connecting to the getFinalRankings Lambda function?? 
+    this.movieEvent = this.route.snapshot.data.finalRanking;
+    console.log("this.movieEvent", this.movieEvent);
+    //this.loadMovieEvent();
 
     // Find the event that corresponds with the id provided in route
-    this.movieEvents = this.route.snapshot.data.movieEvent;
-    console.log("movieEvents?", this.movieEvents);
-    this.findMovieEventByEventID();
+    //this.movieEvents = this.route.snapshot.data.movieEvent;
+    //console.log("movieEvents?", this.movieEvents);
+    //this.findMovieEventByEventID();
 
     this.calcFinalRanking();
     
     this.loadMoviesFromEvent();
+  }
+
+  loadMovieEvent() {
+    return this.apicall.getFinalRankings(this.eventIDFromRoute).subscribe((data) => {
+      this.movieEvent = data;
+      console.log("movieEvent from Lambda: ", data);
+    })
   }
 
   findMovieEventByEventID() {

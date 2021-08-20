@@ -10,11 +10,12 @@ import { RankingService } from "./ranking.service";
 @Injectable({  
   providedIn: "any"
 })
-export class MovieEventResolve implements Resolve<MovieEvent[]> {  
+export class FinalRankingResolve implements Resolve<MovieEvent> {  
   constructor(private apicall: ApicallService, private rankingService: RankingService) {}  
   
-  resolve(route: ActivatedRouteSnapshot): Observable<MovieEvent[]> {  
-    console.log("the ranking resolve has completed");
-    return this.apicall.getMovieEvents();
-  }  
+  resolve(route: ActivatedRouteSnapshot): Observable<MovieEvent> {  
+    console.log("the final ranking resolve has completed");
+    return this.apicall.getFinalRankings("my6raivrzu");
+    // how to pass the eventID to getFinalRankings??
+  }
 }
