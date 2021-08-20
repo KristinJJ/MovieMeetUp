@@ -10,9 +10,9 @@ import { FinalRankingComponent } from './finalRanking/final-ranking.component';
 const routes: Routes = [
     { path: 'home', pathMatch: 'full', component: HomeComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'ranking/:eventID', component: RankingComponent, resolve: {movieEvent: MovieEventResolve} },
+    { path: 'ranking/:eventID', component: RankingComponent, resolve: {movieEvent: MovieEventResolve}},
     { path: 'event', component: EventComponent },
-    { path: 'finalranking/:eventID', component: FinalRankingComponent, resolve: {finalRanking: FinalRankingResolve} }
+    { path: 'finalranking/:eventID', component: FinalRankingComponent, resolve: {finalRanking: FinalRankingResolve}}
     /* add path for movie selection */
 ];
 

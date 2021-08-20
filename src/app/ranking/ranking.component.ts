@@ -59,7 +59,6 @@ export class RankingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.movieEvents = this.route.snapshot.data.movieEvents;
     // First get the event id from the current route.
     const routeParams = this.route.snapshot.paramMap;
     this.eventIDFromRoute = String(routeParams.get('eventID'));

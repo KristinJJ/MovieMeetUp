@@ -74,14 +74,14 @@ export class FinalRankingComponent implements OnInit {
     this.loadMoviesFromEvent();
   }
 
-  loadMovieEvent() {
+  /*loadMovieEvent() {
     return this.apicall.getFinalRankings(this.eventIDFromRoute).subscribe((data) => {
       this.movieEvent = data;
       console.log("movieEvent from Lambda: ", data);
     })
-  }
+  }*/
 
-  findMovieEventByEventID() {
+  /*findMovieEventByEventID() {
     //console.log(this.movieEvents);
     for (let index in this.movieEvents) {
       // make sure the hostID and eventIDs match
@@ -90,7 +90,7 @@ export class FinalRankingComponent implements OnInit {
         console.log("adding movieEvent: ", this.movieEvent);
       }
     }
-  }
+  }*/
 
   calcFinalRanking() {
     console.log(this.movieEvent);
