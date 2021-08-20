@@ -42,6 +42,7 @@ export class FinalRankingComponent implements OnInit {
   hostID = environment.demoUserID;
   finalRanking = new Map();
   userRankings: RankUpdate[] = [];
+  data: any;
 
   constructor(
     public apicall: ApicallService, 
@@ -52,16 +53,18 @@ export class FinalRankingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // temporary until real API call with ranked choice voting
-    //this.movieEvents = this.route.snapshot.data.movieEvents;
+    this.data = this.route.snapshot.data;
+    console.log("data: ", this.data);
+
 
     // First get the event id from the current route.
     const routeParams = this.route.snapshot.paramMap;
     this.eventIDFromRoute = String(routeParams.get('eventID'));
     //console.log("eventIDFromRoute: " + this.eventIDFromRoute);
     
+    // KEEP THIS ONE
     this.movieEvent = this.route.snapshot.data.finalRanking;
-    console.log("this.movieEvent", this.movieEvent);
+    //console.log("this.movieEvent", this.movieEvent);
     //this.loadMovieEvent();
 
     // Find the event that corresponds with the id provided in route
@@ -79,9 +82,9 @@ export class FinalRankingComponent implements OnInit {
       this.movieEvent = data;
       console.log("movieEvent from Lambda: ", data);
     })
-  }*/
+  }
 
-  /*findMovieEventByEventID() {
+  findMovieEventByEventID() {
     //console.log(this.movieEvents);
     for (let index in this.movieEvents) {
       // make sure the hostID and eventIDs match
