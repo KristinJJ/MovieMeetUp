@@ -17,6 +17,7 @@ import { MovieCardComponent} from "./movieCard/movieCard.component";
 import { EventRankingDetails } from "./eventRankingDetails/eventRankingDetails.component";
 import { FinalRankingComponent } from './finalRanking/final-ranking.component';
 import { ApicallService } from './apicall.service';
+import { IntroComponent } from './intro/intro.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ApicallService } from './apicall.service';
     MovieCardComponent,
     EventRankingDetails,
     IterablePipe,
-    FinalRankingComponent /* added for map template displaying */
+    FinalRankingComponent,
+    IntroComponent /* added for map template displaying */
   ],
   imports: [
     BrowserModule,
