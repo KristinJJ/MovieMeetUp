@@ -63,7 +63,6 @@ export class FinalRankingComponent implements OnInit {
     this.apicall.getFinalRankings(this.eventIDFromRoute).subscribe(data => console.log("Final Ranking: ", data)); 
     //Why this isn't connecting to the getFinalRankings Lambda function?? 
 
-
     // Find the event that corresponds with the id provided in route
     this.movieEvents = this.route.snapshot.data.movieEvent;
     console.log("movieEvents?", this.movieEvents);
@@ -88,12 +87,16 @@ export class FinalRankingComponent implements OnInit {
   calcFinalRanking() {
     console.log(this.movieEvent);
     console.log(this.movieEvent?.eventRankings);
-    for (let userRanking in this.movieEvent?.eventRankings) {
-      console.log("userRanking: ", userRanking);
-      //this.userRankings.push(userRanking);
-      //for (let movieRanking in userRanking.) {
-        //this.finalRanking.set();
-      //}
+    if (this.movieEvent?.eventRankings == undefined) {
+      console.log("no one has ranked the movies yet");
+    } else {
+      for (let userRanking in this.movieEvent?.eventRankings) {
+        console.log("userRanking: ", userRanking);
+        //this.userRankings.push(userRanking);
+        //for (let movieRanking in userRanking.) {
+          //this.finalRanking.set();
+        //}
+      }
     }
   }
 
