@@ -1,12 +1,4 @@
-/* import { Component, OnInit } from '@angular/core';
-import { MovieEvent } from '../event/event.component';
-import { PopMovieItem } from '../movies';
-import { ActivatedRoute } from '@angular/router';
-import { RankingService } from '../ranking.service';
-import { Router } from '@angular/router';
-import { ApicallService } from '../apicall.service';
-import { HttpClient } from '@angular/common/http'; */
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { ApicallService } from '../apicall.service';
 import { OnInit } from '@angular/core';
@@ -19,12 +11,14 @@ import { ActivatedRoute } from '@angular/router';
 import { RankingService } from '../ranking.service';
 import { RankUpdate } from '../ranking/ranking.component';
 
+
 @Component({
   selector: 'app-final-ranking',
   templateUrl: './final-ranking.component.html',
   styleUrls: ['./final-ranking.component.scss']
 })
 export class FinalRankingComponent implements OnInit {
+
   id = '';
   eventTitle = '';
   eventDate = '';
@@ -34,9 +28,6 @@ export class FinalRankingComponent implements OnInit {
   rankings: RankUpdate[] = [];
   finalRankings: MovieEvent[] = [];
   rankDetails: (PopMovieItem) [] | undefined;
-  // TEMP VARIABLES - until ranking service but is fixed
-  demoID = "DEMO";
-  movieEvents: MovieEvent[] = [];
   highestRank: PopMovieItem | undefined;
   eventIDFromRoute = "";
   hostID = environment.demoUserID;
@@ -55,7 +46,6 @@ export class FinalRankingComponent implements OnInit {
   ngOnInit() {
     //this.data = this.route.snapshot.data;
     //console.log("data: ", this.data);
-
 
     // First get the event id from the current route.
     const routeParams = this.route.snapshot.paramMap;
@@ -117,14 +107,14 @@ export class FinalRankingComponent implements OnInit {
       this.eventTitle = this.movieEvent.eventTitle;
       this.eventDate = this.movieEvent.eventDate;
       this.movieItemArray = this.movieEvent.eventMovies;
+
       if (this.movieEvent.eventRankings != undefined) {
         this.rankings = this.movieEvent.eventRankings;
       }
       
 
 
-      if (this.rankings != undefined) {
-        // this.rankDetails =;
+/*       if (this.rankings != undefined) {
         const specRank = this.rankings[1];
         //console.log("specRank: " + JSON.stringify(specRank));
         // console.log("target: " + JSON.stringify(this.movieEvent.eventRankings[3]));
@@ -134,16 +124,10 @@ export class FinalRankingComponent implements OnInit {
         if (specRank.UserRankings) {        
           //console.log("target first movie in UserRankings: " + JSON.stringify(specRank.UserRankings[3]));
           console.log("UserRankings length: " + specRank.UserRankings.length);
-          //let urank = JSON.parse(JSON.stringify(specRank.UserRankings[3]));
-          //console.log("test: " + urank);
-
-          //let urankings = specRank.UserRankings.join();
-          //console.log("urankings(JPJS): " + JSON.parse(JSON.stringify(urankings)));
-          //console.log("urankings lgth: " + urankings.length);
         }
         console.log("target points: " + specRank.UserRankings![1].points);
         
-      }
+      }*/
       if (this.movieEvent.id) {
         this.id = this.movieEvent.id;
         this.url = this.url + this.id;
@@ -152,6 +136,7 @@ export class FinalRankingComponent implements OnInit {
     this.findTopMovie();
   }
 
+  // currently, I'm just referencing eventRankings[1].UserRankings, but I believe all that would need to change would be the various calls to that particular array.
   findTopMovie() {
     let topMovie;
     let maxValue = 0;
@@ -169,3 +154,4 @@ export class FinalRankingComponent implements OnInit {
   }
 
 }
+
