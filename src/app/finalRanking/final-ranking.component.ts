@@ -149,7 +149,7 @@ export class FinalRankingComponent implements OnInit {
         topMovie = this.rankings![1].UserRankings![i];
       }
     }
-  }
+  } 
     this.highestRank = topMovie;
   }
 
