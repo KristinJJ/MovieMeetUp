@@ -149,11 +149,17 @@ if (this.movieItemArray) {
   }
 
   submitRanking() {
-    //this.submitUserID();
+    if (this.userID == "") {
+      this.errorMsg = 'You must enter a User ID.';
+      return;
+    } else {
+      this.errorMsg = '';
+    }
+    console.log("User ID: " + this.userID);
+
     this.rankMovies();
     console.log("Highest rank: " + this.highestRank);
 
-    console.log("User ID: " + this.userID);
     for (let entry of this.movieRankings.entries()) {
       console.log('movie title: ' + entry[0])
       console.log('points: ' + entry[1]);
@@ -173,6 +179,7 @@ if (this.movieItemArray) {
 
     // THEN invoke apicall to put rankings into the DB.
     this.apicall.addUserRankings(rankingUpdate).subscribe(data => console.log(data));
+    this.userID = "";
   }
 
 }
