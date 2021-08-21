@@ -44,6 +44,8 @@ export class RankingComponent implements OnInit {
   movieItemArray: (PopMovieItem)[] | undefined;
   movieRankings = new Map();
   errorMsg = '';
+  confmsg = '';
+  public confirmed = false;
   eventIDFromRoute = '';
   highestRank = 'no highest rank';
   movieEvent: MovieEvent | undefined;
@@ -173,6 +175,15 @@ if (this.movieItemArray) {
     this.highestRank = topMovie;
   }
 
+  confmessage(): void {
+    this.confirmed = true;
+    console.log("confirmed: " + this.confirmed);
+    setTimeout(() => {
+      this.confirmed = false;
+      console.log("confirmed: " + this.confirmed);
+    }, 4000);
+  }
+
   submitRanking() {
     if (this.userID == "") {
       this.errorMsg = 'You must enter a User ID.';
@@ -205,6 +216,9 @@ if (this.movieItemArray) {
     // THEN invoke apicall to put rankings into the DB.
     this.apicall.addUserRankings(rankingUpdate).subscribe(data => console.log(data));
     this.userID = "";
+
+    this.confmsg = `Your movie ranking has been submitted!`;
+    this.confmessage();
   }
 
 }
