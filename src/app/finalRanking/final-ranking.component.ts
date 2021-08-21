@@ -53,8 +53,8 @@ export class FinalRankingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.data = this.route.snapshot.data;
-    console.log("data: ", this.data);
+    //this.data = this.route.snapshot.data;
+    //console.log("data: ", this.data);
 
 
     // First get the event id from the current route.

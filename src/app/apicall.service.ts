@@ -95,6 +95,23 @@ export class ApicallService {
       )
   }
 
+  // get Event data from DynamoDB
+  // return the Event by eventID
+  getMovieEvent(id: string): Observable<MovieEvent> {
+    //console.log("id for queryStringParameters:", id);
+    const options = id ? 
+    { params : new HttpParams().set('id', id)} : {};
+    console.log("options for the MovieEvent: ", options);
+    return this.http.get<MovieEvent>(`https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/getFinalRankings`, options).
+      pipe(
+        map((data) => {
+          console.log(data);
+          console.log("getMovieEvent() data: " + data);
+          return data ?? [];
+        })
+      )
+  }
+
   // get FinalRanking data from DynamoDB
   // return the Final Rankings for an Event by eventID
   getFinalRankings(id: string): Observable<MovieEvent> {

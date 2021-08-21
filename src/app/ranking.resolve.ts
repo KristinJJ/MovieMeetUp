@@ -10,11 +10,18 @@ import { RankingService } from "./ranking.service";
 @Injectable({  
   providedIn: "any"
 })
-export class MovieEventResolve implements Resolve<MovieEvent[]> {  
-  constructor(private apicall: ApicallService, private rankingService: RankingService) {}  
+export class MovieEventResolve implements Resolve<MovieEvent> {  
+  routeParams: any;
+  constructor(private apicall: ApicallService) {}  
   
-  resolve(route: ActivatedRouteSnapshot): Observable<MovieEvent[]> {  
-    console.log("the ranking resolve has completed");
-    return this.apicall.getMovieEvents();
+  resolve(route: ActivatedRouteSnapshot): Observable<MovieEvent> {  
+    //console.log("the ranking resolve has completed");
+    //return this.apicall.getMovieEvents();
+
+    console.log("the ranking resolve has completed", route);
+    this.routeParams = route.paramMap.get('eventID');
+    console.log("eventID from resolve: ", this.routeParams);
+
+    return this.apicall.getMovieEvent(this.routeParams);
   }  
 }
