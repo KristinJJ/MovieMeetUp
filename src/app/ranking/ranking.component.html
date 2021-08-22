@@ -56,6 +56,9 @@
 <button mat-raised-button color="primary" (click)="submitRanking()">
   Submit
 </button>
+<p *ngIf="confirmed" class="confirmation" style="color: green">
+  <strong>{{ confmsg }}</strong>
+</p>
 
 <!-- <h1>Current Highest Rank: {{ highestRank }}</h1> -->
 
