@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Movies, MovieItem, PopMovies, PopMovieItem } from './movies';
 //import * as Rx from "rxjs/Rx";
 import { from, Observable, throwError } from 'rxjs';
@@ -95,6 +95,38 @@ export class ApicallService {
       )
   }
 
+  // get Event data from DynamoDB
+  // return the Event by eventID
+  getMovieEvent(id: string): Observable<MovieEvent> {
+    //console.log("id for queryStringParameters:", id);
+    const options = id ? 
+    { params : new HttpParams().set('id', id)} : {};
+    console.log("options for the MovieEvent: ", options);
+    return this.http.get<MovieEvent>(`https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/getMovieEvent`, options).
+      pipe(
+        map((data) => {
+          console.log(data);
+          console.log("getMovieEvent() data: " + data);
+          return data ?? [];
+        })
+      )
+  }
+
+  // get FinalRanking data from DynamoDB
+  // return the Final Rankings for an Event by eventID
+  getFinalRankings(id: string): Observable<MovieEvent> {
+    //console.log("id for queryStringParameters:", id);
+    const options = id ? 
+    { params : new HttpParams().set('id', id)} : {};
+    console.log("options for the FinalRanking: ", options);
+    return this.http.get<MovieEvent>(`https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/getFinalRankings`, options).
+      pipe(
+        map((data) => {
+          console.log(data);
+          console.log("getFinalRankings() data: " + data);
+          return data ?? [];
+        })
+      )
+  }
+
 }
-
-

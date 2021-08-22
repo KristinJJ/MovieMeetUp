@@ -21,6 +21,7 @@ export interface RankUpdate {
   eventID: string;
   userID: string;
   UserRankings: (PopMovieItem)[] | undefined;
+  points?: number;
 }
 
 /**
@@ -57,17 +58,16 @@ export class RankingComponent implements OnInit {
     private route: ActivatedRoute) {
   }
 
-  async ngOnInit() {
-    this.movieEvents = this.route.snapshot.data.movieEvents;
+  ngOnInit() {
     // First get the event id from the current route.
     const routeParams = this.route.snapshot.paramMap;
     this.eventIDFromRoute = String(routeParams.get('eventID'));
     //console.log("eventIDFromRoute: " + this.eventIDFromRoute);
 
     // Find the event that corresponds with the id provided in route
-    this.movieEvents = this.route.snapshot.data.movieEvent;
-    console.log("movieEvents?", this.movieEvents);
-    this.findMovieEventByEventID();
+    this.movieEvent = this.route.snapshot.data.movieEvent;
+    console.log("movieEvent", this.movieEvent);
+    //this.findMovieEventByEventID();
     
     this.loadMoviesFromEvent();
   }
@@ -129,13 +129,14 @@ export class RankingComponent implements OnInit {
   }
 
   submitUserID() {
-    if (this.value == '') {
+    this.userID = this.value;
+    /*if (this.value == '') {
       this.errorMsg = 'You must enter a User ID.';
       return;
     } else {
       this.userID = this.value;
       this.errorMsg = '';
-    }
+    }*/
     console.log("User ID: " + this.userID);
   }
 
@@ -173,10 +174,7 @@ if (this.movieItemArray) {
   }
 
   submitRanking() {
-    if (this.userID == '' || this.userID == 'No User ID Entered') {
-      this.errorMsg = 'You must enter a User ID.';
-      return;
-    }
+    //this.submitUserID();
     this.rankMovies();
     console.log("Highest rank: " + this.highestRank);
 

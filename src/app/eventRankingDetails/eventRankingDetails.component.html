@@ -1,3 +1,32 @@
-<div *ngFor="let eventRanking of eventRankings">
-  <div> {{eventRanking.UserRankings}}</div>
+<!--<div *ngFor="let movieTitle of movieTitle">
+  <div> {{movieTitle}} </div>
+</div>
+
+<div *ngFor="let point of points">
+  <div> {{point}} </div>
+</div>-->
+
+<div class="col-md-12">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Movie Title</th>
+        <th scope="col">Points</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="eventRankings">
+        <tr *ngFor="let movie of eventRankings[0].UserRankings">
+          <td>{{ movie.title }}</td>
+          <!-- temporary number placeholder below -->
+          <td class="points">{{ movie.points }}</td>
+        </tr>
+        <tr *ngFor="let movie of eventRankings[1].UserRankings">
+          <td>{{ movie.title }}</td>
+          <!-- temporary number placeholder below -->
+          <td class="points">{{ movie.points }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
 </div>
