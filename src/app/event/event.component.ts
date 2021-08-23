@@ -29,7 +29,7 @@ export interface MovieEvent {
   selectedMovies: PopMovieItem[];
   //invitees?: (EventInvitees) [] | null;
   eventRankings?: (RankUpdate) [];
-  finalWinners?: (PopMovieItem) [];
+  finalRankings?: (PopMovieItem) [];
 }
 
 @Component({
