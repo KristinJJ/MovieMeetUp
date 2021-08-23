@@ -26,7 +26,7 @@ export class FinalRankingComponent implements OnInit {
   movieEvent: MovieEvent | undefined;
   url = 'http://localhost:4200/finalranking/';
   rankings: RankUpdate[] = [];
-  finalRankings: MovieEvent[] = [];
+  finalRankings: (PopMovieItem)[] = [];
   rankDetails: (PopMovieItem) [] | undefined;
   highestRank: PopMovieItem | undefined;
   eventIDFromRoute = "";
@@ -37,9 +37,6 @@ export class FinalRankingComponent implements OnInit {
 
   constructor(
     public apicall: ApicallService, 
-    private rankingService: RankingService, 
-    private router: Router, 
-    private httpClient: HttpClient, 
     private route: ActivatedRoute
   ) {}
 
@@ -62,7 +59,7 @@ export class FinalRankingComponent implements OnInit {
     //console.log("movieEvents?", this.movieEvents);
     //this.findMovieEventByEventID();
 
-    this.calcFinalRanking();
+    //this.calcFinalRanking();
     
     this.loadMoviesFromEvent();
   }
@@ -85,10 +82,10 @@ export class FinalRankingComponent implements OnInit {
     }
   }*/
 
-  calcFinalRanking() {
+  /*calcFinalRanking() {
     console.log(this.movieEvent);
     console.log(this.movieEvent?.eventRankings);
-    if (this.movieEvent?.eventRankings == undefined) {
+    if (this.movieEvent?.finalRankings == undefined) {
       console.log("no one has ranked the movies yet");
     } else {
       for (let userRanking in this.movieEvent?.eventRankings) {
@@ -99,7 +96,7 @@ export class FinalRankingComponent implements OnInit {
         //}
       }
     }
-  }
+  }*/
 
   loadMoviesFromEvent() {
     // if movieEvent is not undefined or null, assign movies to movieItemArray
@@ -110,6 +107,11 @@ export class FinalRankingComponent implements OnInit {
 
       if (this.movieEvent.eventRankings != undefined) {
         this.rankings = this.movieEvent.eventRankings;
+      }
+
+      if (this.movieEvent.finalRankings != undefined) {
+        this.finalRankings = this.movieEvent.finalRankings;
+        //console.log("finalRanking: ", this.finalRanking);
       }
       
 
@@ -133,11 +135,11 @@ export class FinalRankingComponent implements OnInit {
         this.url = this.url + this.id;
       }
     }
-    this.findTopMovie();
+    //this.findTopMovie();
   }
 
   // currently, I'm just referencing eventRankings[1].UserRankings, but I believe all that would need to change would be the various calls to that particular array.
-  findTopMovie() {
+  /*findTopMovie() {
     let topMovie;
     let maxValue = 0;
     if (this.rankings != undefined) { 
@@ -151,7 +153,7 @@ export class FinalRankingComponent implements OnInit {
     }
   }
     this.highestRank = topMovie;
-  }
+  }*/
 
 }
 
