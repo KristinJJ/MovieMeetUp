@@ -102,7 +102,7 @@ export class ApicallService {
     const options = id ? 
     { params : new HttpParams().set('id', id)} : {};
     console.log("options for the MovieEvent: ", options);
-    return this.http.get<MovieEvent>(`https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/getFinalRankings`, options).
+    return this.http.get<MovieEvent>(`https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/getMovieEvent`, options).
       pipe(
         map((data) => {
           console.log(data);

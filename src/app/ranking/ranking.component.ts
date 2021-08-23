@@ -44,6 +44,8 @@ export class RankingComponent implements OnInit {
   movieItemArray: (PopMovieItem)[] | undefined;
   movieRankings = new Map();
   errorMsg = '';
+  confmsg = '';
+  public confirmed = false;
   eventIDFromRoute = '';
   highestRank = 'no highest rank';
   movieEvent: MovieEvent | undefined;
@@ -130,55 +132,28 @@ export class RankingComponent implements OnInit {
 
   submitUserID() {
     this.userID = this.value;
-    /*if (this.value == '') {
+    console.log("User ID: " + this.userID);
+  }
+
+  confmessage(): void {
+    this.confirmed = true;
+    console.log("confirmed: " + this.confirmed);
+    setTimeout(() => {
+      this.confirmed = false;
+      console.log("confirmed: " + this.confirmed);
+    }, 4000);
+  }
+
+  submitRanking() {
+    if (this.userID == "") {
       this.errorMsg = 'You must enter a User ID.';
       return;
     } else {
-      this.userID = this.value;
       this.errorMsg = '';
-    }*/
+    }
     console.log("User ID: " + this.userID);
-  }
-
-  /*rankMovies() {
-  if (this.movieItemArray) {
-    let points = this.movieItemArray.length
-    for (let i = 0; i < this.movieItemArray.length; i++) {
-      if (this.movieRankings.has(this.movieItemArray[i].title)) {
-        let newRanking = points + this.movieRankings.get(this.movieItemArray[i].title)
-        this.movieRankings.set(this.movieItemArray[i].title, newRanking);
-        points--;
-      } else {
-        this.movieRankings.set(this.movieItemArray[i].title, points);
-
-        // Adds points attribute with the value determined to the movie in movieItemArray
-        this.movieItemArray[i].points = points;
-        points--;
-      }
-      }
-    }
-    this.findTopMovie();
-  }
-
-  findTopMovie() {
-    let topMovie = '';
-    let maxValue = 0;
-    for (let key of this.movieRankings.keys()) {
-      let newValue = this.movieRankings.get(key);
-      if (newValue > maxValue) {
-        maxValue = newValue;
-        topMovie = key;
-      }
-    }
-    this.highestRank = topMovie;
-  }*/
-
-  submitRanking() {
-    //this.submitUserID();
-    //this.rankMovies();
     console.log("Highest rank: " + this.highestRank);
 
-    console.log("User ID: " + this.userID);
     for (let entry of this.movieRankings.entries()) {
       console.log('movie title: ' + entry[0])
       //console.log('points: ' + entry[1]);
@@ -198,6 +173,10 @@ export class RankingComponent implements OnInit {
 
     // THEN invoke apicall to put rankings into the DB.
     this.apicall.addUserRankings(rankingUpdate).subscribe(data => console.log(data));
+    this.userID = "";
+
+    this.confmsg = `Your movie ranking has been submitted!`;
+    this.confmessage();
   }
 
 }
