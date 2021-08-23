@@ -140,8 +140,8 @@ export class RankingComponent implements OnInit {
     console.log("User ID: " + this.userID);
   }
 
-  rankMovies() {
-if (this.movieItemArray) {
+  /*rankMovies() {
+  if (this.movieItemArray) {
     let points = this.movieItemArray.length
     for (let i = 0; i < this.movieItemArray.length; i++) {
       if (this.movieRankings.has(this.movieItemArray[i].title)) {
@@ -171,17 +171,17 @@ if (this.movieItemArray) {
       }
     }
     this.highestRank = topMovie;
-  }
+  }*/
 
   submitRanking() {
     //this.submitUserID();
-    this.rankMovies();
+    //this.rankMovies();
     console.log("Highest rank: " + this.highestRank);
 
     console.log("User ID: " + this.userID);
     for (let entry of this.movieRankings.entries()) {
       console.log('movie title: ' + entry[0])
-      console.log('points: ' + entry[1]);
+      //console.log('points: ' + entry[1]);
     }
 
 
