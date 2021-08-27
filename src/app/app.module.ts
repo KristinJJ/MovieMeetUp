@@ -16,6 +16,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MovieCardComponent} from "./movieCard/movieCard.component";
 import { ApicallService } from './apicall.service';
 import { FinalRankingComponent } from './finalRanking/final-ranking.component';
+import { DeferLoadModule } from '@trademe/ng-defer-load';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { FinalRankingComponent } from './finalRanking/final-ranking.component';
     HttpClientModule,
     DemoMaterialModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule, 
+    DeferLoadModule
   ],
   providers: [
     ApicallService,

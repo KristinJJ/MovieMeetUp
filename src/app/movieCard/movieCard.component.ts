@@ -11,6 +11,7 @@ export class MovieCardComponent implements OnInit {
   @Input() movie!: PopMovieItem|undefined;
   @Output() notify = new EventEmitter();
 
+  show = false;
   selected = false;
 
   constructor(
