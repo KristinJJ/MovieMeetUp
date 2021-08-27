@@ -14,10 +14,11 @@ import { HomeComponent} from "./home/home.component";
 import { TopNavComponent } from "./topNav/topNav.component";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MovieCardComponent} from "./movieCard/movieCard.component";
-import { EventRankingDetails } from "./eventRankingDetails/eventRankingDetails.component";
+//import { EventRankingDetails } from "./eventRankingDetails/eventRankingDetails.component";
 import { FinalRankingComponent } from './finalRanking/final-ranking.component';
 import { ApicallService } from './apicall.service';
 import { IntroComponent } from './intro/intro.component';
+
 
 @NgModule({
   declarations: [
@@ -28,10 +29,10 @@ import { IntroComponent } from './intro/intro.component';
     HomeComponent,
     TopNavComponent,
     MovieCardComponent,
-    EventRankingDetails,
+    //EventRankingDetails,
     IterablePipe,
     FinalRankingComponent,
-    IntroComponent /* added for map template displaying */
+    IntroComponent
   ],
   imports: [
     BrowserModule,

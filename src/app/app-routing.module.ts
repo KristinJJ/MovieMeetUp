@@ -9,7 +9,8 @@ import { IntroComponent } from './intro/intro.component';
 
 const routes: Routes = [
     { path: 'home', pathMatch: 'full', component: HomeComponent },
-    { path: '', redirectTo: '/intro', pathMatch: 'full' },
+   // { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '', pathMatch: 'full', component: HomeComponent },
     { path: 'ranking/:eventID', component: RankingComponent, resolve: {movieEvent: MovieEventResolve} },
     { path: 'event', component: EventComponent },
     { path: 'finalranking/:eventID', component: FinalRankingComponent, resolve: {movieEvent: MovieEventResolve} },
