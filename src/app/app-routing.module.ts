@@ -3,8 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { EventComponent } from './event/event.component';
 import { RankingComponent } from "./ranking/ranking.component";
 import { HomeComponent } from "./home/home.component";
-import { FinalRankingComponent } from './finalRanking/final-ranking.component';
 import { MovieEventResolve } from './ranking.resolve';
+import { FinalRankingResolve } from './finalRanking.resolve';
+import { FinalRankingComponent } from './finalRanking/final-ranking.component';
 import { IntroComponent } from './intro/intro.component';
 
 const routes: Routes = [

@@ -21,6 +21,7 @@ export interface RankUpdate {
   eventID: string;
   userID: string;
   UserRankings: (PopMovieItem)[] | undefined;
+  points?: number;
 }
 
 /**
@@ -43,6 +44,8 @@ export class RankingComponent implements OnInit {
   movieItemArray: (PopMovieItem)[] | undefined;
   movieRankings = new Map();
   errorMsg = '';
+  confmsg = '';
+  public confirmed = false;
   eventIDFromRoute = '';
   highestRank = 'no highest rank';
   movieEvent: MovieEvent | undefined;
@@ -57,17 +60,16 @@ export class RankingComponent implements OnInit {
     private route: ActivatedRoute) {
   }
 
-  async ngOnInit() {
-    this.movieEvents = this.route.snapshot.data.movieEvents;
+  ngOnInit() {
     // First get the event id from the current route.
     const routeParams = this.route.snapshot.paramMap;
     this.eventIDFromRoute = String(routeParams.get('eventID'));
     //console.log("eventIDFromRoute: " + this.eventIDFromRoute);
 
     // Find the event that corresponds with the id provided in route
-    this.movieEvents = this.route.snapshot.data.movieEvent;
-    console.log("movieEvents?", this.movieEvents);
-    this.findMovieEventByEventID();
+    this.movieEvent = this.route.snapshot.data.movieEvent;
+    console.log("movieEvent", this.movieEvent);
+    //this.findMovieEventByEventID();
     
     this.loadMoviesFromEvent();
   }
@@ -129,13 +131,14 @@ export class RankingComponent implements OnInit {
   }
 
   submitUserID() {
-    if (this.value == '') {
+    this.userID = this.value;
+    /*if (this.value == '') {
       this.errorMsg = 'You must enter a User ID.';
       return;
     } else {
       this.userID = this.value;
       this.errorMsg = '';
-    }
+    }*/
     console.log("User ID: " + this.userID);
   }
 
@@ -172,15 +175,27 @@ if (this.movieItemArray) {
     this.highestRank = topMovie;
   }
 
+  confmessage(): void {
+    this.confirmed = true;
+    console.log("confirmed: " + this.confirmed);
+    setTimeout(() => {
+      this.confirmed = false;
+      console.log("confirmed: " + this.confirmed);
+    }, 4000);
+  }
+
   submitRanking() {
-    if (this.userID == '' || this.userID == 'No User ID Entered') {
+    if (this.userID == "") {
       this.errorMsg = 'You must enter a User ID.';
       return;
+    } else {
+      this.errorMsg = '';
     }
+    console.log("User ID: " + this.userID);
+
     this.rankMovies();
     console.log("Highest rank: " + this.highestRank);
 
-    console.log("User ID: " + this.userID);
     for (let entry of this.movieRankings.entries()) {
       console.log('movie title: ' + entry[0])
       console.log('points: ' + entry[1]);
@@ -200,6 +215,10 @@ if (this.movieItemArray) {
 
     // THEN invoke apicall to put rankings into the DB.
     this.apicall.addUserRankings(rankingUpdate).subscribe(data => console.log(data));
+    this.userID = "";
+
+    this.confmsg = `Your movie ranking has been submitted!`;
+    this.confmessage();
   }
 
 }

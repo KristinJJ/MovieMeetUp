@@ -26,7 +26,7 @@ export class RankingService {
     return this.movieEvents;
   }
 
-  findMovieEventByEventID(hostID: String, eventID: String) {
+  /*findMovieEventByEventID(hostID: String, eventID: String) {
     console.log(this.movieEvents);
     let temp: MovieEvent | undefined;
     for (let index in this.movieEvents) {
@@ -38,7 +38,7 @@ export class RankingService {
     }
     console.log(temp);
     return temp;
-  }
+  }*/
 
   getMovieEvents(){
     return this.movieEvents;
