@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { SampleComponent } from './sample/sample.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DemoMaterialModule } from "./material.module";
 import { FormsModule} from "@angular/forms";
 import { EventComponent, IterablePipe } from './event/event.component';
@@ -18,6 +18,7 @@ import { MovieCardComponent} from "./movieCard/movieCard.component";
 import { FinalRankingComponent } from './finalRanking/final-ranking.component';
 import { ApicallService } from './apicall.service';
 import { IntroComponent } from './intro/intro.component';
+//import { HeaderInterceptor } from './auth-interceptor';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { IntroComponent } from './intro/intro.component';
   providers: [
     ApicallService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    //{ provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

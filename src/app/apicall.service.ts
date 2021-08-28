@@ -106,7 +106,7 @@ export class ApicallService {
       pipe(
         map((data) => {
           console.log(data);
-          console.log("getMovieEvent() data: " + data);
+          console.log("getMovieEvent() data: " + JSON.stringify(data));
           return data ?? [];
         })
       )

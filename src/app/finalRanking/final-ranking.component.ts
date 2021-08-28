@@ -54,7 +54,7 @@ export class FinalRankingComponent implements OnInit {
     
     // KEEP THIS ONE
     this.movieEvent = this.route.snapshot.data.finalRanking;
-    //console.log("this.movieEvent", this.movieEvent);
+    console.log("this.movieEvent", this.movieEvent);
     //this.loadMovieEvent();
 
     // Find the event that corresponds with the id provided in route

@@ -39,6 +39,7 @@ export interface MovieEvent {
 
 @Injectable()
 export class EventComponent implements OnInit {
+  sessionhostID = sessionStorage.getItem('hostID');
   hostID = '';
   eventID = '';
   eventTitle = '';
@@ -89,6 +90,9 @@ export class EventComponent implements OnInit {
   }
 
   createEvent() { // TO ADD: CONTENT VERIFICATION
+    if (this.sessionhostID !== null) {
+      this.hostID = this.sessionhostID
+    };
     
     if (this.hostID === '' || this.eventTitle === '' || this.eventDate === '') {
       this.errormsg = 'You must enter a Host ID, an Event Title, and select a Date.';
@@ -105,7 +109,7 @@ export class EventComponent implements OnInit {
     //   with added random number to prevent overwriting, should a previous event be deleted
     //this.eventID = `${this.events.size+1}` + '-' + `${Math.floor(Math.random()*1000)}`;
     //console.log(this.eventID);
-
+    
     // Create newEvent object of MovieEvent type with the provided elements
     let newEvent: MovieEvent = {
       hostID: this.hostID,
