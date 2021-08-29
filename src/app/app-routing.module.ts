@@ -14,7 +14,7 @@ const routes: Routes = [
     { path: '', pathMatch: 'full', component: HomeComponent },
     { path: 'ranking/:eventID', component: RankingComponent, resolve: {movieEvent: MovieEventResolve} },
     { path: 'event', component: EventComponent },
-    { path: 'finalranking/:eventID', component: FinalRankingComponent, resolve: {movieEvent: MovieEventResolve} },
+    { path: 'finalranking/:eventID', component: FinalRankingComponent, resolve: {finalRanking: FinalRankingResolve} },
     { path: 'intro', component: IntroComponent }
     /* add path for movie selection */
 ];

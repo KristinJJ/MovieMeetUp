@@ -58,12 +58,12 @@ export class HomeComponent implements OnInit {
       console.log("session storage-host: "+ sessionStorage.getItem('hostID'));
       console.log("session storage-idToken: " + sessionStorage.getItem('id_token')); 
       console.log("session storage-accessToken: " + sessionStorage.getItem('access_token'));
+
       
-    }
-    
-    
+    } 
     this.rankingService.loadMovieEventsByHostID(String(sessionStorage.getItem('hostID')));
     this.movieEvents = this.rankingService.getMovieEvents();
+   
   }
 
 }
