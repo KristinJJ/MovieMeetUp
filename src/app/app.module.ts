@@ -14,12 +14,11 @@ import { HomeComponent} from "./home/home.component";
 import { TopNavComponent } from "./topNav/topNav.component";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MovieCardComponent} from "./movieCard/movieCard.component";
-//import { EventRankingDetails } from "./eventRankingDetails/eventRankingDetails.component";
 import { FinalRankingComponent } from './finalRanking/final-ranking.component';
 import { ApicallService } from './apicall.service';
 import { IntroComponent } from './intro/intro.component';
 import { HeaderInterceptor } from './auth-interceptor';
-
+import { DeferLoadModule } from '@trademe/ng-defer-load';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import { HeaderInterceptor } from './auth-interceptor';
     HomeComponent,
     TopNavComponent,
     MovieCardComponent,
-    //EventRankingDetails,
     IterablePipe,
     FinalRankingComponent,
     IntroComponent
@@ -42,7 +40,8 @@ import { HeaderInterceptor } from './auth-interceptor';
     HttpClientModule,
     DemoMaterialModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule, 
+    DeferLoadModule
   ],
   providers: [
     ApicallService,

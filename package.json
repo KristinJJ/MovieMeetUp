@@ -23,6 +23,7 @@
     "@angular/router": "~12.1.1",
     "amazon-cognito-identity-js": "^5.1.0",
     "aws-amplify-angular": "^6.0.10",
+    "@trademe/ng-defer-load": "^8.2.1",
     "aws-sdk": "^2.950.0",
     "jwt-decode": "^3.1.2",
     "rxjs": "~6.6.0",

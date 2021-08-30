@@ -132,47 +132,7 @@ export class RankingComponent implements OnInit {
 
   submitUserID() {
     this.userID = this.value;
-    /*if (this.value == '') {
-      this.errorMsg = 'You must enter a User ID.';
-      return;
-    } else {
-      this.userID = this.value;
-      this.errorMsg = '';
-    }*/
     console.log("User ID: " + this.userID);
-  }
-
-  rankMovies() {
-if (this.movieItemArray) {
-    let points = this.movieItemArray.length
-    for (let i = 0; i < this.movieItemArray.length; i++) {
-      if (this.movieRankings.has(this.movieItemArray[i].title)) {
-        let newRanking = points + this.movieRankings.get(this.movieItemArray[i].title)
-        this.movieRankings.set(this.movieItemArray[i].title, newRanking);
-        points--;
-      } else {
-        this.movieRankings.set(this.movieItemArray[i].title, points);
-
-        // Adds points attribute with the value determined to the movie in movieItemArray
-        this.movieItemArray[i].points = points;
-        points--;
-      }
-      }
-    }
-    this.findTopMovie();
-  }
-
-  findTopMovie() {
-    let topMovie = '';
-    let maxValue = 0;
-    for (let key of this.movieRankings.keys()) {
-      let newValue = this.movieRankings.get(key);
-      if (newValue > maxValue) {
-        maxValue = newValue;
-        topMovie = key;
-      }
-    }
-    this.highestRank = topMovie;
   }
 
   confmessage(): void {
@@ -192,13 +152,11 @@ if (this.movieItemArray) {
       this.errorMsg = '';
     }
     console.log("User ID: " + this.userID);
-
-    this.rankMovies();
     console.log("Highest rank: " + this.highestRank);
 
     for (let entry of this.movieRankings.entries()) {
       console.log('movie title: ' + entry[0])
-      console.log('points: ' + entry[1]);
+      //console.log('points: ' + entry[1]);
     }
 
 
