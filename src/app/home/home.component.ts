@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     
     //if (sessionStorage.getItem("LoggedStatus") === null) {
       if (sessionStorage.getItem("hostID") === null) {
-      var url = new URL(window.location.href.replace('#id_token', '?id_token'));
+      var url = new URL(window.location.href.replace('#', '?'));
       console.log("URL: " + url);
       console.log("href: "+ window.location.href);
       

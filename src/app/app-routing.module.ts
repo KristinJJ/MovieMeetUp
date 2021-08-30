@@ -9,8 +9,8 @@ import { FinalRankingComponent } from './finalRanking/final-ranking.component';
 import { IntroComponent } from './intro/intro.component';
 
 const routes: Routes = [
-    { path: 'home', pathMatch: 'full', component: HomeComponent },
-   // { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'home', pathMatch: 'full', component: HomeComponent }, // TODO: add authGuard--> canActivate: [RedirectGuard]
+    { path: '', redirectTo: '/intro', pathMatch: 'full' },
     { path: '', pathMatch: 'full', component: HomeComponent },
     { path: 'ranking/:eventID', component: RankingComponent, resolve: {movieEvent: MovieEventResolve} },
     { path: 'event', component: EventComponent },

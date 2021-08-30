@@ -1,4 +1,12 @@
 <h1>Your Events</h1>
+<div class="logoutButton">
+  <a
+    href="https://movie-meetup.auth.us-west-2.amazoncognito.com/logout?client_id=36c0irsvr5p4lbpkdoli72nk8p&logout_uri=http://localhost:4200/intro"
+    mat-raised-button
+    color="warn"
+    >LogOut</a
+  >
+</div>
 <a mat-raised-button color="primary" routerLink="/event">Build an Event</a>
 <h2>Click on a link below to go to your Events</h2>
 <div *ngFor="let event of movieEvents">
