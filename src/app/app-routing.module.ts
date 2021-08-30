@@ -6,13 +6,16 @@ import { HomeComponent } from "./home/home.component";
 import { MovieEventResolve } from './ranking.resolve';
 import { FinalRankingResolve } from './finalRanking.resolve';
 import { FinalRankingComponent } from './finalRanking/final-ranking.component';
+import { IntroComponent } from './intro/intro.component';
 
 const routes: Routes = [
-    { path: 'home', pathMatch: 'full', component: HomeComponent },
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'ranking/:eventID', component: RankingComponent, resolve: {movieEvent: MovieEventResolve}},
+    { path: 'home', pathMatch: 'full', component: HomeComponent }, // TODO: add authGuard--> canActivate: [RedirectGuard]
+    { path: '', redirectTo: '/intro', pathMatch: 'full' },
+    { path: '', pathMatch: 'full', component: HomeComponent },
+    { path: 'ranking/:eventID', component: RankingComponent, resolve: {movieEvent: MovieEventResolve} },
     { path: 'event', component: EventComponent },
-    { path: 'finalranking/:eventID', component: FinalRankingComponent, resolve: {finalRanking: FinalRankingResolve}}
+    { path: 'finalranking/:eventID', component: FinalRankingComponent, resolve: {finalRanking: FinalRankingResolve} },
+    { path: 'intro', component: IntroComponent }
     /* add path for movie selection */
 ];
 
