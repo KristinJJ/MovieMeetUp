@@ -89,7 +89,7 @@ export class ApicallService {
       pipe(
         map((data) => {
           //console.log(data);
-          //console.log("getMovieEvents() data.Items: " + data.Items);
+          console.log("ApiService- getMovieEvents() completed");
           return data.Items ?? [];
         })
       )

@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     
     //if (sessionStorage.getItem("LoggedStatus") === null) {
-      if (sessionStorage.getItem("hostID") === null) {
+      /*if (sessionStorage.getItem("hostID") === null) {
       var url = new URL(window.location.href.replace('#', '?'));
       console.log("URL: " + url);
       console.log("href: "+ window.location.href);
@@ -60,7 +60,8 @@ export class HomeComponent implements OnInit {
       console.log("session storage-accessToken: " + sessionStorage.getItem('access_token'));
 
       
-    } 
+    } */
+    console.log("session storage-host: "+ sessionStorage.getItem('hostID'));
     this.rankingService.loadMovieEventsByHostID(String(sessionStorage.getItem('hostID')));
     this.movieEvents = this.rankingService.getMovieEvents();
    

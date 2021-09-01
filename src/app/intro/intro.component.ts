@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-intro',
@@ -7,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntroComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     sessionStorage.clear();
+    // somehow, going to /intro is autmatically setting authService.isLoggedIn to false, and I'm not sure how.
+    //this.authService.logout();
   }
 
 }
