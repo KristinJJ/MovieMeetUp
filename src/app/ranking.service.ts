@@ -23,7 +23,7 @@ export class RankingService {
         }
       }
     });
-    console.log(this.movieEvents); 
+    console.log('RankingService-getMovieEventsByHostID completed: ' + this.movieEvents); 
     return this.movieEvents;
   }
 

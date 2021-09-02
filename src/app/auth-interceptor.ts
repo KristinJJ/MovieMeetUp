@@ -25,7 +25,7 @@ export class HeaderInterceptor implements HttpInterceptor {
   intercept(httpRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
             const IdAuthToken = String(sessionStorage.getItem('id_token'));
-      
+            console.log('Interceptor: setting auth header');
         return next.handle(httpRequest.clone({ setHeaders: { 'Authorization': IdAuthToken } }));
   }
 }
