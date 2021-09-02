@@ -10,9 +10,9 @@ import { IntroComponent } from './intro/intro.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-    { path: 'home', pathMatch: 'full', component: HomeComponent, canActivate: [AuthGuard] }, // TODO: add authGuard--> canActivate: [RedirectGuard]
+    { path: 'home', pathMatch: 'full', component: HomeComponent, canActivate: [AuthGuard] },
     { path: '', redirectTo: '/intro', pathMatch: 'full' },
-    { path: '', pathMatch: 'full', component: HomeComponent },
+    //{ path: '', pathMatch: 'full', component: HomeComponent },
     { path: 'ranking/:eventID', component: RankingComponent, resolve: {movieEvent: MovieEventResolve} },
     { path: 'event', pathMatch: 'full', component: EventComponent, canActivate: [AuthGuard] },
     { path: 'finalranking/:eventID', component: FinalRankingComponent, resolve: {finalRanking: FinalRankingResolve} },

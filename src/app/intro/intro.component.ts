@@ -12,7 +12,8 @@ export class IntroComponent implements OnInit {
 
   ngOnInit(): void {
     sessionStorage.clear();
-    // somehow, going to /intro is autmatically setting authService.isLoggedIn to false, and I'm not sure how.
+
+    // somehow, going to /intro is already setting authService.isLoggedIn to false, and I'm not sure how.
     //this.authService.logout();
   }
 

@@ -13,10 +13,12 @@ export class AuthGuard implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
+    // capture url
     state: RouterStateSnapshot): true|UrlTree {
       const url: string = state.url;
       console.log('state url: ' + url);
       console.log('AuthGuard#canActivate called');
+      // if url has hosted UI login info, then run AuthService login function
       if (url.includes('id_token')) {
         this.authService.login();
         return this.checkLogin(url);
