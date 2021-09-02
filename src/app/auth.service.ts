@@ -16,12 +16,15 @@ export class AuthService {
   idToken = '';
   accessToken = '';
 
-  login(): Observable<boolean>{
+ /*  ngOnInit() {
 
+  } */
+  login(): Observable<boolean>{
     // for page refresh when logged in - AuthService wants to reset variables on a page refresh
     if (sessionStorage.getItem("hostID") !== null) {
       this.isLoggedIn = true;
     }
+
     if (sessionStorage.getItem("hostID") === null) {
       var url = new URL(window.location.href.replace('#', '?'));
       console.log("URL: " + url);
