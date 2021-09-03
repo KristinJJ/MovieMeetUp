@@ -49,7 +49,7 @@ export class RankingComponent implements OnInit {
   eventIDFromRoute = '';
   highestRank = 'no highest rank';
   movieEvent: MovieEvent | undefined;
-  url = 'http://localhost:4200/ranking/';
+  url = 'https://www.moviemeetup.com/ranking/';
   movieEvents: MovieEvent[] = [];
 
   constructor(
