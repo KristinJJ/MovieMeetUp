@@ -1,1 +1,3 @@
-<a routerLink="/home"><mat-icon>home</mat-icon></a>
+<div *ngIf="loggedUser">
+  <a routerLink="/home"><mat-icon>home</mat-icon></a>
+</div>
