@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-intro',
@@ -7,6 +8,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./intro.component.scss']
 })
 export class IntroComponent implements OnInit {
+  loginURL= environment.loginURL;
 
   constructor(private authService: AuthService) { }
 

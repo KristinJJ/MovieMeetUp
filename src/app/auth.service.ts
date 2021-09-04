@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
 import jwtDecode, { JwtPayload }  from "jwt-decode";
@@ -11,7 +11,7 @@ export interface JwtPayloadCognito extends JwtPayload {
   providedIn: 'root'
 })
 export class AuthService {
-  isLoggedIn = false;
+  @Input() isLoggedIn = false;
   redirectURL: string | null = null;
   idToken = '';
   accessToken = '';
@@ -46,7 +46,7 @@ export class AuthService {
       sessionStorage.setItem('id_token', this.idToken);
       sessionStorage.setItem('access_token', this.accessToken);
 
-      this.isLoggedIn = true;
+      //this.isLoggedIn = true;
 
       console.log("session storage-host: "+ sessionStorage.getItem('hostID'));
       console.log("session storage-idToken: " + sessionStorage.getItem('id_token')); 
