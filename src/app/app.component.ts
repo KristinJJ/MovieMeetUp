@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   userID = 'no User ID entered';
   movieRankings = new Map();
   highestRank = 'no highest rank';
+  
 
   constructor(public apicall: ApicallService, private router: Router) {
   }

@@ -9,11 +9,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./topNav.component.css']
 })
 export class TopNavComponent implements OnInit {
-  loggedUser: boolean = false;
+  //loggedUser: boolean = false;
 
   constructor(private authGuard: AuthGuard, private authService: AuthService, private ref: ChangeDetectorRef) { }
 
-  checkLoggedInStatus(): boolean {
+  /* checkLoggedInStatus(): boolean {
     if (sessionStorage.getItem("hostID") !== null) {
       this.loggedUser = this.authService.isLoggedIn;
       this.ref.detectChanges();
@@ -21,15 +21,15 @@ export class TopNavComponent implements OnInit {
     console.log('topnav checking: ' + this.loggedUser);
     this.ref.detectChanges();
     return this.loggedUser;
-  }
+  } */
 
   ngOnInit(): void {
     //this.checkLoggedInStatus();
-    this.loggedUser = this.authService.isLoggedIn;
+    /* this.loggedUser = this.authService.isLoggedIn;
     console.log("topNav OnInit: loggedUser=" + this.loggedUser);
     this.checkLoggedInStatus();
     console.log("topNav ngOnit: checkLoggedInStatus: "+ this.loggedUser);
-    this.ref.detectChanges();
+    this.ref.detectChanges(); */
     
   }
   
