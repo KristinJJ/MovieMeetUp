@@ -9,16 +9,16 @@
       {{ finalRankings[0].title }}
     </div>
     <mat-card *ngIf="rankings" class="movie-card">
-      <div class="content" *ngIf="finalRankings">
+      <!--<div class="content" *ngIf="finalRankings">
         <app-movie-card [movie]="finalRankings[0]"> </app-movie-card>
-      </div>
-      <!--<div class="content">
+      </div>-->
+      <div class="content">
         <img
           mat-card-image
           src="{{ finalRankings[0].image }}"
           alt="Movie Poster for {{ finalRankings[0].title }}"
         />
-      </div>-->
+      </div>
     </mat-card>
   </div>
 </ng-container>
