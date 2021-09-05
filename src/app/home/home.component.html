@@ -1,4 +1,15 @@
+<app-topNav></app-topNav>
 <h1>Your Events</h1>
+<div class="logoutButton">
+  <a
+    href="https://auth.moviemeetup.com/logout?client_id=3can93q53vqr18qoidsi1g65l7&logout_uri={{
+      logoutURL
+    }}"
+    mat-raised-button
+    color="warn"
+    >LogOut</a
+  >
+</div>
 <a mat-raised-button color="primary" routerLink="/event">Build an Event</a>
 <h2>Click on a link below to go to your Events</h2>
 <div *ngFor="let event of movieEvents">

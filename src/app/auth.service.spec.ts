@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ApicallService } from './apicall.service';
+import { AuthService } from './auth.service';
 
-describe('ApicallService', () => {
-  let service: ApicallService;
+describe('AuthService', () => {
+  let service: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ApicallService);
+    service = TestBed.inject(AuthService);
   });
 
   it('should be created', () => {

@@ -4,6 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { MovieEvent } from '../event/event.component';
 import { RankingService } from '../ranking.service';
 import { environment } from 'src/environments/environment';
+import jwtDecode, { JwtPayload }  from "jwt-decode";
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
+
+
+export interface JwtPayloadCognito extends JwtPayload {
+  preferred_username: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -13,11 +22,19 @@ import { environment } from 'src/environments/environment';
 
 export class HomeComponent implements OnInit {
   movieEvents: MovieEvent[] = [];
-  constructor(public apicall: ApicallService, private rankingService: RankingService, private httpClient: HttpClient) { }
+  logoutURL= environment.logoutURL;
+
+  constructor(public apicall: ApicallService, private router: Router, private rankingService: RankingService, private httpClient: HttpClient, private route: ActivatedRoute) {
+    };
+
+    
 
   ngOnInit(): void {
-    this.rankingService.loadMovieEventsByHostID(environment.demoUserID);
+
+    console.log("session storage-host: "+ sessionStorage.getItem('hostID'));
+    this.rankingService.loadMovieEventsByHostID(String(sessionStorage.getItem('hostID')));
     this.movieEvents = this.rankingService.getMovieEvents();
+    
   }
 
 }
