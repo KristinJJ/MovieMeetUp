@@ -1,3 +1,13 @@
+.movie-card {
+  //padding: auto;
+  width: 250px;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
 img {
   max-height: 100%;
   max-width: 100%;
@@ -6,15 +16,6 @@ img {
   //overflow: hidden;
   object-fit: cover;
   object-position: bottom;
-}
-
-.movie-card {
-  //padding: auto;
-  width: 250px;
-  height: 370px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 //.content > mat-card {
@@ -36,7 +37,7 @@ mat-card.mat-elevation-z4 .selection {
   opacity: 0;
   cursor: pointer;
   color: #283593;
-  background: #fff;
+  background: white;
   position: absolute;
   right: -10px;
   top: -10px;
