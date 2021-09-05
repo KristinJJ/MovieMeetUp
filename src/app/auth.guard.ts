@@ -30,6 +30,7 @@ export class AuthGuard implements CanActivate {
     // for page refresh when logged in - AuthService wants to reset variables on a page refresh
     if (sessionStorage.getItem("hostID") !== null) {
       this.authService.isLoggedIn = true;
+      
     }
     console.log('checkLogin: isLoggedin=' + this.authService.isLoggedIn);
     if (this.authService.isLoggedIn) {
