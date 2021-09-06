@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:ci": "ng build --prod --sourceMap=false --base-href GroupMovieRecommender"
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
