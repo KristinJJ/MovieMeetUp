@@ -8,7 +8,8 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./intro.component.scss']
 })
 export class IntroComponent implements OnInit {
-  loginURL= environment.loginURL;
+  loginURL = https://moviemeetup.com/home
+  //loginURL= environment.loginURL;
 
   constructor(private authService: AuthService) { }
 
