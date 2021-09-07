@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Movies, MovieItem, PopMovies, PopMovieItem } from './movies';
+//import { MovieCardComponent } from "./movieCard/movieCard.component";
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,16 @@ export class EventService {
       }
     }
     console.log(this.movies);
+  }
+
+  resetMovieArray() {
+    /* for (let i = this.movies.length -1; i >= 0; --i) {
+      this.component.onSelectCard(this.movies[i]);
+    } */
+    this.movies.length = 0;
+    console.log("selected movies cleared");
+    return this.movies;
+    
   }
 
 }
