@@ -4,43 +4,46 @@
     <input matInput type="text" [(ngModel)]="hostID" />
   </mat-form-field>
 </p> -->
-<app-topNav></app-topNav>
-<p>Logged in HostID: {{ sessionhostID }}</p>
+<div class="fixedHead">
+  <app-topNav></app-topNav>
 
-<p>
-  <mat-form-field appearance="fill">
-    <mat-label>Enter Event Title</mat-label>
-    <input matInput type="text" [(ngModel)]="eventTitle" />
-    <!--<mat-error>{{ getErrorMessage() }}</mat-error>-->
-  </mat-form-field>
-</p>
+  <p>Logged in HostID: {{ sessionhostID }}</p>
 
-<mat-form-field appearance="fill">
-  <mat-label>Choose a Date</mat-label>
-  <input
-    matInput
-    [min]="minDate"
-    [matDatepicker]="picker"
-    (dateInput)="setDate($event)"
-  />
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
-
-<h3>Click on at least three Movies below to select them for your Event</h3>
-
-<h3 style="color: red">
-  {{ errormsg }}
-</h3>
-<div class="createBox">
   <p>
-    <button mat-raised-button color="primary" (click)="createEvent()">
-      Create Event
-    </button>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter Event Title</mat-label>
+      <input matInput type="text" [(ngModel)]="eventTitle" />
+      <!--<mat-error>{{ getErrorMessage() }}</mat-error>-->
+    </mat-form-field>
   </p>
-  <p *ngIf="confirmed" class="confirmation" style="color: green">
-    <strong>{{ confmsg }}</strong>
-  </p>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a Date</mat-label>
+    <input
+      matInput
+      [min]="minDate"
+      [matDatepicker]="picker"
+      (dateInput)="setDate($event)"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <h3>Click on at least three Movies below to select them for your Event</h3>
+
+  <h3 style="color: red">
+    {{ errormsg }}
+  </h3>
+  <div class="createBox">
+    <p>
+      <button mat-raised-button color="primary" (click)="createEvent()">
+        Create Event
+      </button>
+    </p>
+    <p *ngIf="confirmed" class="confirmation" style="color: green">
+      <strong>{{ confmsg }}</strong>
+    </p>
+  </div>
 </div>
 
 <!-- TABLE TO DISPLAY CREATED EVENTS -->
