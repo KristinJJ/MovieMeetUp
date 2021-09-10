@@ -59,7 +59,6 @@
             <ul *ngFor="let movie of viewing.eventMovies">
               <li>{{ movie.title }}</li>
             </ul>
-            <mat-divider></mat-divider>
           </td>
           <td *ngIf="viewing.eventRankings; else dispZero">
             {{ viewing.eventRankings?.length }}
