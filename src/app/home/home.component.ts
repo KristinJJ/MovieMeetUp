@@ -34,6 +34,8 @@ export class HomeComponent implements OnInit {
     console.log("session storage-host: "+ sessionStorage.getItem('hostID'));
     this.rankingService.loadMovieEventsByHostID(String(sessionStorage.getItem('hostID')));
     this.movieEvents = this.rankingService.getMovieEvents();
+
+    console.log("TEST: " + this.movieEvents);
     
     
   }
