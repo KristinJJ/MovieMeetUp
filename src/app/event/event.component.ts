@@ -138,7 +138,7 @@ export class EventComponent implements OnInit {
     this.eventDate = '';
     this.errormsg = '';
     this.date = new FormControl(new Date());
-    this.selectedMovies = [];
+    this.eventService.resetMovieArray();
     this.confmsg = `Your "${newEvent.eventTitle}" event has been created!`;
     this.confmessage();
     //return newEvent;

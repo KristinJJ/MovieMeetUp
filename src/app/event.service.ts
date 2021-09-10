@@ -31,6 +31,13 @@ export class EventService {
     console.log(this.movies);
   }
 
+  resetMovieArray() {
+    this.movies.length = 0;
+    console.log("selected movies cleared");
+    return this.movies;
+    
+  }
+
 }
 
 
