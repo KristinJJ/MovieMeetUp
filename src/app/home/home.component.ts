@@ -23,6 +23,7 @@ export interface JwtPayloadCognito extends JwtPayload {
 export class HomeComponent implements OnInit {
   movieEvents: MovieEvent[] = [];
   logoutURL= environment.logoutURL;
+  url = 'https://moviemeetup.com/ranking/';
 
   constructor(public apicall: ApicallService, private router: Router, private rankingService: RankingService, private httpClient: HttpClient, private route: ActivatedRoute) {
     };
@@ -35,7 +36,6 @@ export class HomeComponent implements OnInit {
     this.rankingService.loadMovieEventsByHostID(String(sessionStorage.getItem('hostID')));
     this.movieEvents = this.rankingService.getMovieEvents();
 
-    console.log("TEST: " + this.movieEvents);
     
     
   }
