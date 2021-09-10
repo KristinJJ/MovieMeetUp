@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    production: false
+    production: false,
+    imdbApiKey: "k_jr9zca59",
+    demoUserID: "DEMO",
+    loginURL: "http://localhost:4200/home",
+    logoutURL: "http://localhost:4200/intro"
 };
   
   /*
