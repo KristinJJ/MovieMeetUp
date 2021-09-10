@@ -5,6 +5,9 @@
   <h3>Top Selected Movie(s):</h3>
   <ng-container *ngIf="finalRankings">
     <div class="content">
+      <div *ngIf="topChoices.length > 1">
+        There is a {{ topChoices.length }}-way tie!
+      </div>
       <div class="cardHeader">
         {{ topChoices }}
         <!--{{ finalRankings[0].title }}-->
