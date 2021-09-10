@@ -34,7 +34,7 @@ jobs:
     needs: build
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@master
       - name: Download build
         uses: actions/download-artifact@v1
         with:
@@ -50,3 +50,12 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: 'us-west-2'   # optional: defaults to us-east-1
           SOURCE_DIR: 'deploy_dist/angular-test-app' 
+          
+      - name: Clear CloudFront Cache
+        uses: chetan/invalidate-cloudfront-action@master
+        env:
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+          PATHS: '/index.html'
+          AWS_REGION: 'us-east-2'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
