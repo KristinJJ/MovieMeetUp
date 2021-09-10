@@ -1,9 +1,9 @@
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body {
   font-family: Roboto, Arial, sans-serif;
   margin: 0;
-  padding: 30px;
+  padding: 0px 30px 30px 30px;
 }
 
 .version-info {
@@ -11,4 +11,3 @@ body {
   float: right;
   margin: 8px;
 }
-
