@@ -34,6 +34,7 @@ export class FinalRankingComponent implements OnInit {
   finalRanking = new Map();
   userRankings: RankUpdate[] = [];
   data: any;
+  tiedMovies: String[] = [];
 
   constructor(
     public apicall: ApicallService, 
@@ -72,6 +73,17 @@ export class FinalRankingComponent implements OnInit {
       if (this.movieEvent.id) {
         this.id = this.movieEvent.id;
         this.url = this.url + this.id;
+      }
+      this.checkPointTie();
+    }
+  }
+
+  checkPointTie() {
+    let max = this.finalRankings[0].points;
+    for (let finalRanking in this.finalRankings) {
+      if (max == this.finalRankings[finalRanking].points) {
+        this.tiedMovies.push(this.finalRankings[finalRanking].title);
+        console.log("tied movies: ", this.tiedMovies);
       }
     }
   }
