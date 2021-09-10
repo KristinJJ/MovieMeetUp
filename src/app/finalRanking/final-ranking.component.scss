@@ -1,25 +1,10 @@
+h1 {
+  padding-bottom: 10px;
+}
+
 h3 {
   text-align: center;
-}
-
-.cardHeader {
-  text-align: center;
-  margin: 16px;
-  font-size: medium;
-  font-weight: bold;
-  padding: 20px;
-  overflow-wrap: normal;
-}
-
-.movie-card {
-  //padding: auto;
-  width: 250px;
-  height: 450px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f5f5f5;
-  margin: auto;
+  padding-top: 20px;
 }
 
 img {
@@ -35,6 +20,33 @@ img {
 table {
   margin-left: auto;
   margin-right: auto;
+}
+
+.cardHeader {
+  text-align: center;
+  margin: 16px;
+  font-size: medium;
+  font-weight: bold;
+  padding: 20px;
+  overflow-wrap: normal;
+}
+
+.container {
+  display: block;
+  text-align: center;
+  margin: auto;
+  max-width: 500px;
+}
+
+.movie-card {
+  //padding: auto;
+  width: 250px;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  margin: auto;
 }
 
 .points {

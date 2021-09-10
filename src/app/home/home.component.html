@@ -1,6 +1,5 @@
 <app-topNav></app-topNav>
-<h1>Your Events</h1>
-<div class="logoutButton">
+<!--<div class="logoutButton">
   <a
     href="https://auth.moviemeetup.com/logout?client_id=3can93q53vqr18qoidsi1g65l7&logout_uri={{
       logoutURL
@@ -9,44 +8,78 @@
     color="warn"
     >LogOut</a
   >
-</div>
-<a mat-raised-button color="primary" routerLink="/event">Build an Event</a>
-<h2>Click on a link below to go to your Events</h2>
-<div *ngFor="let event of movieEvents">
-  <a mat-raised-button color="warn" [routerLink]="['/ranking', event.id]">{{
-    event.eventTitle
-  }}</a>
-</div>
+</div>-->
+<div class="body">
+  <h1>Your Events</h1>
+  <a mat-raised-button color="primary" routerLink="/event">Build an Event</a>
+  <h2>Click on a link below to go to your Events</h2>
+  <!-- <div *ngFor="let event of movieEvents">
+    <a mat-raised-button color="warn" [routerLink]="['/ranking', event.id]">{{
+      event.eventTitle
+    }}</a>
+  </div>
 
-<div *ngFor="let event of movieEvents">
-  <a
-    mat-raised-button
-    color="accent"
-    [routerLink]="['/finalranking', event.id]"
-    >{{ event.eventTitle }}</a
-  >
-</div>
+  <div *ngFor="let event of movieEvents">
+    <a
+      mat-raised-button
+      color="accent"
+      [routerLink]="['/finalranking', event.id]"
+      >{{ event.eventTitle }}</a
+    >
+  </div> -->
 
-<!-- TABLE TO DISPLAY CREATED EVENTS -->
-<!-- <div class="col-md-12">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th scope="col">Event Name</th>
-        <th scope="col">Date</th>
-        <th scope="col">Movies</th>
-        <th scope="col">Votes Submitted</th>
-        <th scope="col">Voters</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let viewing of movieEvents">
-        <td>{{ viewing.eventTitle }}</td>
-        <td>{{ viewing.eventDate }}</td>
-        <td>{{ viewing.eventMovies }}</td>
-        <td>{{ viewing.eventRankings?.length }}</td>
-        <td>{{ viewing.eventRankings?.UserRankings?.userID }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div> -->
+  <!-- TABLE TO DISPLAY CREATED EVENTS -->
+  <div class="col-md-12">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <!-- <th scope="col">Event ID</th> -->
+          <th scope="col">Event Name</th>
+          <th scope="col">Date</th>
+          <th scope="col">Movies</th>
+          <th scope="col">Votes Submitted</th>
+          <th scope="col">Invite Guests</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let viewing of movieEvents">
+          <!-- <td>{{ viewing.id }}</td> -->
+          <td>
+            <a
+              mat-raised-button
+              color="warn"
+              [routerLink]="['/ranking', viewing.id]"
+              >{{ viewing.eventTitle }}</a
+            >
+          </td>
+          <td>{{ viewing.eventDate }}</td>
+          <td>
+            <ul *ngFor="let movie of viewing.eventMovies">
+              <li>{{ movie.title }}</li>
+            </ul>
+            <mat-divider></mat-divider>
+          </td>
+          <td *ngIf="viewing.eventRankings; else dispZero">
+            {{ viewing.eventRankings?.length }}
+          </td>
+          <ng-template #dispZero>0</ng-template>
+          <td>
+            <a
+              mat-raised-button
+              color="accent"
+              href="mailto:?subject=Vote%20for%20which%20movie%20to%20watch%20for%20'{{
+                viewing.eventTitle
+              }}'&body=Before%20{{
+                viewing.eventDate
+              }},%20rank%20the%20movies%20at:%0A%0A{{ this.url }}{{
+                viewing.id
+              }}%0A%0AThanks!"
+            >
+              email
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
