@@ -1,45 +1,47 @@
-<h1>Event Title: {{ eventTitle }}</h1>
-<h2>Event Date: {{ eventDate }}</h2>
+<div class="container">
+  <h1>{{ eventTitle }} on {{ eventDate }}</h1>
+  <!--<h2>{{ eventDate }}</h2>-->
 
-<h3>The Top Selected Movie Is...</h3>
-
-<ng-container *ngIf="finalRankings">
-  <div class="content">
-    <div class="cardHeader">
-      {{ finalRankings[0].title }}
-    </div>
-    <mat-card *ngIf="rankings" class="movie-card">
-      <!--<div class="content" *ngIf="finalRankings">
-        <app-movie-card [movie]="finalRankings[0]"> </app-movie-card>
-      </div>-->
-      <div class="content">
-        <img
-          mat-card-image
-          src="{{ finalRankings[0].image }}"
-          alt="Movie Poster for {{ finalRankings[0].title }}"
-        />
+  <h3>Top Selected Movie(s):</h3>
+  <ng-container *ngIf="finalRankings">
+    <div class="content">
+      <div class="cardHeader">
+        {{ topChoices }}
+        <!--{{ finalRankings[0].title }}-->
       </div>
-    </mat-card>
-  </div>
-</ng-container>
+      <mat-card *ngIf="rankings" class="movie-card">
+        <!--<div class="content" *ngIf="finalRankings">
+          <app-movie-card [movie]="finalRankings[0]"> </app-movie-card>
+        </div>-->
+        <div class="content">
+          <img
+            mat-card-image
+            src="{{ finalRankings[0].image }}"
+            alt="Movie Poster for {{ finalRankings[0].title }}"
+          />
+        </div>
+      </mat-card>
+    </div>
+  </ng-container>
 
-<h3>Final Rankings:</h3>
-<div class="col-md-12">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th scope="col">Movie Title</th>
-        <th scope="col">Points</th>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngIf="rankings">
-        <tr *ngFor="let movie of finalRankings; let i = index">
-          <td>{{ movie.title }}</td>
-          <td class="points">{{ movie.points }}</td>
+  <h3>Final Rankings:</h3>
+  <div class="col-md-12">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Movie Title</th>
+          <th scope="col">Points</th>
         </tr>
-      </ng-container>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="rankings">
+          <tr *ngFor="let movie of finalRankings; let i = index">
+            <td>{{ movie.title }}</td>
+            <td class="points">{{ movie.points }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
 </div>
 
