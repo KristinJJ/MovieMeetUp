@@ -86,3 +86,10 @@ mat-datepicker-toggle {
     font-size: x-small;
   }
 }
+
+@media only screen and (min-width: 900px) {
+  .desktop {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}

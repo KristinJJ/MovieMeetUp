@@ -10,25 +10,27 @@
 <div class="fixedHead">
   <p>Logged in HostID: {{ sessionhostID }}</p>
 
-  <p>
-    <mat-form-field appearance="fill">
-      <mat-label>Enter Event Title</mat-label>
-      <input matInput type="text" [(ngModel)]="eventTitle" />
-      <!--<mat-error>{{ getErrorMessage() }}</mat-error>-->
-    </mat-form-field>
-  </p>
+  <div class="desktop">
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter Event Title</mat-label>
+        <input matInput type="text" [(ngModel)]="eventTitle" />
+        <!--<mat-error>{{ getErrorMessage() }}</mat-error>-->
+      </mat-form-field>
+    </p>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Choose a Date</mat-label>
-    <input
-      matInput
-      [min]="minDate"
-      [matDatepicker]="picker"
-      (dateInput)="setDate($event)"
-    />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a Date</mat-label>
+      <input
+        matInput
+        [min]="minDate"
+        [matDatepicker]="picker"
+        (dateInput)="setDate($event)"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
 
   <h3>Click on at least three Movies below to select them for your Event</h3>
 
