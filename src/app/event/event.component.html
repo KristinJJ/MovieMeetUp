@@ -4,9 +4,10 @@
     <input matInput type="text" [(ngModel)]="hostID" />
   </mat-form-field>
 </p> -->
-<div class="fixedHead">
+<div class="fixedNav">
   <app-topNav></app-topNav>
-
+</div>
+<div class="fixedHead">
   <p>Logged in HostID: {{ sessionhostID }}</p>
 
   <p>
@@ -51,20 +52,20 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th scope="col">Host ID</th>
         <th scope="col">Event Name</th>
         <th scope="col">Date</th>
         <th scope="col">Movies Selected</th>
+        <th scope="col">Votes Returned</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let viewing of events | keyvalue">
-        <td>{{ viewing.value.hostID }}</td>
         <td>{{ viewing.value.eventTitle }}</td>
         <td>{{ viewing.value.eventDate }}</td>
         <h2 *ngFor="let selectedMovie of viewing.value.selectedMovies">
           <h4>{{ selectedMovie.title }}</h4>
         </h2>
+        
         <mat-divider></mat-divider>
       </tr>
     </tbody>
@@ -76,7 +77,7 @@
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
     <div class="content" *ngFor="let movie of eventMovies">
       <app-movie-card [movie]="movie"> </app-movie-card>
-      <div>{{ movie.title }}</div>
+      <div class="movieTitle">{{ movie.title }}</div>
     </div>
   </div>
 </div>

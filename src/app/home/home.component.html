@@ -28,24 +28,25 @@
 </div>
 
 <!-- TABLE TO DISPLAY CREATED EVENTS -->
-<!--<div class="col-md-12">
+<!-- <div class="col-md-12">
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th scope="col">Event ID</th>
-        <th scope="col">Host ID</th>
         <th scope="col">Event Name</th>
         <th scope="col">Date</th>
+        <th scope="col">Movies</th>
+        <th scope="col">Votes Submitted</th>
+        <th scope="col">Voters</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let viewing of movieEvents">
-        <td>{{ viewing.id}}</td>
-        <td>{{ viewing.hostID}}</td>
         <td>{{ viewing.eventTitle }}</td>
         <td>{{ viewing.eventDate }}</td>
-        </td>
+        <td>{{ viewing.eventMovies }}</td>
+        <td>{{ viewing.eventRankings?.length }}</td>
+        <td>{{ viewing.eventRankings?.UserRankings?.userID }}</td>
       </tr>
     </tbody>
   </table>
-</div>-->
+</div> -->

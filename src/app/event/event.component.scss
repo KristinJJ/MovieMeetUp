@@ -1,16 +1,40 @@
 mat-toolbar {
   justify-content: space-between;
+  padding-top: 0px;
+}
+* {
+  justify-content: center;
+  text-align: center;
 }
 
 body {
-  padding-top: 0px;
+  padding: 0em 1em;
+}
+
+app-topnav {
+  justify-content: left;
+}
+
+mat-datepicker-toggle {
+  z-index: 9999;
+}
+
+.fixedNav {
+  position: sticky;
+  top: 0;
+  padding-top: 15px;
+  margin: 0em -1.5em auto;
+  background-color: white;
+  z-index: 1;
+  text-align: left;
 }
 
 .fixedHead {
   position: sticky;
-  top: 0;
-  margin: 0 auto;
-  z-index: 9999;
+  top: 40px;
+  margin: 0em -1.5em auto;
+  z-index: 1;
+  padding-top: 5px;
   background-color: white;
   border-bottom: 1px solid blue;
 }
@@ -42,8 +66,23 @@ body {
 }
 
 .movieTitle {
-  font-size: medium;
+  font-size: smaller;
   font-weight: bold;
-  padding: 20px;
+  padding: 10px 0px;
   word-wrap: normal;
+}
+
+@media only screen and (max-width: 600px) {
+  .movie-card {
+    //padding: auto;
+    width: 125px;
+    height: 225px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .movieTitle {
+    font-size: x-small;
+  }
 }
