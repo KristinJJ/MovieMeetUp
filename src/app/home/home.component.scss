@@ -1,5 +1,28 @@
+.nav {
+  padding-top: 15px;
+  margin: 0em -1.5em auto;
+}
+
+h1 {
+  padding-top: 1em;
+}
+
+h2 {
+  padding: 30px;
+}
+
+.body {
+  display: block;
+  text-align: center;
+  margin: auto;
+  max-width: 800px;
+}
+
 .logoutButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  //display: flex;
+  //justify-content: right;
+  //align-items: right;
 }

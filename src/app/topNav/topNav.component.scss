@@ -1,0 +1,19 @@
+
+
+.flex-container {
+    width: 100%;
+    height: 150px;
+    //position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-item {
+    width: 100px;
+}
+
+.logoutButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }

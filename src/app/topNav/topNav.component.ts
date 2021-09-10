@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { AuthGuard } from '../auth.guard';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-topNav',
@@ -10,6 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class TopNavComponent implements OnInit {
   //loggedUser: boolean = false;
+  logoutURL= environment.logoutURL;
 
   constructor(private authGuard: AuthGuard, private authService: AuthService, private ref: ChangeDetectorRef) { }
 
