@@ -171,47 +171,4 @@ export class IterablePipe implements PipeTransform {
   }
 }
 
-// methods needed:
-  // create new event (constructor)
-      // creates event with an id and date (date picker?) required.
 
-  // search for movies
-      // moves to searching for movies to add.
-          // would need to have add button for each movie object in table
-              // add button would add movie to eventMovie array
-  // add invitees to invitees
-  // find existing event
-  // update existing event
-  // update movieRankings (when invitee does their ranking)
-
-
-// Event JSON
-  /* "eventID": "string",
-	"eventDate": "string",
-	"movies": [
-		{
-			"movieID": "string",
-			"image": "string",
-			"title": "string",
-			"description": "string"
-		}
-	],
-	"invitees": [
-		{
-			"userID": "string",
-			"firstName": "string",
-			"lastName": "string",
-			"email": "string",
-			"rankDone": "boolean"
-		}
-	],
-	"rankings": [
-		{
-			"userID": "string",
-			"rankedMovies": {
-				"movieID": "string",
-				"title": "string",
-				"score": "number"
-			}
-		}
-	] */
