@@ -1,10 +1,13 @@
 <div class="container">
-  <h1>{{ eventTitle }} on {{ eventDate }}</h1>
-  <!--<h2>{{ eventDate }}</h2>-->
+  <h1>Event Title: {{ eventTitle }}</h1>
+  <h2>Event Date: {{ eventDate }}</h2>
 
   <h3>Top Selected Movie(s):</h3>
   <ng-container *ngIf="finalRankings">
     <div class="content">
+      <div *ngIf="finalRankings.length == 0"> 
+        No rankings submitted. Submit at least one ranking to see the final selection!
+      </div>
       <div *ngIf="topChoices.length > 1">
         There is a {{ topChoices.length }}-way tie!
       </div>
@@ -16,7 +19,7 @@
         <!--<div class="content" *ngIf="finalRankings">
           <app-movie-card [movie]="finalRankings[0]"> </app-movie-card>
         </div>-->
-        <div class="content">
+        <div *ngIf="finalRankings.length > 0" class="content">
           <img
             mat-card-image
             src="{{ finalRankings[0].image }}"
@@ -27,8 +30,8 @@
     </div>
   </ng-container>
 
-  <h3>Final Rankings:</h3>
-  <div class="col-md-12">
+  <h3 *ngIf="finalRankings.length > 0">Final Rankings:</h3>
+  <div *ngIf="finalRankings.length > 0" class="col-md-12">
     <table class="table table-bordered">
       <thead>
         <tr>

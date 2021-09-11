@@ -74,7 +74,10 @@ export class FinalRankingComponent implements OnInit {
         this.id = this.movieEvent.id;
         this.url = this.url + this.id;
       }
-      this.checkPointTie();
+
+      if (this.movieEvent.eventRankings != undefined) {
+        this.checkPointTie();
+      } 
     }
   }
 
