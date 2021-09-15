@@ -21,12 +21,12 @@ There are endless badges that you could use in your projects. And they do depend
 I use [**Shields IO**](https://shields.io/) for making badges. It is a simple and easy to use tool that you can use for almost all your badge cravings. -->
 
 <!-- Some badges that you could use -->
-![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/KristinJJ/GroupMovieRecommender?include_prereleases)
-![GitHub last commit](https://img.shields.io/github/last-commit/KristinJJ/GroupMovieRecommender)
-![GitHub issues](https://img.shields.io/github/issues-raw/KristinJJ/GroupMovieRecommender)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/KristinJJ/GroupMovieRecommender)
-![GitHub All Releases](https://img.shields.io/github/downloads/KristinJJ/GroupMovieRecommender/total)
-![GitHub](https://img.shields.io/github/license/KristinJJ/GroupMovieRecommender)
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/KristinJJ/MovieMeetUp?include_prereleases)
+![GitHub last commit](https://img.shields.io/github/last-commit/KristinJJ/MovieMeetUp)
+![GitHub issues](https://img.shields.io/github/issues-raw/KristinJJ/MovieMeetUp)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/KristinJJ/MovieMeetUp)
+![GitHub All Releases](https://img.shields.io/github/downloads/KristinJJ/MovieMeetUp/total)
+![GitHub](https://img.shields.io/github/license/KristinJJ/MovieMeetUp)
 
 <!-- ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/navendu-pottekkat/awesome-readme?include_prereleases)
 : This badge shows the version of the current release.
@@ -95,7 +95,7 @@ To use this project, first clone the repo on your device using the command below
 
 ```git init```
 
-```git clone https://github.com/KristinJJ/GroupMovieRecommender.git``` -->
+```git clone https://github.com/KristinJJ/MovieMeetUp.git``` -->
 
 ```sh
 npm install
@@ -152,7 +152,7 @@ Personally and by standard, you should use a [issue template](https://github.com
 
 You could also add contact details for people to get in touch with you regarding your project. -->
 Contributions, issues and feature requests are welcome.
-Feel free to check [issues](https://github.com/KristinJJ/GroupMovieRecommender/issues) page if you want to contribute.
+Feel free to check [issues](https://github.com/KristinJJ/MovieMeetUp/issues) page if you want to contribute.
 
 Contact us: MovieMeetupApp@gmail.com
 
