@@ -25,7 +25,6 @@ I use [**Shields IO**](https://shields.io/) for making badges. It is a simple an
 ![GitHub last commit](https://img.shields.io/github/last-commit/KristinJJ/MovieMeetUp)
 ![GitHub issues](https://img.shields.io/github/issues-raw/KristinJJ/MovieMeetUp)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/KristinJJ/MovieMeetUp)
-![GitHub All Releases](https://img.shields.io/github/downloads/KristinJJ/MovieMeetUp/total)
 ![GitHub](https://img.shields.io/github/license/KristinJJ/MovieMeetUp)
 
 <!-- ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/navendu-pottekkat/awesome-readme?include_prereleases)
