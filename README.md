@@ -30,41 +30,33 @@
 </p>
 
 ## Table of contents
-- [Table of contents](#table-of-contents)
 - [About The Project](#about-the-project)
 - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
 - [Usage](#usage)
 - [Contribute](#contribute)
-    - [Support](#support)
+    - [Sponsor](#sponsor)
     - [Adding new features or fixing bugs](#adding-new-features-or-fixing-bugs)
 - [License](#license)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
 
 ## About The Project
-[(Back to top)](#table-of-contents)
+<img width="778" alt="Screen Shot 2021-09-15 at 6 20 25 AM" src="https://user-images.githubusercontent.com/26866132/133440917-4157bfe2-1c26-41fe-a73d-7c5cdb9c183e.png">
 
-<img width="836" alt="Screen Shot 2021-09-15 at 5 49 19 AM" src="https://user-images.githubusercontent.com/26866132/133436497-2ff7f4cc-1f58-4005-bbcc-cc2fedb8ea4d.png">
 
 * Describe the project here
 
 ### Built With
-[(Back to top)](#table-of-contents)
-
 * [Angular](https://angular.io/)
 * [Angular Material](https://material.angular.io/)
 * [AWS](https://aws.amazon.com/)
 
 ## Getting Started
-[(Back to top)](#table-of-contents)
-
 To get a local copy up and running follow these simple steps:
 
 ### Prerequisites
-[(Back to top)](#table-of-contents)
-
 * [Install Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm)
 * npm
   ```sh
@@ -72,8 +64,6 @@ To get a local copy up and running follow these simple steps:
   ```
 
 ### Installation
-[(Back to top)](#table-of-contents)
-
 1. Get a free API Key at https://imdb-api.com/
 2. Clone the repo
    ```sh
@@ -92,43 +82,25 @@ To get a local copy up and running follow these simple steps:
 7. CloudFormation stuff goes here
 
 ## Usage
-[(Back to top)](#table-of-contents)
+<img width="836" alt="Screen Shot 2021-09-15 at 5 49 19 AM" src="https://user-images.githubusercontent.com/26866132/133441000-45466212-9ce6-467e-a468-e2f5220f119c.png">
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 ## Contribute
-[(Back to top)](#table-of-contents)
 
-<!-- This is where you can let people know how they can **contribute** to your project. Some of the ways are given below.
-
-Also this shows how you can add subsections within a section. -->
-
-### Support
-[(Back to top)](#table-of-contents)
-
-<!-- Your project is gaining traction and it is being used by thousands of people(***with this README there will be even more***). Now it would be a good time to look for people or organisations to sponsor your project. This could be because you are not generating any revenue from your project and you require money for keeping the project alive.
-
-You could add how people can sponsor your project in this section. Add your patreon or GitHub sponsor link here for easy access.
-
-A good idea is to also display the sponsors with their organisation logos or badges to show them your love!(*Someday I will get a sponsor and I can show my love*) -->
+### Sponsor
 Please ⭐️ this repository if this project helped you!
 
 <a href="https://www.buymeacoffee.com/moviemeetup" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 ### Adding new features or fixing bugs
-[(Back to top)](#table-of-contents)
-
 Contributions, issues and feature requests are welcome.
 Feel free to check [issues](https://github.com/KristinJJ/MovieMeetUp/issues) page if you want to contribute.
 
 ## License
-[(Back to top)](#table-of-contents)
-
 [GNU General Public License version 3](https://opensource.org/licenses/GPL-3.0)
 
 ## Contact
-[(Back to top)](#table-of-contents)
-
 * Project Email: MovieMeetupApp@gmail.com
 * Project Link: https://github.com/KristinJJ/MovieMeetUp
 * Github or LinkedIn links?
