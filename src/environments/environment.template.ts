@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  imdbApiKey: /*YOUR-IMDB-API-KEY-HERE*/, //insert your own IMDb-API key from https://imdb-api.com/
+  imdbApiKey: 'ENTER-YOUR-IMDB-API-KEY-HERE', //insert your own IMDb-API key from https://imdb-api.com/
   demoUserID: "DEMO",
   loginURL: "http://localhost:4200/home",
   logoutURL: "http://localhost:4200/intro"
