@@ -29,7 +29,7 @@
   </p>
 </p>
 
-# Table of contents
+## Table of contents
 - [Table of contents](#table-of-contents)
 - [About The Project](#about-the-project)
 - [Getting Started](#getting-started)
@@ -43,26 +43,26 @@
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
 
-# About The Project
+## About The Project
 [(Back to top)](#table-of-contents)
 
 <img width="836" alt="Screen Shot 2021-09-15 at 5 49 19 AM" src="https://user-images.githubusercontent.com/26866132/133436497-2ff7f4cc-1f58-4005-bbcc-cc2fedb8ea4d.png">
 
 * Describe the project here
 
-## Built With
+### Built With
 [(Back to top)](#table-of-contents)
 
 * [Angular](https://angular.io/)
 * [Angular Material](https://material.angular.io/)
 * [AWS](https://aws.amazon.com/)
 
-# Getting Started
+## Getting Started
 [(Back to top)](#table-of-contents)
 
 To get a local copy up and running follow these simple steps:
 
-## Prerequisites
+### Prerequisites
 [(Back to top)](#table-of-contents)
 
 * [Install Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm)
@@ -71,7 +71,7 @@ To get a local copy up and running follow these simple steps:
   npm install npm@latest -g
   ```
 
-## Installation
+### Installation
 [(Back to top)](#table-of-contents)
 
 1. Get a free API Key at https://imdb-api.com/
@@ -91,19 +91,19 @@ To get a local copy up and running follow these simple steps:
 6. AWS Credentials stuff goes here
 7. CloudFormation stuff goes here
 
-# Usage
+## Usage
 [(Back to top)](#table-of-contents)
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-# Contribute
+## Contribute
 [(Back to top)](#table-of-contents)
 
 <!-- This is where you can let people know how they can **contribute** to your project. Some of the ways are given below.
 
 Also this shows how you can add subsections within a section. -->
 
-## Support
+### Support
 [(Back to top)](#table-of-contents)
 
 <!-- Your project is gaining traction and it is being used by thousands of people(***with this README there will be even more***). Now it would be a good time to look for people or organisations to sponsor your project. This could be because you are not generating any revenue from your project and you require money for keeping the project alive.
@@ -115,25 +115,25 @@ Please ⭐️ this repository if this project helped you!
 
 <a href="https://www.buymeacoffee.com/moviemeetup" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
-## Adding new features or fixing bugs
+### Adding new features or fixing bugs
 [(Back to top)](#table-of-contents)
 
 Contributions, issues and feature requests are welcome.
 Feel free to check [issues](https://github.com/KristinJJ/MovieMeetUp/issues) page if you want to contribute.
 
-# License
+## License
 [(Back to top)](#table-of-contents)
 
 [GNU General Public License version 3](https://opensource.org/licenses/GPL-3.0)
 
-# Contact
+## Contact
 [(Back to top)](#table-of-contents)
 
 * Project Email: MovieMeetupApp@gmail.com
 * Project Link: https://github.com/KristinJJ/MovieMeetUp
 * Github or LinkedIn links?
 
-# Acknowledgements
+## Acknowledgements
 * [CodeDay Labs 2021](https://labs.codeday.org/)
 * Mentor - Richard Harrington, Senior IT Manager at T-Mobile
 
