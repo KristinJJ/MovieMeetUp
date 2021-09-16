@@ -16,7 +16,7 @@
   <h3 align="center">Movie MeetUp</h3>
 
   <p align="center">
-    Movie Meetup, a mobile responsive website application to help groups of people determine which movie they would like to see
+    Movie Meetup, to help groups of people determine which movie they would like to see
     <br />
     <!--<a href="https://github.com/KristinJJ/MovieMeetUp"><strong>Explore the docs »</strong></a>-->
     <br />
@@ -34,7 +34,7 @@
 - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
-- [Usage](#usage)
+<!-- - [Usage](#usage)-->
 - [Contribute](#contribute)
     - [Sponsor](#sponsor)
     - [Adding new features or fixing bugs](#adding-new-features-or-fixing-bugs)
@@ -46,7 +46,7 @@
 <img width="778" alt="Screen Shot 2021-09-15 at 6 20 25 AM" src="https://user-images.githubusercontent.com/26866132/133440917-4157bfe2-1c26-41fe-a73d-7c5cdb9c183e.png">
 
 
-* Describe the project here
+* Created for the CodeDay Labs 2021 Advanced Track under the mentorship of Richard Harrington, a mobile responsive website application built with an Angular Frontend and an AWS backend to help users decide which movie they would all like to watch.
 
 ### Built With
 * [Angular](https://angular.io/)
@@ -78,13 +78,12 @@ To get a local copy up and running follow these simple steps:
    ```sh
    imdbApiKey: 'ENTER-YOUR-IMDB-API-KEY-HERE'
    ```
-6. AWS Credentials stuff goes here
-7. CloudFormation stuff goes here
+6. !!! CloudFormation for AWS backend under construction !!!
 
-## Usage
-<img width="836" alt="Screen Shot 2021-09-15 at 5 49 19 AM" src="https://user-images.githubusercontent.com/26866132/133441000-45466212-9ce6-467e-a468-e2f5220f119c.png">
+<!--## Usage
+<img width="836" alt="Screen Shot 2021-09-15 at 5 49 19 AM" src="https://user-images.githubusercontent.com/26866132/133441000-45466212-9ce6-467e-a468-e2f5220f119c.png">-->
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+<!--Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.-->
 
 ## Contribute
 
@@ -103,7 +102,7 @@ Feel free to check [issues](https://github.com/KristinJJ/MovieMeetUp/issues) pag
 ## Contact
 * Project Email: MovieMeetupApp@gmail.com
 * Project Link: https://github.com/KristinJJ/MovieMeetUp
-* Github or LinkedIn links?
+<!--* Github or LinkedIn links?-->
 
 ## Acknowledgements
 * [CodeDay Labs 2021](https://labs.codeday.org/)
