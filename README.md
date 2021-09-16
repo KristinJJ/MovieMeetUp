@@ -34,7 +34,7 @@
 - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
-<!-- - [Usage](#usage)-->
+    <!-- - [Usage](#usage)-->
 - [Contribute](#contribute)
     - [Sponsor](#sponsor)
     - [Adding new features or fixing bugs](#adding-new-features-or-fixing-bugs)
@@ -47,6 +47,7 @@
 
 
 * Created for the CodeDay Labs 2021 Advanced Track under the mentorship of Richard Harrington, a mobile responsive website application built with an Angular Frontend and an AWS backend to help users decide which movie they would all like to watch.
+* [CodeDay Labs Showcase](https://codeday.sh/moviemeetup)
 
 ### Built With
 * [Angular](https://angular.io/)
@@ -101,8 +102,9 @@ Feel free to check [issues](https://github.com/KristinJJ/MovieMeetUp/issues) pag
 
 ## Contact
 * Project Email: MovieMeetupApp@gmail.com
-* Project Link: https://github.com/KristinJJ/MovieMeetUp
-<!--* Github or LinkedIn links?-->
+* LinkedIn
+  - [Mike Gilson](https://www.linkedin.com/in/mikegilsonsoftdev/)
+  - [Kristin Jue](https://www.linkedin.com/in/kristinjue/)
 
 ## Acknowledgements
 * [CodeDay Labs 2021](https://labs.codeday.org/)
