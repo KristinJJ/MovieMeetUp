@@ -46,7 +46,7 @@
 <img width="778" alt="Screen Shot 2021-09-15 at 6 20 25 AM" src="https://user-images.githubusercontent.com/26866132/133440917-4157bfe2-1c26-41fe-a73d-7c5cdb9c183e.png">
 
 
-* Created for the CodeDay Labs 2021 Advanced Track under the mentorship of Richard Harrington, a mobile responsive website application built with an Angular Frontend and an AWS backend to help users decide which movie they would all like to watch.
+* Created for the CodeDay Labs 2021 Advanced Track under the mentorship of Richard Harrington, a responsive website application built with an Angular Frontend and an AWS backend to help users decide which movie they would all like to watch.
 * [CodeDay Labs Showcase](https://codeday.sh/moviemeetup)
 
 ### Built With
