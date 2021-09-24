@@ -91,7 +91,7 @@ To get a local copy up and running follow these simple steps:
 ### Sponsor
 Please ⭐️ this repository if this project helped you!
 
-<a href="https://www.buymeacoffee.com/moviemeetup" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+<a href="https://www.buymeacoffee.com/kayotexesu" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 ### Adding new features or fixing bugs
 Contributions, issues and feature requests are welcome.
