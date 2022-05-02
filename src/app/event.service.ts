@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Movies, MovieItem, PopMovies, PopMovieItem } from './movies';
+import { Movies, MovieItem, PopMovies, PopMovieItem, EWMovies, EWMovieItem } from './movies';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  movies: PopMovieItem[] = [];
+  movies: EWMovieItem[] = [];
   constructor(private http: HttpClient) {}
 
   getNumSelected() {
@@ -17,14 +17,14 @@ export class EventService {
     return this.movies;
   }
 
-  addMovieToEvent(popMovieItem: PopMovieItem) {
-    this.movies.push(popMovieItem);
+  addMovieToEvent(ewMovieItem: EWMovieItem) {
+    this.movies.push(ewMovieItem);
     console.log(this.movies);
   }
 
-  removeMovieFromEvent(popMovieItem: PopMovieItem) {
+  removeMovieFromEvent(ewMovieItem: EWMovieItem) {
     for (let i = this.movies.length - 1; i >= 0; --i) {
-      if (this.movies[i] == popMovieItem) {
+      if (this.movies[i] == ewMovieItem) {
         this.movies.splice(i,1);
       }
     }

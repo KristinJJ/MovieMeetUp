@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Movies, MovieItem, PopMovies, PopMovieItem } from './movies';
+import { Movies, MovieItem, PopMovies, PopMovieItem, EWMovies, EWMovieItem } from './movies';
 //import * as Rx from "rxjs/Rx";
 import { from, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { RankUpdate } from '../app/ranking/ranking.component';
 interface ItemsResponse {
   movies: Array<Movies>;
   popMovies: Array<PopMovies>;
+  ewMovies: Array<EWMovies>;
 }
 
 // TODO: securely save API Key as variable to include in api calls
@@ -46,6 +47,18 @@ export class ApicallService {
         map((data) => {
           console.log(data);
           console.log("getPopMovies() data.Items: " + data.Items);
+          return data.Items ?? [];
+        })
+      )
+  }
+
+  // Get EW Movie info from the API
+  getEWMovies() : Observable<EWMovieItem[]> {
+    return this.http.get<EWMovies>('https://easyware.webaissance.com/feeds/CircleCinema/parsefeed.php?key=8^h7B%gt5bn(Q').
+      pipe(
+        map((data) => {
+          console.log(data);
+          console.log("getEWMovies() data.Items: " + data.Items);
           return data.Items ?? [];
         })
       )
