@@ -60,8 +60,8 @@ export class ApicallService {
       /* .set("Content-Type", "application/xml")
       .set('Access-Control-Allow-Origin', '*')
       .set("Access-Control-Allow-Methods", "OPTIONS,POST,PUT,GET"); */
-      options.append('Origin','http://localhost:4200')
-      .append("Accept", "appliction/xml")
+      options.set('Origin','http://localhost:4200')
+      .append("Accept", "application/xml")
       .append("Content-Type", "application/xml")
       .append('Access-Control-Allow-Origin', '*')
       .append("Access-Control-Allow-Methods", "OPTIONS,POST,PUT,GET")

@@ -28,5 +28,6 @@ import { Put } from 'aws-sdk/clients/dynamodb';
             const IdAuthToken = String(sessionStorage.getItem('id_token'));
             console.log('Interceptor: setting auth header');
         return next.handle(httpRequest.clone({ setHeaders: { 'Authorization': IdAuthToken } }));
+        /*return next.handle(httpRequest.clone({ setHeaders: { "Content-Type": "text/plain"} }));*/
   } 
 }
