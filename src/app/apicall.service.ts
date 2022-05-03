@@ -54,7 +54,19 @@ export class ApicallService {
 
   // Get EW Movie info from the API
   getEWMovies() : Observable<EWMovieItem[]> {
-    return this.http.get<EWMovies>('https://easyware.webaissance.com/feeds/CircleCinema/parsefeed.php?key=8^h7B%gt5bn(Q').
+    const options = new HttpHeaders()
+      //.set('Origin','http://localhost:4200')
+      //.set("Accept", "appliction/xml")
+      /* .set("Content-Type", "application/xml")
+      .set('Access-Control-Allow-Origin', '*')
+      .set("Access-Control-Allow-Methods", "OPTIONS,POST,PUT,GET"); */
+      options.append('Origin','http://localhost:4200')
+      .append("Accept", "appliction/xml")
+      .append("Content-Type", "application/xml")
+      .append('Access-Control-Allow-Origin', '*')
+      .append("Access-Control-Allow-Methods", "OPTIONS,POST,PUT,GET")
+      .append('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, X-Auth-Token');
+    return this.http.get<EWMovies>('https://easyware.webaissance.com/feeds/CircleCinema/parsefeed.php?key=8^h7B%gt5bn(Q', { headers : options}).
       pipe(
         map((data) => {
           console.log(data);
