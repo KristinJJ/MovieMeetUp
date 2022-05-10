@@ -3,17 +3,19 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Movies, MovieItem, PopMovies, PopMovieItem, EWMovies, EWMovieItem } from './movies';
 //import * as Rx from "rxjs/Rx";
 import { from, Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { switchMap, map, catchError } from 'rxjs/operators';
 import { environment } from "../environments/environment";
 import { MovieEvents, MovieEvent } from "../app/event/event.component";
 import { RankUpdate } from '../app/ranking/ranking.component';
-
+//import { xml2js } from '../../node_modules/xml2js/lib/xml2js';
 interface ItemsResponse {
   movies: Array<Movies>;
   popMovies: Array<PopMovies>;
-  ewMovies: Array<EWMovies>;
+  ewMovies: Array<EWMovies>; //Array<any>
 }
 
+//declare const require: (arg0: string) => any;
+//const xml2js = require("xml2js");
 // TODO: securely save API Key as variable to include in api calls
 // TODO: create variable for movie title from user entry in API call
       //: future api calls--imdb id for full movie details
@@ -61,20 +63,29 @@ export class ApicallService {
       .set('Access-Control-Allow-Origin', '*')
       .set("Access-Control-Allow-Methods", "OPTIONS,POST,PUT,GET"); */
       options.set('Origin','http://localhost:4200')
-      .append("Accept", "application/xml")
-      .append("Content-Type", "application/xml")
-      .append('Access-Control-Allow-Origin', '*')
-      .append("Access-Control-Allow-Methods", "OPTIONS,POST,PUT,GET")
-      .append('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, X-Auth-Token');
-    return this.http.get<EWMovies>('https://easyware.webaissance.com/feeds/CircleCinema/parsefeed.php?key=8^h7B%gt5bn(Q', { headers : options}).
+      .append("Accept", "application/json")
+      .append("Content-Type", "application/json")
+      //.append('Access-Control-Allow-Origin', '*')
+      //.append("Access-Control-Allow-Methods", "OPTIONS,POST,PUT,GET")
+      //.append('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, X-Auth-Token');
+    return this.http.get<EWMovies>('https://63sqiwx2oejpzp2pihabimegc40btzgv.lambda-url.us-west-2.on.aws/', { /*responseType: "text",*/ /*headers : options*/}).
       pipe(
-        map((data) => {
+
+         map((data: any) =>  {
+          
           console.log(data);
-          console.log("getEWMovies() data.Items: " + data.Items);
-          return data.Items ?? [];
+          
+          console.log(`getEWMovies() data.Items: ${data.events}`);
+          return data ?? [];
         })
       )
   }
+
+/*   async parseXmlToJson(xml: string) {
+    return await xml2js
+      .parseStringPromise(xml, { explicitArray: false })
+      .then((response: { events: { event: any; }; }) => response.events.event);
+  } */
 
   // adds created event to the Event DynamoDB table
   addMovieEvent(body: MovieEvent) : Observable<MovieEvent[]> {

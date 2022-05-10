@@ -27,29 +27,29 @@ export interface MovieItem {
 export interface EWMovies {
     searchType: string;
     expression: string;
-    Items?: (EWMovieItem)[] | null;
+    events?: (EWMovieItem)[] | null;
     errorMessage: string;
 }
 
 export interface EWMovieItem {
-    points?: number;
-    eventid: string;
-    title: string;
-    isMovie: string;    /*boolean? */
-    rating: string;
-    synopsis: string;
-    type: string;
-    director: string;
-    language: string;
-    releasedate: string; /*Date? */
-    poster: string;
-    writer: string;
     cast: string;
     country: string;
-    series: (string)[] | null;
-    distributor: (string)[] | null;
+    director: string;
+    distributor: string;
+    eventid: string;
+    ismovie: string;
+    language: string;
+    poster: string;
+    rating: string;
+    releasedate: string;
     runtime: string;
+    series: string;
     shows: (Screening)[] | null;
+    synopsis: string;
+    title: string;
+    type: string;
+    writer: string;
+    points?: number;   
 }
 
 export interface Screening {

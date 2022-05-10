@@ -70,9 +70,10 @@ export class EventComponent implements OnInit {
   // Attempt to create a function that references the getPopMovies from the apicallservice. This is probably the wrong way?
   // Current gives CORS error and the GET fails.
   loadEWMovies() {
+    console.log("loadEWMovies called");
     return this.apicall.getEWMovies().subscribe((data) => {
       this.eventMovies = data;
-      console.log(data);
+      console.log("loadEWMovies data:", this.eventMovies);
       })
   }
 
