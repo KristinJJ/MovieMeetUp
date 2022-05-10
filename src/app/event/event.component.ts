@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import type { MovieItem, PopMovieItem } from "../movies";
+import type { MovieItem, PopMovieItem, EWMovieItem } from "../movies";
 import { ApicallService } from '../apicall.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormControl, NgModel, Validators } from '@angular/forms';
@@ -20,16 +20,17 @@ export interface MovieEvents {
   errorMessage: string;
 }
 
+// Modified for EW Movie info
 export interface MovieEvent {
   id?: string;
   hostID: string;
   eventTitle: string;
   eventDate: string;
-  eventMovies?: (PopMovieItem) [];
-  selectedMovies: PopMovieItem[];
+  eventMovies?: (EWMovieItem) [];
+  selectedMovies: EWMovieItem[];
   //invitees?: (EventInvitees) [] | null;
   eventRankings?: (RankUpdate) [];
-  finalRankings?: (PopMovieItem) [];
+  finalRankings?: (EWMovieItem) [];
 }
 
 @Component({
@@ -45,9 +46,9 @@ export class EventComponent implements OnInit {
   eventID = '';
   eventTitle = '';
   eventDate = '';
-  selectedMovies: PopMovieItem[] = [];
+  selectedMovies: EWMovieItem[] = [];
   events = new Map();
-  eventMovies: PopMovieItem[] = [];
+  eventMovies: EWMovieItem[] = [];
   invitees = [];
   movieRankings = [];
   errormsg = '';
@@ -60,7 +61,7 @@ export class EventComponent implements OnInit {
   constructor(public apicall: ApicallService, private eventService: EventService, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    this.loadPopMovies();
+    this.loadEWMovies();
     // set minDate for datepicker to be 'tomorrow'--no past dates or picking today.
     this.minDate.setDate(this.minDate.getDate() +1);
   }
@@ -68,10 +69,11 @@ export class EventComponent implements OnInit {
   // CALL SCAN API GATEWAY HERE? --> https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/popMovies
   // Attempt to create a function that references the getPopMovies from the apicallservice. This is probably the wrong way?
   // Current gives CORS error and the GET fails.
-  loadPopMovies() {
-    return this.apicall.getPopMovies().subscribe((data) => {
+  loadEWMovies() {
+    console.log("loadEWMovies called");
+    return this.apicall.getEWMovies().subscribe((data) => {
       this.eventMovies = data;
-      console.log(data);
+      console.log("loadEWMovies data:", this.eventMovies);
       })
   }
 
