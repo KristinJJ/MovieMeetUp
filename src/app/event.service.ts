@@ -16,7 +16,15 @@ export class EventService {
   getSelectedMovies() {
     return this.movies;
   }
-
+/*  Will need to create a new interface for how we add things to Event.  
+      --would this interface be in event.componet.ts or here?
+    Adding a particular screening instead of
+    all screenings....perhaps: if movieItem not in movies array, we push the EWMovieItem to the movies array, then replace
+    Shows[0].shows with the selected screening?  If movieItem is already in array, then push just the chosen screening to
+    that movieItem's shows array.
+    For removing, essentially the reverse--if MovieItem shows array length is 1, then remove movie item. else remove the
+    specified screening id rom that movieItem's shows array.
+*/
   addMovieToEvent(ewMovieItem: EWMovieItem) {
     this.movies.push(ewMovieItem);
     console.log(this.movies);
