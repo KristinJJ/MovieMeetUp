@@ -97,7 +97,7 @@ export class ApicallService {
       .append("Accept", "appliction/json")
       .append("Content-Type", "application/json");
   
-    return this.http.put<MovieEvent>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/events', body, { 'headers': headers })
+    return this.http.put<MovieEvent>('	https://j6ywe1e02a.execute-api.us-west-2.amazonaws.com/ewEvents', body, { 'headers': headers })
     .pipe(
       map((data) => {
         //console.log('body: ' + JSON.parse(body.eventTitle));

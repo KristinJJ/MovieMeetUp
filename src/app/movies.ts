@@ -44,12 +44,16 @@ export interface EWMovieItem {
     releasedate: string;
     runtime: string;
     series: string;
-    shows: (Screening)[] | null;
+    shows: Shows[];
     synopsis: string;
     title: string;
     type: string;
     writer: string;
     points?: number;   
+}
+
+export interface Shows {
+    show: any[];
 }
 
 export interface Screening {

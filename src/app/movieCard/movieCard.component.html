@@ -9,6 +9,10 @@
   <ng-container *ngIf="show">
     <!--<img mat-card-image src="{{movie.image}}" alt="Movie Poster for {{movie.title}}">-->
     <img mat-card-image src="{{movie.poster}}" alt="Movie Poster for {{movie.title}}">
+    <p>{{movie.releasedate}}</p>
+    <!-- <button mat-raised-button color="primary" (click)="onSelectCard(movie)">
+      {{movie.shows.show[0].room}}
+    </button> -->
   </ng-container>
 </div>
 </mat-card>

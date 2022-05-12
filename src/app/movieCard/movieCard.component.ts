@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {PopMovieItem, EWMovieItem} from "../movies";
+import {PopMovieItem, EWMovieItem, Screening} from "../movies";
 import { EventService } from "../event.service";
 
 @Component({
@@ -9,6 +9,7 @@ import { EventService } from "../event.service";
 })
 export class MovieCardComponent implements OnInit {
   @Input() movie!: EWMovieItem|undefined;
+  @Input() screening!: Screening|undefined;
   @Output() notify = new EventEmitter();
 
   show = false;
