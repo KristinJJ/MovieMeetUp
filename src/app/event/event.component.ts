@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import type { MovieItem, PopMovieItem, EWMovieItem } from "../movies";
+import type { MovieItem, PopMovieItem, EWMovieItem, Shows } from "../movies";
 import { ApicallService } from '../apicall.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormControl, NgModel, Validators } from '@angular/forms';
@@ -57,6 +57,7 @@ export class EventComponent implements OnInit {
   date = new FormControl(new Date());
   gridColumns = 3;
   minDate = new Date();
+  //objCheck: Shows[] = [];
 
   constructor(public apicall: ApicallService, private eventService: EventService, private httpClient: HttpClient) {}
 
@@ -64,6 +65,7 @@ export class EventComponent implements OnInit {
     this.loadEWMovies();
     // set minDate for datepicker to be 'tomorrow'--no past dates or picking today.
     this.minDate.setDate(this.minDate.getDate() +1);
+    
   }
 
   // CALL SCAN API GATEWAY HERE? --> https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/popMovies
@@ -74,6 +76,16 @@ export class EventComponent implements OnInit {
     return this.apicall.getEWMovies().subscribe((data) => {
       this.eventMovies = data;
       console.log("loadEWMovies data:", this.eventMovies);
+      console.log(this.eventMovies[0]);
+      let objCheck = this.eventMovies[2].shows[0].show;
+      if (Object.prototype.toString.call(objCheck) === '[object Array]') {
+        console.log("objCheck is an array");
+      } else {
+        console.log("objCheck is not an array");
+      }
+      console.log('0 typeof', typeof this.eventMovies[0].shows[0].show[0]);
+      console.log(this.eventMovies[2].shows[0].show);
+      console.log('2 typeof', typeof this.eventMovies[2].shows[0].show);
       })
   }
 
