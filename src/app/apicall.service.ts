@@ -116,12 +116,12 @@ export class ApicallService {
       .append("Accept", "appliction/json")
       .append("Content-Type", "application/json");
 
-    return this.http.put<RankUpdate>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/user-rankings', body, { 'headers': headers })  
+    return this.http.put<RankUpdate>('https://j6ywe1e02a.execute-api.us-west-2.amazonaws.com/EWuser-rankings', body, { 'headers': headers })  
   }
 
-  // get Event data from DynamoDB
+  // get Event data from DynamoDB for home page
   getMovieEvents() : Observable<MovieEvent[]> {
-    return this.http.get<MovieEvents>('https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/movieevents-scan').
+    return this.http.get<MovieEvents>('https://j6ywe1e02a.execute-api.us-west-2.amazonaws.com/ewmovieevents-scan').
       pipe(
         map((data) => {
           //console.log(data);
@@ -131,14 +131,14 @@ export class ApicallService {
       )
   }
 
-  // get Event data from DynamoDB
+  // get Event data from DynamoDB for ranking page
   // return the Event by eventID
   getMovieEvent(id: string): Observable<MovieEvent> {
     //console.log("id for queryStringParameters:", id);
     const options = id ? 
     { params : new HttpParams().set('id', id)} : {};
     console.log("options for the MovieEvent: ", options);
-    return this.http.get<MovieEvent>(`https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/getMovieEvent`, options).
+    return this.http.get<MovieEvent>(`https://j6ywe1e02a.execute-api.us-west-2.amazonaws.com/getEWMovieEvent`, options).
       pipe(
         map((data) => {
           console.log(data);
@@ -155,7 +155,7 @@ export class ApicallService {
     const options = id ? 
     { params : new HttpParams().set('id', id)} : {};
     console.log("options for the FinalRanking: ", options);
-    return this.http.get<MovieEvent>(`https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/getFinalRankings`, options).
+    return this.http.get<MovieEvent>(`https://j6ywe1e02a.execute-api.us-west-2.amazonaws.com/EWFinalRankings`, options).
       pipe(
         map((data) => {
           console.log(data);
