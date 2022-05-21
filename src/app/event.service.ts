@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Movies, MovieItem, PopMovies, PopMovieItem, EWMovies, EWMovieItem } from './movies';
+import { Movies, MovieItem, PopMovies, PopMovieItem, EWMovies, EWMovieItem, Shows, Screening } from './movies';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,44 @@ export class EventService {
     console.log(this.movies);
   }
 
+  addScreeningToEvent(movie: EWMovieItem, screening: Screening) {
+    let film : EWMovieItem = this.deepCopy<EWMovieItem>(movie);
+    let selection: Screening = this.deepCopy<Screening>(screening);
+
+    if (movie) {
+      console.log("movie: " + movie.title);
+    }
+
+    if (!this.movies.includes(film)) {
+        film.shows[0].show = [selection];
+        console.log("f", film);
+        console.log("m", movie);
+        this.movies.push(film);
+        //movie.shows.push(screening);
+    } else {
+      //movie.shows.push(screening);
+      film.shows[0].show?.push(selection);
+    }
+    console.log(this.movies);
+  }
+
+  removeScreeningFromEvent(movie: EWMovieItem, screening: Screening) {
+    //let film : EWMovieItem = this.deepCopy<EWMovieItem>(movie);
+    //let selection: Screening = this.deepCopy<Screening>(screening);
+    console.log(movie);
+    console.log(screening);
+    for (let i = this.movies.length - 1; i >= 0; --i) {
+      console.log(typeof this.movies[i].shows[0].show![0].screeningid);
+      console.log(typeof screening.screeningid);
+      console.log(JSON.stringify(this.movies[i].shows[0].show![0].screeningid) == JSON.stringify(screening.screeningid));
+      if (JSON.stringify(this.movies[i].shows[0].show![0].screeningid) == JSON.stringify(screening.screeningid)) {
+        this.movies.splice(i,1);
+      }
+    }
+    console.log(this.movies);
+  }
+
+
   removeMovieFromEvent(ewMovieItem: EWMovieItem) {
     for (let i = this.movies.length - 1; i >= 0; --i) {
       if (this.movies[i] == ewMovieItem) {
@@ -46,6 +84,37 @@ export class EventService {
     
   }
 
+  
+  deepCopy<T>(instance : T) : T {
+    if ( instance == null){
+        return instance;
+    }
+
+    // handle Dates
+    if (instance instanceof Date) {
+        return new Date(instance.getTime()) as any;
+    }
+
+    // handle Array types
+    if (instance instanceof Array){
+        var cloneArr = [] as any[];
+        (instance as any[]).forEach((value)  => {cloneArr.push(value)});
+        // for nested objects
+        return cloneArr.map((value: any) => this.deepCopy<any>(value)) as any;
+    }
+    // handle objects
+    if (instance instanceof Object) {
+        var copyInstance = { ...(instance as { [key: string]: any }
+        ) } as { [key: string]: any };
+        for (var attr in instance) {
+            if ( (instance as Object).hasOwnProperty(attr)) 
+                copyInstance[attr] = this.deepCopy<any>(instance[attr]);
+        }
+        return copyInstance as T;
+    }
+    // handling primitive data types
+    return instance;
+}
 }
 
 
