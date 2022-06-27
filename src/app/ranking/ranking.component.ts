@@ -3,7 +3,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { ApicallService } from '../apicall.service';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MovieItem, movielist, popMovieSamples, PopMovieItem, EWMovieItem } from '../movies';
+import { MovieItem, movielist, popMovieSamples, PopMovieItem } from '../movies';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { MovieEvent } from '../event/event.component';
@@ -20,7 +20,7 @@ export interface RankUp {
 export interface RankUpdate {
   eventID: string;
   userID: string;
-  UserRankings: (EWMovieItem)[] | undefined;
+  UserRankings: (PopMovieItem)[] | undefined;
   points?: number;
 }
 
@@ -41,7 +41,7 @@ export class RankingComponent implements OnInit {
   userID = '';
   hostID = environment.demoUserID;
   title = 'Movie ranking';
-  movieItemArray: (EWMovieItem)[] | undefined;
+  movieItemArray: (PopMovieItem)[] | undefined;
   movieRankings = new Map();
   errorMsg = '';
   confmsg = '';

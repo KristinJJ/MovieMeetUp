@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {PopMovieItem, EWMovieItem, Screening} from "../movies";
+import {PopMovieItem} from "../movies";
 import { EventService } from "../event.service";
 
 @Component({
@@ -8,8 +8,7 @@ import { EventService } from "../event.service";
   styleUrls: ['./movieCard.component.scss']
 })
 export class MovieCardComponent implements OnInit {
-  @Input() movie!: EWMovieItem|undefined;
-  @Input() screening!: Screening|undefined;
+  @Input() movie!: PopMovieItem|undefined;
   @Output() notify = new EventEmitter();
 
   show = false;
@@ -19,12 +18,12 @@ export class MovieCardComponent implements OnInit {
     private eventService: EventService
   ) {}
 
-  onSelectCard(ewMovieItem: EWMovieItem) {
+  onSelectCard(popMovieItem: PopMovieItem) {
     this.selected = !this.selected;
     if (this.selected == false) {
-      this.eventService.removeMovieFromEvent(ewMovieItem);
+      this.eventService.removeMovieFromEvent(popMovieItem);
     } else {
-      this.eventService.addMovieToEvent(ewMovieItem);
+      this.eventService.addMovieToEvent(popMovieItem);
     }
   }
 

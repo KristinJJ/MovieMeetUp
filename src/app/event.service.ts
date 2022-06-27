@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Movies, MovieItem, PopMovies, PopMovieItem, EWMovies, EWMovieItem } from './movies';
+import { Movies, MovieItem, PopMovies, PopMovieItem } from './movies';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  movies: EWMovieItem[] = [];
+  movies: PopMovieItem[] = [];
   constructor(private http: HttpClient) {}
 
   getNumSelected() {
@@ -16,23 +16,15 @@ export class EventService {
   getSelectedMovies() {
     return this.movies;
   }
-/*  Will need to create a new interface for how we add things to Event.  
-      --would this interface be in event.componet.ts or here?
-    Adding a particular screening instead of
-    all screenings....perhaps: if movieItem not in movies array, we push the EWMovieItem to the movies array, then replace
-    Shows[0].shows with the selected screening?  If movieItem is already in array, then push just the chosen screening to
-    that movieItem's shows array.
-    For removing, essentially the reverse--if MovieItem shows array length is 1, then remove movie item. else remove the
-    specified screening id rom that movieItem's shows array.
-*/
-  addMovieToEvent(ewMovieItem: EWMovieItem) {
-    this.movies.push(ewMovieItem);
+
+  addMovieToEvent(popMovieItem: PopMovieItem) {
+    this.movies.push(popMovieItem);
     console.log(this.movies);
   }
 
-  removeMovieFromEvent(ewMovieItem: EWMovieItem) {
+  removeMovieFromEvent(popMovieItem: PopMovieItem) {
     for (let i = this.movies.length - 1; i >= 0; --i) {
-      if (this.movies[i] == ewMovieItem) {
+      if (this.movies[i] == popMovieItem) {
         this.movies.splice(i,1);
       }
     }
