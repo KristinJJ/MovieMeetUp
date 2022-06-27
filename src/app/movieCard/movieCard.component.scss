@@ -1,7 +1,7 @@
 .movie-card {
   //padding: auto;
-  max-width: 1000px;
-  //max-height: 600px;
+  width: 188px;
+  height: 338px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,8 +9,8 @@
 }
 
 img {
-  max-height: 80%;
-  max-width: 80%;
+  max-height: 100%;
+  max-width: 100%;
   margin: auto;
   display: block;
   //overflow: hidden;
@@ -29,41 +29,8 @@ mat-card:hover .selection {
 mat-card.mat-elevation-z4 .selection {
   opacity: 1;
 }
-
-.screenings {
-  padding-top: 5px; 
-  //display: grid;
-  //grid-template-columns: 
-   //[left] 1fr [right]1fr;
-  //justify-content: center;
-  //align-items: center;
-}
-.buttongrid {
-  margin: 2px 0px;
-  //position: absolute;
-  //top: 50%;
-  //-ms-transform: translateY(-50%);
-  //transform: translateY(-50%);
-  padding: 0px 5px;
-  width: 100%;
-  height: 100%;
-  font-size: smaller;
-  //font-weight: bold;
-  //background-color: #3f51b5;
-  background-color: red;
-  color: white;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  
-  //justify-content: center;
-  //align-items: center;
-  
-}
-
-
-.button-selected {
-  border: 2px solid #283593;
+.card-selected {
+  border: 4px solid #283593;
 }
 
 .selection {

@@ -19,7 +19,6 @@ import { ApicallService } from './apicall.service';
 import { IntroComponent } from './intro/intro.component';
 import { HeaderInterceptor } from './auth-interceptor';
 import { DeferLoadModule } from '@trademe/ng-defer-load';
-import { ScreenButtonComponent } from './screen-button/screen-button.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +31,7 @@ import { ScreenButtonComponent } from './screen-button/screen-button.component';
     MovieCardComponent,
     IterablePipe,
     FinalRankingComponent,
-    IntroComponent,
-    ScreenButtonComponent
+    IntroComponent
   ],
   imports: [
     BrowserModule,
