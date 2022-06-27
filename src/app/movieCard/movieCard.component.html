@@ -1,35 +1,18 @@
-<mat-card *ngIf="movie" class="movie-card"  (deferLoad)="show = true"> <!-- (click)="onSelectCard(movie)"-->
+<mat-card *ngIf="movie" class="movie-card" (click)="onSelectCard(movie)" [ngClass]="{'card-selected mat-elevation-z4': selected}" (deferLoad)="show = true">
   <div class="content">
-  <!-- <span [matTooltip]="selected ? 'true' : 'false'" class="selection">
+  <span [matTooltip]="selected ? 'true' : 'false'" class="selection">
     <mat-icon>check_circle</mat-icon>
-  </span> -->
+  </span>
   <mat-card-header>
     <!--<mat-card-title>{{movie.title}}</mat-card-title>-->
   </mat-card-header>
   <ng-container *ngIf="show">
     <!--<img mat-card-image src="{{movie.image}}" alt="Movie Poster for {{movie.title}}">-->
     <img mat-card-image src="{{movie.poster}}" alt="Movie Poster for {{movie.title}}">
-    <p>{{movie.title}}</p>
-    <!-- <div fxLayout="row wrap" fxLayoutGap="16px grid"> -->
-      <div class="screenings">
-        <div class="screenings-buttons" *ngFor="let item of movie.shows[0].show"> <!-- {{ movie.shows[0].show[0].timestamp }}</div> -->
-          <!-- <button mat-button (click)="onSelectScreening(item)"> -->
-            <app-screen-button [item]="item" [movie]="movie"></app-screen-button>
-
-
-<!--            
-          <ng-container *ngIf="movie.shows[0].show.length === 1 else buttongrid">
-            <button mat-raised-button color="primary" class="single-screening">{{ unixConvert(item.timestamp) }} - Screen {{item.screen}}
-            </button>
-          </ng-container>
-          <ng-template #buttongrid>
-            <button mat-raised-button color="primary" class="buttongrid" (click)="onSelectCard(movie)">{{ unixConvert(item.timestamp) }} - Screen {{item.screen}}
-            </button>
-        </ng-template>
-      -->
-       </div>
-
-    </div>
+    <p>{{movie.releasedate}}</p>
+    <!-- <button mat-raised-button color="primary" (click)="onSelectCard(movie)">
+      {{movie.shows.show[0].room}}
+    </button> -->
   </ng-container>
 </div>
 </mat-card>
