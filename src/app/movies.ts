@@ -44,7 +44,7 @@ export interface EWMovieItem {
     releasedate: string;
     runtime: string;
     series: string;
-    shows: Shows[];
+    shows: Shows[];  //[];
     synopsis: string;
     title: string;
     type: string;
@@ -53,7 +53,7 @@ export interface EWMovieItem {
 }
 
 export interface Shows {
-    show: any[];
+    show: any[] | null;
 }
 
 export interface Screening {

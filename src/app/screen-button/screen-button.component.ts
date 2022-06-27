@@ -1,35 +1,34 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {PopMovieItem, EWMovieItem, Screening} from "../movies";
 import { EventService } from "../event.service";
-//import {screen-button} from "../event/event.component";
 
 @Component({
-  selector: 'app-movie-card',
-  templateUrl: './movieCard.component.html',
-  styleUrls: ['./movieCard.component.scss']
+  selector: 'app-screen-button',
+  templateUrl: './screen-button.component.html',
+  styleUrls: ['./screen-button.component.scss']
 })
-export class MovieCardComponent implements OnInit {
-  @Input() movie!: EWMovieItem|undefined;
-  @Input() screening!: Screening|undefined;
+export class ScreenButtonComponent implements OnInit {
+  @Input() movie!: EWMovieItem;
+  @Input() item!: Screening|undefined;
   @Output() notify = new EventEmitter();
 
   show = false;
-  selected = false;
-  buttonSel = false
-  constructor(
-    private eventService: EventService
-  ) {}
+  buttonSel = false;
 
-  onSelectCard(ewMovieItem: EWMovieItem) {
-    this.selected = !this.selected;
-    console.log(this.selected);
-    if (this.selected == false) {
-      this.eventService.removeMovieFromEvent(ewMovieItem);
-    } else {
-      this.eventService.addMovieToEvent(ewMovieItem);
+  constructor(private eventService: EventService) { }
+
+  onSelectScreening(screening: Screening, movie: EWMovieItem) {
+    this.buttonSel = !this.buttonSel;
+    console.log(this.buttonSel);
+    if (this.buttonSel == false) {
+      console.log("remove screening: " + JSON.stringify(screening));
+      this.eventService.removeScreeningFromEvent(movie, screening);
+  } else {
+      console.log("add screening: " + JSON.stringify(screening));
+      console.log("add movie: " + JSON.stringify(movie));
+      this.eventService.addScreeningToEvent(movie, screening);
     }
   }
-  
 
   unixConvert(unix: string): string {
     let show = new Date(parseInt(unix) * 1e3).toISOString().substring(0, 23);

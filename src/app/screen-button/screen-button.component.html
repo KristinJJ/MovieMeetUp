@@ -1,0 +1,11 @@
+<div *ngIf="item" class="movie-card"  (deferLoad)="show = true">
+    <span [matTooltip]="buttonSel ? 'true' : 'false'" class="selection">
+        <mat-icon>check_circle</mat-icon>
+    </span>
+    <ng-container *ngIf="show">
+        <button mat-raised-button color="primary" class="buttongrid" (click)="onSelectScreening(item, movie)" [ngClass]="{'button-selected mat-elevation-z4': buttonSel}">
+            {{ unixConvert(item.timestamp) }} - Screen {{item.screen}}
+        </button>
+    </ng-container>
+    
+</div> 
