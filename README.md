@@ -34,7 +34,7 @@
 - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
-<!-- - [Usage](#usage)-->
+    <!-- - [Usage](#usage)-->
 - [Contribute](#contribute)
     - [Sponsor](#sponsor)
     - [Adding new features or fixing bugs](#adding-new-features-or-fixing-bugs)
@@ -46,7 +46,8 @@
 <img width="778" alt="Screen Shot 2021-09-15 at 6 20 25 AM" src="https://user-images.githubusercontent.com/26866132/133440917-4157bfe2-1c26-41fe-a73d-7c5cdb9c183e.png">
 
 
-* Created for the CodeDay Labs 2021 Advanced Track under the mentorship of Richard Harrington, a mobile responsive website application built with an Angular Frontend and an AWS backend to help users decide which movie they would all like to watch.
+* Created for the CodeDay Labs 2021 Advanced Track under the mentorship of Richard Harrington, a responsive website application built with an Angular Frontend and an AWS backend to help users decide which movie they would all like to watch.
+* [CodeDay Labs Showcase](https://codeday.sh/moviemeetup)
 
 ### Built With
 * [Angular](https://angular.io/)
@@ -90,7 +91,7 @@ To get a local copy up and running follow these simple steps:
 ### Sponsor
 Please ⭐️ this repository if this project helped you!
 
-<a href="https://www.buymeacoffee.com/moviemeetup" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+<a href="https://www.buymeacoffee.com/kayotexesu" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 ### Adding new features or fixing bugs
 Contributions, issues and feature requests are welcome.
@@ -101,8 +102,9 @@ Feel free to check [issues](https://github.com/KristinJJ/MovieMeetUp/issues) pag
 
 ## Contact
 * Project Email: MovieMeetupApp@gmail.com
-* Project Link: https://github.com/KristinJJ/MovieMeetUp
-<!--* Github or LinkedIn links?-->
+* LinkedIn
+  - [Mike Gilson](https://www.linkedin.com/in/mikegilsonsoftdev/)
+  - [Kristin Jue](https://www.linkedin.com/in/kristinjue/)
 
 ## Acknowledgements
 * [CodeDay Labs 2021](https://labs.codeday.org/)

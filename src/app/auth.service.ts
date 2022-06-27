@@ -46,6 +46,8 @@ export class AuthService {
       sessionStorage.setItem('id_token', this.idToken);
       sessionStorage.setItem('access_token', this.accessToken);
 
+      //this.isLoggedIn = true;
+
       console.log("session storage-host: "+ sessionStorage.getItem('hostID'));
       console.log("session storage-idToken: " + sessionStorage.getItem('id_token')); 
       console.log("session storage-accessToken: " + sessionStorage.getItem('access_token'));
