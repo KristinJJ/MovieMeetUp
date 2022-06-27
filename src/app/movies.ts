@@ -23,52 +23,6 @@ export interface MovieItem {
     description?: string;
 }
 
-// EW MOVIE INTERFACES -- START
-export interface EWMovies {
-    searchType: string;
-    expression: string;
-    events?: (EWMovieItem)[] | null;
-    errorMessage: string;
-}
-
-export interface EWMovieItem {
-    cast: string;
-    country: string;
-    director: string;
-    distributor: string;
-    eventid: string;
-    ismovie: string;
-    language: string;
-    poster: string;
-    rating: string;
-    releasedate: string;
-    runtime: string;
-    series: string;
-    shows: Shows[];
-    synopsis: string;
-    title: string;
-    type: string;
-    writer: string;
-    points?: number;   
-}
-
-export interface Shows {
-    show: any[];
-}
-
-export interface Screening {
-    screeningid: string;
-    eventid: string;
-    screeninglink: string;
-    location: string;
-    room: string;       /* number? */
-    screen: string;     /* number? */
-    soldout: string;    /* boolean or number? */
-    notes: (string)[] | null;
-    timestamp: string; /*strange datetime notation? */
-}
-// EW MOVIE INTERFACES -- END
-
 export interface PopMovieItem {
     points?: number
     id: string;
