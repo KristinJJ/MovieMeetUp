@@ -23,7 +23,9 @@ export interface JwtPayloadCognito extends JwtPayload {
 export class HomeComponent implements OnInit {
   movieEvents: MovieEvent[] = [];
   logoutURL= environment.logoutURL;
-  url = 'https://moviemeetup.com/ranking/';
+  // url that gets sent in the email for users to rank selected movies in events
+  //url = 'https://moviemeetup.com/ranking/';
+  url = 'https://localhost:4200/ranking/';
 
   constructor(public apicall: ApicallService, private router: Router, private rankingService: RankingService, private httpClient: HttpClient, private route: ActivatedRoute) {
     };

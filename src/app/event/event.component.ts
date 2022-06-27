@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import type { MovieItem, PopMovieItem } from "../movies";
+import type { MovieItem, PopMovieItem, EWMovieItem, Shows } from "../movies";
 import { ApicallService } from '../apicall.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormControl, NgModel, Validators } from '@angular/forms';
@@ -20,16 +20,17 @@ export interface MovieEvents {
   errorMessage: string;
 }
 
+// Modified for EW Movie info
 export interface MovieEvent {
   id?: string;
   hostID: string;
   eventTitle: string;
   eventDate: string;
-  eventMovies?: (PopMovieItem) [];
-  selectedMovies: PopMovieItem[];
+  eventMovies?: (EWMovieItem) [];
+  selectedMovies: EWMovieItem[];
   //invitees?: (EventInvitees) [] | null;
   eventRankings?: (RankUpdate) [];
-  finalRankings?: (PopMovieItem) [];
+  finalRankings?: (EWMovieItem) [];
 }
 
 @Component({
@@ -45,9 +46,9 @@ export class EventComponent implements OnInit {
   eventID = '';
   eventTitle = '';
   eventDate = '';
-  selectedMovies: PopMovieItem[] = [];
+  selectedMovies: EWMovieItem[] = [];
   events = new Map();
-  eventMovies: PopMovieItem[] = [];
+  eventMovies: EWMovieItem[] = [];
   invitees = [];
   movieRankings = [];
   errormsg = '';
@@ -56,24 +57,88 @@ export class EventComponent implements OnInit {
   date = new FormControl(new Date());
   gridColumns = 3;
   minDate = new Date();
+  //objCheck: Shows[] = [];
 
   constructor(public apicall: ApicallService, private eventService: EventService, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    this.loadPopMovies();
+    this.loadEWMovies();
     // set minDate for datepicker to be 'tomorrow'--no past dates or picking today.
     this.minDate.setDate(this.minDate.getDate() +1);
+    
   }
 
   // CALL SCAN API GATEWAY HERE? --> https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/popMovies
   // Attempt to create a function that references the getPopMovies from the apicallservice. This is probably the wrong way?
   // Current gives CORS error and the GET fails.
-  loadPopMovies() {
-    return this.apicall.getPopMovies().subscribe((data) => {
+  loadEWMovies() {
+    console.log("loadEWMovies called");
+    return this.apicall.getEWMovies().subscribe((data) => {
       this.eventMovies = data;
-      console.log(data);
+      console.log("loadEWMovies data:", this.eventMovies);
+      console.log(this.eventMovies[0]);
+      //let objCheck = this.eventMovies[2].shows[0].show;
+      /*if (Object.prototype.toString.call(objCheck) === '[object Array]') {
+        console.log("objCheck is an array");
+      } else {
+        console.log("objCheck is not an array");
+      } */
+      //console.log('0 typeof', typeof this.eventMovies[0].shows[0].show[0]);
+      //console.log(this.eventMovies[2].shows[0].show);
+      //console.log('2 typeof', typeof this.eventMovies[2].shows[0].show[0]);
+      let seconds = "1652383800"
+      //let time = (s: any) => new Date(s * 1e3).toISOString(); //.slice(-13, -8);
+      // YYYY-MM-DDTHH:mm:ss.sssZ
+      // .slice(-13, -5) = 19:30:00
+      // .slice(-5, -8) = 19:30
+      //console.log(time(seconds));
+      //let attempt = time(seconds).substring(0, 23);
+      //console.log(attempt);
+      //let test = new Date(attempt);   // new Date(parseInt(seconds)*1000)
+      //this.convertToDate(test);
+      console.log("tada?: ", this.unixConvert(seconds));
+      //console.log(test);
       })
   }
+
+  // above converts seconds string to ISO date string, then stips the Z off the end,
+  // then converts to a Date object.
+  // what is next: strip off the day/month/date, then strip off the time and convert to AM/PM
+  unixConvert(unix: string): string {
+    let show = new Date(parseInt(unix) * 1e3).toISOString().substring(0, 23);
+    let showTime = new Date(show).toString();;
+    //console.log("showTime: " + showTime);
+    let strDay = showTime.substring(0, 3);
+    let date = new Date(show);
+    let day = date.getDate();
+    //let month = date.getMonth() + 1;
+    let strMonth = showTime.substring(4, 7);
+    //let year = date.getFullYear();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    let zminutes = minutes < 10 ? '0'+minutes : minutes;
+    let strTime = hours + ':' + zminutes + ' ' + ampm;
+    return `${strDay} ${strMonth} ${day} - ${strTime}`;
+  }
+
+  // CREATE "convertToDate" function to convert the date string to a Date object.
+  convertToDate(dateString: Date): Date {
+    console.log("dateString: ", dateString);
+    let year = dateString.getFullYear();
+    let month = dateString.getMonth()+1; 
+    let dt = dateString.getDate();
+    let date = year + '-' + (month<10 ? '0' : '') + month + '-' + (dt<10 ? '0' : '') + dt;
+    //let d = new Date(date);
+    let d = dateString.getDay() + ' ' + dateString.toLocaleDateString() + ' ' + dateString.toTimeString().substring(0, dateString.toTimeString().indexOf("GMT"));
+    console.log(d);
+    return new Date(d);
+    //let dateParts = dateString.split("-");
+    //return new Date(+dateParts[0], dateParts[1] - 1, +dateParts[2]);
+  }
+
 
   setDate(event: MatDatepickerInputEvent<Date>) {
     console.log(event.value);

@@ -80,6 +80,13 @@
     <div class="content" *ngFor="let movie of eventMovies">
       <app-movie-card [movie]="movie"> </app-movie-card>
       <div class="movieTitle">{{ movie.title }}</div>
+      <!-- <div class="movieTitle">{{ if (movie.shows.show[0].timestamp || movie.shows.show }}</div> -->
+      <!-- <div class="moviesTitle">{{ Object.prototype.toString.call(movie.shows.show) !== '[object Array]' ? [movie.shows.show] : movie.shows.show[0].timestamp }}</div> -->
+      <!-- if shows is an array, then show the first one, otherwise show the single show -->
+      <div class="moviesTitle" *ngFor="let item of movie.shows[0].show"> <!-- {{ movie.shows[0].show[0].timestamp }}</div> -->
+          <div class="moviesTitle">{{ unixConvert(item.timestamp) }} - Screen {{item.screen}}</div>
+      </div>
+      <!-- <div class="moviesTitle">{{ movie.shows.show[0].timestamp ? movie.shows.show[0].timestamp : movie.shows }}</div> -->
     </div>
   </div>
 </div>

@@ -56,12 +56,17 @@
           </td>
           <td>{{ viewing.eventDate }}</td>
           <td>
-            <ul *ngFor="let movie of viewing.eventMovies">
+            <ul class="movies" *ngFor="let movie of viewing.eventMovies">
               <li>{{ movie.title }}</li>
             </ul>
           </td>
-          <td *ngIf="viewing.eventRankings; else dispZero">
+          <!-- <td *ngIf="viewing.eventRankings; else dispZero">
             {{ viewing.eventRankings?.length }}
+          </td> -->
+          <td *ngIf="viewing.eventRankings; else dispZero">
+            <ul class="no-bullets" *ngFor="let ranking of viewing.eventRankings">
+              <li>{{ ranking.userID }}</li>
+            </ul>
           </td>
           <ng-template #dispZero>
             <td>0</td>
