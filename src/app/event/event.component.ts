@@ -49,6 +49,7 @@ export class EventComponent implements OnInit {
   selectedMovies: EWMovieItem[] = [];
   events = new Map();
   eventMovies: EWMovieItem[] = [];
+  filteredMovies: EWMovieItem[] = [];
   invitees = [];
   movieRankings = [];
   errormsg = '';
@@ -106,11 +107,12 @@ export class EventComponent implements OnInit {
   // what is next: strip off the day/month/date, then strip off the time and convert to AM/PM
   unixConvert(unix: string): string {
     let show = new Date(parseInt(unix) * 1e3).toISOString().substring(0, 23);
-    let showTime = new Date(show).toString();;
+    let showTime = new Date(show).toString();
     //console.log("showTime: " + showTime);
     let strDay = showTime.substring(0, 3);
     let date = new Date(show);
-    let day = date.getDate();
+    //let day = date.getDate();
+    let day = showTime.substring(8, 10);
     //let month = date.getMonth() + 1;
     let strMonth = showTime.substring(4, 7);
     //let year = date.getFullYear();
@@ -144,6 +146,31 @@ export class EventComponent implements OnInit {
     console.log(event.value);
     this.eventDate = `${event.value}`.substring(0, 15);
     console.log("New EventDate: " + this.eventDate);
+    this.filterMovies(this.eventDate);
+  }
+
+  filterMovies(eventDate: string) {
+    console.log('filteredMovies() triggered')
+    let filtered = this.eventMovies;
+    let target = eventDate.substring(0,11);
+    console.log('target date: ', target)
+    let arr = filtered.filter(film => {
+      //return film.shows[0].show.includes()
+
+
+      let screenings = film.shows[0].show;
+      //console.log('screenings?: ', screenings)
+      console.log('target chk : ', this.unixConvert(screenings[0].timestamp));
+      return screenings.some((entry) => this.unixConvert(entry.timestamp).substring(0,11) === target)
+      /*for (let scr of screenings) {
+        let temptime = this.unixConvert(scr.timestamp);
+        if (temptime.substring(0,11) === target) {
+            match = true;
+            break;
+        } */
+    });
+    console.log('arr?: ', arr);
+    this.filteredMovies = arr;
   }
 
   confmessage(): void {
