@@ -15,6 +15,21 @@ app-topnav {
   text-align: revert;
 }
 
+.example-sidenav {
+  display: fixed;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+
+  background: rgba(255, 0, 0, 0.5);
+}
+
 mat-datepicker-toggle {
   z-index: 9999;
 }
@@ -22,6 +37,7 @@ mat-datepicker-toggle {
 .fixedNav {
   position: sticky;
   top: 0;
+  
   padding-top: 15px;
   margin: 0em -1.5em auto;
   background-color: white;
@@ -30,13 +46,22 @@ mat-datepicker-toggle {
 }
 
 .fixedHead {
+  top: 0;
+    width: 400px;
+    position: fixed;
+    z-index: 1;
+    height: 100%;
+    left: 0;
+    overflow-x: hidden;
+    background-color: white;
+  /*
   position: sticky;
   top: 40px;
   margin: 0em -1.5em auto;
   z-index: 1;
   padding-top: 0px;
   background-color: white;
-  border-bottom: 1px solid #3f51b5;
+  border-bottom: 1px solid #3f51b5;  */
 }
 
 .clickable {

@@ -5,49 +5,58 @@
   </mat-form-field>
 </p> -->
 <div class="fixedNav">
+  <!-- <mat-sidenav-container></mat-sidenav-container> -->
   <app-topNav></app-topNav>
 </div>
-<div class="fixedHead">
-  <p>Logged in HostID: {{ sessionhostID }}</p>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" opened >
 
-  <div class="desktop">
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Enter Event Title</mat-label>
-        <input matInput type="text" [(ngModel)]="eventTitle" />
-        <!--<mat-error>{{ getErrorMessage() }}</mat-error>-->
-      </mat-form-field>
-    </p>
+    <div class="fixedNav">
+      <!-- <mat-sidenav-container></mat-sidenav-container> -->
+      <app-topNav></app-topNav>
+    </div>
+    <div class="fixedHead">
+      <p>Logged in HostID: {{ sessionhostID }}</p>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Choose a Date</mat-label>
-      <input
-        matInput
-        [min]="minDate"
-        [matDatepicker]="picker"
-        (dateInput)="setDate($event)"
-      />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </div>
+      <div class="desktop">
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter Event Title</mat-label>
+            <input matInput type="text" [(ngModel)]="eventTitle" />
+            <!--<mat-error>{{ getErrorMessage() }}</mat-error>-->
+          </mat-form-field>
+        </p>
 
-  <h3>Click on at least three Movies below to select them for your Event</h3>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a Date</mat-label>
+          <input
+            matInput
+            [min]="minDate"
+            [matDatepicker]="picker"
+            (dateInput)="setDate($event)"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
 
-  <h3 style="color: red">
-    {{ errormsg }}
-  </h3>
-  <div class="createBox">
-    <p>
-      <button mat-raised-button color="primary" (click)="createEvent()">
-        Create Event
-      </button>
-    </p>
-    <p *ngIf="confirmed" class="confirmation" style="color: green">
-      <strong>{{ confmsg }}</strong>
-    </p>
-  </div>
-</div>
+      <h3>Click on at least three Movies below to select them for your Event</h3>
+
+      <h3 style="color: red">
+        {{ errormsg }}
+      </h3>
+      <div class="createBox">
+        <p>
+          <button mat-raised-button color="primary" (click)="createEvent()">
+            Create Event
+          </button>
+        </p>
+        <p *ngIf="confirmed" class="confirmation" style="color: green">
+          <strong>{{ confmsg }}</strong>
+        </p>
+      </div>
+    </div>
+  </mat-sidenav>
 
 <!-- TABLE TO DISPLAY CREATED EVENTS -->
 <!--<div class="col-md-12">
@@ -73,34 +82,36 @@
     </tbody>
   </table>
 </div>-->
-
-<!-- GRID TO DISPLAY MOVIES -->
-<div class="content">
-  <div fxLayout="row wrap" fxLayoutGap="16px grid">
-    <div *ngIf="eventDate !== ''; else elseBlock">
-      <div class="content" *ngFor="let movie of filteredMovies">
-        <app-movie-card [movie]="movie"> </app-movie-card>
-        <div class="movieTitle">{{ movie.title }}</div>
-        <!-- <div class="movieTitle">{{ if (movie.shows.show[0].timestamp || movie.shows.show }}</div> -->
-        <!-- <div class="moviesTitle">{{ Object.prototype.toString.call(movie.shows.show) !== '[object Array]' ? [movie.shows.show] : movie.shows.show[0].timestamp }}</div> -->
-        <!-- if shows is an array, then show the first one, otherwise show the single show -->
-        <div class="moviesTitle" *ngFor="let item of movie.shows[0].show"> <!-- {{ movie.shows[0].show[0].timestamp }}</div> -->
-            <div class="moviesTitle">{{ unixConvert(item.timestamp) }} - Screen {{item.screen}}</div>
+  <!-- <mat-sidenav-content> -->
+  <!-- GRID TO DISPLAY MOVIES -->
+    <div class="content">
+      <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div *ngIf="eventDate !== ''; else elseBlock">
+          <div class="content" *ngFor="let movie of filteredMovies">
+            <app-movie-card [movie]="movie"> </app-movie-card>
+            <div class="movieTitle">{{ movie.title }}</div>
+            <!-- <div class="movieTitle">{{ if (movie.shows.show[0].timestamp || movie.shows.show }}</div> -->
+            <!-- <div class="moviesTitle">{{ Object.prototype.toString.call(movie.shows.show) !== '[object Array]' ? [movie.shows.show] : movie.shows.show[0].timestamp }}</div> -->
+            <!-- if shows is an array, then show the first one, otherwise show the single show -->
+            <div class="moviesTitle" *ngFor="let item of movie.shows[0].show"> <!-- {{ movie.shows[0].show[0].timestamp }}</div> -->
+                <div class="moviesTitle">{{ unixConvert(item.timestamp) }} - Screen {{item.screen}}</div>
+            </div>
+          </div>
         </div>
+        <ng-template #elseBlock>
+          <div class="content" *ngFor="let movie of eventMovies">
+            <app-movie-card [movie]="movie"> </app-movie-card>
+            <div class="movieTitle">{{ movie.title }}</div>
+            <!-- <div class="movieTitle">{{ if (movie.shows.show[0].timestamp || movie.shows.show }}</div> -->
+            <!-- <div class="moviesTitle">{{ Object.prototype.toString.call(movie.shows.show) !== '[object Array]' ? [movie.shows.show] : movie.shows.show[0].timestamp }}</div> -->
+            <!-- if shows is an array, then show the first one, otherwise show the single show -->
+            <div class="moviesTitle" *ngFor="let item of movie.shows[0].show"> <!-- {{ movie.shows[0].show[0].timestamp }}</div> -->
+                <div class="moviesTitle">{{ unixConvert(item.timestamp) }} - Screen {{item.screen}}</div>
+            </div>
+            <!-- <div class="moviesTitle">{{ movie.shows.show[0].timestamp ? movie.shows.show[0].timestamp : movie.shows }}</div> -->
+          </div>
+        </ng-template>
       </div>
     </div>
-    <ng-template #elseBlock>
-      <div class="content" *ngFor="let movie of eventMovies">
-        <app-movie-card [movie]="movie"> </app-movie-card>
-        <div class="movieTitle">{{ movie.title }}</div>
-        <!-- <div class="movieTitle">{{ if (movie.shows.show[0].timestamp || movie.shows.show }}</div> -->
-        <!-- <div class="moviesTitle">{{ Object.prototype.toString.call(movie.shows.show) !== '[object Array]' ? [movie.shows.show] : movie.shows.show[0].timestamp }}</div> -->
-        <!-- if shows is an array, then show the first one, otherwise show the single show -->
-        <div class="moviesTitle" *ngFor="let item of movie.shows[0].show"> <!-- {{ movie.shows[0].show[0].timestamp }}</div> -->
-            <div class="moviesTitle">{{ unixConvert(item.timestamp) }} - Screen {{item.screen}}</div>
-        </div>
-        <!-- <div class="moviesTitle">{{ movie.shows.show[0].timestamp ? movie.shows.show[0].timestamp : movie.shows }}</div> -->
-      </div>
-    </ng-template>
-  </div>
-</div>
+  <!-- </mat-sidenav-content> -->
+</mat-sidenav-container>
