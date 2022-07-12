@@ -2,6 +2,7 @@ mat-toolbar {
   justify-content: space-between;
   padding-top: 0px;
 }
+
 * {
   justify-content: center;
   text-align: center;
@@ -10,50 +11,55 @@ mat-toolbar {
 body {
   padding: 0em 1em;
 }
-
-app-topnav {
-  text-align: revert;
-}
-
-.example-sidenav {
-  display: fixed;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 200px;
-  position: fixed;
-  z-index: 1;
+.fixedNav {
+  position: absolute;
   top: 0;
   left: 0;
-  overflow-x: hidden;
-
-  background: rgba(255, 0, 0, 0.5);
-}
-
-mat-datepicker-toggle {
-  z-index: 9999;
-}
-
-.fixedNav {
-  position: sticky;
-  top: 0;
+  right: 0;
+  bottom: 150;
+  display:flex;
+  justify-content: space-between;
   
+  /*.
   padding-top: 15px;
   margin: 0em -1.5em auto;
   background-color: white;
   z-index: 1;
-  text-align: left;
+  text-align: left; */
+} 
+
+app-topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: revert;
+  width: 100%;
+  z-index: 8;
+  
+  justify-content: space-between;
 }
 
+mat-form-field {
+  padding-top: 15%;
+  width: 90%;
+
+
+}
+
+h3 {
+  padding: 0 5%;
+}
 .fixedHead {
-  top: 0;
-    width: 400px;
+    top: 37px;
+    width: 200px;
     position: fixed;
-    z-index: 1;
+    /* z-index: 1;*/
     height: 100%;
     left: 0;
     overflow-x: hidden;
     background-color: white;
+    align-items: center;
   /*
   position: sticky;
   top: 40px;
@@ -64,6 +70,37 @@ mat-datepicker-toggle {
   border-bottom: 1px solid #3f51b5;  */
 }
 
+.example-container {
+  /* display: absolute; */
+  /*align-items: center;
+  justify-content: center; */
+  /*height: 100%; */
+  /* width: 50%; */
+  position: absolute;
+  /* z-index: 1; */
+  top: 300;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+
+  background: white;
+}
+.example-sidenav {
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  width: 200px;
+  background: yellow;
+}
+
+mat-datepicker-toggle {
+  z-index: 9999;
+}
+
+
+
+
+
 .clickable {
   cursor: pointer;
 }
@@ -72,6 +109,9 @@ mat-datepicker-toggle {
   margin-right: 8px;
   font-size: 1rem;
 }
+
+
+
 
 .content {
   margin: 16px;
@@ -115,6 +155,6 @@ mat-datepicker-toggle {
 @media only screen and (min-width: 900px) {
   .desktop {
     display: flex;
-    justify-content: space-evenly;
+    justify-content:center;
   }
 }

@@ -4,27 +4,28 @@
     <input matInput type="text" [(ngModel)]="hostID" />
   </mat-form-field>
 </p> -->
-<div class="fixedNav">
+<div> <!-- class="fixedNav" -->
   <!-- <mat-sidenav-container></mat-sidenav-container> -->
   <app-topNav></app-topNav>
 </div>
 <mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" opened >
+  <mat-sidenav mode="side" opened class="example-sidenav" >
 
-    <div class="fixedNav">
-      <!-- <mat-sidenav-container></mat-sidenav-container> -->
+    <!--<div class="fixedNav">
+      
       <app-topNav></app-topNav>
-    </div>
+    </div> -->
     <div class="fixedHead">
-      <p>Logged in HostID: {{ sessionhostID }}</p>
-
+    <!--   <p>Logged in HostID: {{ sessionhostID }}</p>
+    -->
       <div class="desktop">
         <p>
-          <mat-form-field appearance="fill">
+          <!-- <mat-form-field appearance="fill">
             <mat-label>Enter Event Title</mat-label>
             <input matInput type="text" [(ngModel)]="eventTitle" />
-            <!--<mat-error>{{ getErrorMessage() }}</mat-error>-->
+            <mat-error>{{ getErrorMessage() }}</mat-error
           </mat-form-field>
+        -->
         </p>
 
         <mat-form-field appearance="fill">
@@ -82,7 +83,7 @@
     </tbody>
   </table>
 </div>-->
-  <!-- <mat-sidenav-content> -->
+  <mat-sidenav-content class="example-content">
   <!-- GRID TO DISPLAY MOVIES -->
     <div class="content">
       <div fxLayout="row wrap" fxLayoutGap="16px grid">
@@ -113,5 +114,5 @@
         </ng-template>
       </div>
     </div>
-  <!-- </mat-sidenav-content> -->
+  </mat-sidenav-content>
 </mat-sidenav-container>
