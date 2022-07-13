@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-topNav',
   templateUrl: './topNav.component.html',
-  styleUrls: ['./topNav.component.css']
+  styleUrls: ['./topNav.component.scss']
 })
 export class TopNavComponent implements OnInit {
   //loggedUser: boolean = false;

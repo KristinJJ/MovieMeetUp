@@ -25,6 +25,17 @@ export class EventService {
     For removing, essentially the reverse--if MovieItem shows array length is 1, then remove movie item. else remove the
     specified screening id rom that movieItem's shows array.
 */
+
+  addFilteredMoviesToEvent(movieArr: EWMovieItem[]) {
+    // if there are already movies in array when function called, reset array first
+    if(this.movies.length > 0) {
+      this.movies = [];
+    }
+    // make this.movies equal the passed array
+    this.movies = movieArr;
+    console.log("add date array to eventMovies: ", this.movies);
+  }
+
   addMovieToEvent(ewMovieItem: EWMovieItem) {
     this.movies.push(ewMovieItem);
     console.log(this.movies);

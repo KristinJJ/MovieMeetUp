@@ -35,7 +35,7 @@ export interface RankUpdate {
 
 export class RankingComponent implements OnInit {
   id = '';
-  eventTitle = '';
+  //eventTitle = '';
   eventDate = '';
   value = '';
   userID = '';
@@ -105,7 +105,7 @@ export class RankingComponent implements OnInit {
   loadMoviesFromEvent() {
     // if movieEvent is not undefined or null, assign movies to movieItemArray
     if (this.movieEvent != undefined) {
-      this.eventTitle = this.movieEvent.eventTitle;
+      //this.eventTitle = this.movieEvent.eventTitle;
       this.eventDate = this.movieEvent.eventDate;
       this.movieItemArray = this.movieEvent.eventMovies;
       

@@ -36,7 +36,7 @@
       <thead>
         <tr>
           <!-- <th scope="col">Event ID</th> -->
-          <th scope="col">Event Name</th>
+          <th scope="col">Event Date</th>
           <th scope="col">Date</th>
           <th scope="col">Movies</th>
           <th scope="col">Votes Submitted</th>
@@ -51,7 +51,7 @@
               mat-raised-button
               color="warn"
               [routerLink]="['/ranking', viewing.id]"
-              >{{ viewing.eventTitle }}</a
+              >{{ viewing.eventDate }}</a
             >
           </td>
           <td>{{ viewing.eventDate }}</td>
@@ -75,8 +75,8 @@
             <a
               mat-raised-button
               color="accent"
-              href="mailto:?subject=Vote%20for%20which%20movie%20to%20watch%20for%20'{{
-                viewing.eventTitle
+              href="mailto:?subject=Vote%20for%20which%20movie%20to%20watch%20on%20'{{
+                viewing.eventDate
               }}'&body=Before%20{{
                 viewing.eventDate
               }},%20rank%20the%20movies%20at:%0A%0A{{ this.url }}{{

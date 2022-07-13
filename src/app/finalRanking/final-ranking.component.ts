@@ -20,7 +20,7 @@ import { RankUpdate } from '../ranking/ranking.component';
 export class FinalRankingComponent implements OnInit {
 
   id = '';
-  eventTitle = '';
+  //eventTitle = '';
   eventDate = '';
   movieItemArray: (EWMovieItem)[] | undefined;
   movieEvent: MovieEvent | undefined;
@@ -57,7 +57,7 @@ export class FinalRankingComponent implements OnInit {
   loadMoviesFromEvent() {
     // if movieEvent is not undefined or null, assign movies to movieItemArray
     if (this.movieEvent != undefined) {
-      this.eventTitle = this.movieEvent.eventTitle;
+      //this.eventTitle = this.movieEvent.eventTitle;
       this.eventDate = this.movieEvent.eventDate;
       this.movieItemArray = this.movieEvent.eventMovies;
 
