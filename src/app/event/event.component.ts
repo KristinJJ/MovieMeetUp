@@ -24,7 +24,7 @@ export interface MovieEvents {
 export interface MovieEvent {
   id?: string;
   hostID: string;
-  eventTitle: string;
+  //eventTitle: string;
   eventDate: string;
   eventMovies?: (EWMovieItem) [];
   selectedMovies: EWMovieItem[];
@@ -44,7 +44,7 @@ export class EventComponent implements OnInit {
   sessionhostID = sessionStorage.getItem('hostID');
   hostID = '';
   eventID = '';
-  eventTitle = '';
+  //eventTitle = '';
   eventDate = '';
   selectedMovies: EWMovieItem[] = [];
   events = new Map();
@@ -147,6 +147,8 @@ export class EventComponent implements OnInit {
     this.eventDate = `${event.value}`.substring(0, 15);
     console.log("New EventDate: " + this.eventDate);
     this.filterMovies(this.eventDate);
+    // clear error message if there was one from a previous date selection and attempted event creation.
+    this.errormsg = '';
   }
 
   filterMovies(eventDate: string) {
@@ -171,6 +173,9 @@ export class EventComponent implements OnInit {
     });
     console.log('arr?: ', arr);
     this.filteredMovies = arr;
+    this.eventService.addFilteredMoviesToEvent(this.filteredMovies);
+    //this.selectedMovies = this.filteredMovies;
+    console.log("selected Movies: ", this.selectedMovies);
   }
 
   confmessage(): void {
@@ -187,14 +192,14 @@ export class EventComponent implements OnInit {
       this.hostID = this.sessionhostID
     };
     
-    if (this.hostID === '' || this.eventTitle === '' || this.eventDate === '') {
-      this.errormsg = 'You must enter a Host ID, an Event Title, and select a Date.';
+    if (this.hostID === '' || this.eventDate === '') {
+      this.errormsg = 'You must have a Host ID and select a Date.';
       return;
     } if (this.eventDate === null) {
       this.errormsg = 'You must select an actual Date.';
       return;
     } if (this.eventService.getNumSelected() < 3) {
-      this.errormsg = 'You must select at least three Movies.';
+      this.errormsg = 'You must have at least three movie times for guests to choose from.';
       return;
     }
 
@@ -206,7 +211,7 @@ export class EventComponent implements OnInit {
     // Create newEvent object of MovieEvent type with the provided elements
     let newEvent: MovieEvent = {
       hostID: this.hostID,
-      eventTitle : this.eventTitle,
+      //eventTitle : this.eventTitle,
       eventDate : this.eventDate,
       selectedMovies : [...this.eventService.getSelectedMovies()]
     };
@@ -220,18 +225,18 @@ export class EventComponent implements OnInit {
 
     // Display all MovieEvent objects in the events map
     for (let entry of this.events.entries()) {
-      console.log(entry[0], entry[1].eventTitle);
+      console.log(entry[0], entry[1].eventDate);
     }
     this.events.forEach((value: string, key: string) => {
       console.log("KV: " + key, value);
     })
     this.apicall.addMovieEvent(newEvent).subscribe();
-    this.eventTitle = '';
+    //this.eventTitle = '';
     this.eventDate = '';
     this.errormsg = '';
     this.date = new FormControl(new Date());
     this.eventService.resetMovieArray();
-    this.confmsg = `Your "${newEvent.eventTitle}" event has been created!`;
+    this.confmsg = `Your event for "${newEvent.eventDate}" has been created!`;
     this.confmessage();
     //return newEvent;
   }

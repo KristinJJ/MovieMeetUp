@@ -41,7 +41,7 @@
         </mat-form-field>
       </div>
 
-      <h3>Click on at least three Movies below to select them for your Event</h3>
+      <h3>Select a date for your Event to see what's playing that day!</h3>
 
       <h3 style="color: red">
         {{ errormsg }}
@@ -95,7 +95,7 @@
             <!-- <div class="moviesTitle">{{ Object.prototype.toString.call(movie.shows.show) !== '[object Array]' ? [movie.shows.show] : movie.shows.show[0].timestamp }}</div> -->
             <!-- if shows is an array, then show the first one, otherwise show the single show -->
             <div class="moviesTitle" *ngFor="let item of movie.shows[0].show"> <!-- {{ movie.shows[0].show[0].timestamp }}</div> -->
-                <div class="moviesTitle">{{ unixConvert(item.timestamp) }} - Screen {{item.screen}}</div>
+                <div class="moviesTitle" *ngIf="unixConvert(item.timestamp).substring(0,11) === eventDate.substring(0,11)">{{ unixConvert(item.timestamp) }} - Screen {{item.screen}}</div>
             </div>
           </div>
         </div>

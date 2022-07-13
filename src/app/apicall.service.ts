@@ -104,7 +104,7 @@ export class ApicallService {
         console.table(data);
         console.log('data: ' + JSON.stringify(data,null,2));
         return JSON.stringify(data);
-        return JSON.parse(data.eventTitle);
+        return JSON.parse(data.eventDate);
       })
     )
   }
