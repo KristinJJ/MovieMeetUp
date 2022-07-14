@@ -43,7 +43,7 @@ caption {
 }
 thead,
 th {
-  background-color: #000;
+  background-color:darkolivegreen;
   color: #fff;
   border: 2px solid #fff;
   padding: 0.6em;
@@ -63,9 +63,14 @@ td {
   vertical-align: middle;
 }
 ul.movies {
+  list-style-type: none;
   text-align: left;
   margin: 1em;
   padding: 0;
+}
+
+ul.movies li::before {
+  content: "- ";
 }
 
 ul.no-bullets {
