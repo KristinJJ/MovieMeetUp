@@ -27,8 +27,8 @@ export class HomeComponent implements OnInit {
   // url that gets sent in the email for users to rank selected movies in events
   //url = 'https://moviemeetup.com/ranking/';
   url = 'https://localhost:4200/ranking/';
-  today = '';
-  date = new Date();
+  //today: any;
+  //date = new Date();
 
   constructor(private eventComponent: EventComponent, public apicall: ApicallService, private router: Router, private rankingService: RankingService, private httpClient: HttpClient, private route: ActivatedRoute) {
     };
@@ -41,8 +41,8 @@ export class HomeComponent implements OnInit {
     this.rankingService.loadMovieEventsByHostID(String(sessionStorage.getItem('hostID')));
     this.movieEvents = this.rankingService.getMovieEvents();
      
-    this.today = this.eventComponent.unixConvert(this.date.toString());
-    console.log("today?: ", this.today);
+    //this.today = this.eventComponent.hoursConvert(this.date.getTime().toString());
+    //console.log("today?: ", this.today);
   }
 
 }

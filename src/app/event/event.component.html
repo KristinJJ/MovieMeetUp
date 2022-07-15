@@ -10,7 +10,7 @@
 </div>
 <mat-sidenav-container class="example-container">
   <mat-sidenav mode="side" opened class="example-sidenav" >
-
+    
     <!--<div class="fixedNav">
       
       <app-topNav></app-topNav>
@@ -18,6 +18,7 @@
     <div class="fixedHead">
     <!--   <p>Logged in HostID: {{ sessionhostID }}</p>
     -->
+    <h3>Select a date for your Event to see what's playing that day!</h3>
       <div class="desktop">
         <p>
           <!-- <mat-form-field appearance="fill">
@@ -27,9 +28,9 @@
           </mat-form-field>
         -->
         </p>
-
+        
         <mat-form-field appearance="fill">
-          <mat-label>Choose a Date</mat-label>
+          <mat-label id="default">Choose a Date</mat-label>
           <input
             matInput
             [min]="minDate"
@@ -41,7 +42,14 @@
         </mat-form-field>
       </div>
 
-      <h3>Select a date for your Event to see what's playing that day!</h3>
+      <h3>Filter the selected day by time ranges, if desired!</h3>
+
+      <!-- Angular Material button examples -->
+      <div class="example-button-row">
+        <button mat-fab class="filter" (click)="filterMoviesByTime('morning')">8am-Noon</button>
+        <button mat-fab class="filter" (click)="filterMoviesByTime('afternoon')" color="primary">Noon-5pm</button>
+        <button mat-fab class="filter" (click)="filterMoviesByTime('evening')" color="accent">5pm-Mid</button>
+      </div>
 
       <h3 style="color: red">
         {{ errormsg }}
