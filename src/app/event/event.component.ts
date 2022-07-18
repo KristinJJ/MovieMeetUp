@@ -50,6 +50,7 @@ export class EventComponent implements OnInit {
   events = new Map();
   eventMovies: EWMovieItem[] = [];
   filteredMovies: EWMovieItem[] = [];
+  timeFilteredMovies: EWMovieItem[] = [];
   invitees = [];
   movieRankings = [];
   errormsg = '';
@@ -165,6 +166,10 @@ export class EventComponent implements OnInit {
 
 
   setDate(event: MatDatepickerInputEvent<Date>) {
+    if (this.eventDate !== '') {
+      console.log("reloading movies")
+      this.loadEWMovies();
+    }
     console.log(event.value);
     this.eventDate = `${event.value}`.substring(0, 15);
     console.log("New EventDate: " + this.eventDate);
@@ -173,11 +178,14 @@ export class EventComponent implements OnInit {
     this.errormsg = '';
   }
 
+  //filter all movies based on selected date
+  // will update the shows[0].show scrrenings array with just the ones for the date selected
   filterMovies(eventDate: string) {
     console.log('filteredMovies() triggered')
     let filtered = this.eventMovies;
     let target = eventDate.substring(0,11);
     console.log('target date: ', target)
+    // this will filter for the selected date:
     let arr = filtered.filter(film => {
       //return film.shows[0].show.includes()
       let screenings = film.shows[0].show;
@@ -192,10 +200,21 @@ export class EventComponent implements OnInit {
         } */
     });
     console.log('arr?: ', arr);
-    this.filteredMovies = arr;
+    let selectedDate = [target];
+    //this will update the shows listings for just the selected date instead of passing all screenings
+    let filteredArr = arr.map(result=> {
+      //let screenings = shows[0].show;
+      result.shows[0].show =  result.shows[0].show.filter(screening=>selectedDate.includes(this.unixConvert(screening.timestamp).substring(0,11)))
+      return result;
+    });
+    this.filteredMovies = filteredArr;
     this.eventService.addFilteredMoviesToEvent(this.filteredMovies);
+    /* this.filteredMovies = arr;
+    this.eventService.addFilteredMoviesToEvent(this.filteredMovies);
+    */
     //this.selectedMovies = this.filteredMovies;
-    console.log("selected Movies: ", this.selectedMovies);
+    console.log("filtered Movies: ", this.filteredMovies);
+    console.log("original Movies: ", this.eventMovies);
   }
 
   // function for filtering by daytime ranges:
@@ -209,16 +228,21 @@ export class EventComponent implements OnInit {
     let targetRange = '';
     let timeFiltered = this.filteredMovies;
     let start: number, end: number;
+    let ranges:number[] = [];
     if (range === "morning") {
       start = 6;
       end = 11;
+      ranges = Array.from({length: 6}, (x,i) => i + start); //6-11
     } else if (range === "afternoon") {
       start = 12;
       end = 16;
+      ranges = Array.from({length: 5}, (x,i) => i + start); //12-16
     } else if (range === "evening") {
       start = 17;
       end = 23;
+      ranges = Array.from({length: 8}, (x,i) => i + start); //17-24
     }
+    console.log(range, ranges);
       let arr = timeFiltered.filter(scr => {
         let screenings = scr.shows[0].show;
         console.log(this.hoursConvert(screenings[0].timestamp));
@@ -226,10 +250,15 @@ export class EventComponent implements OnInit {
         return screenings.some((entry) => this.hoursConvert(entry.timestamp) >= start && this.hoursConvert(entry.timestamp) <= end)
         //if(this.unixConvert(entry.timestamp).substring(13) > start && this.unixConvert(entry.timestamp).substring(13) < end) {
       });
-      console.log('morningArr: ', arr);
-      this.filteredMovies = arr;
-      this.eventService.addFilteredMoviesToEvent(this.filteredMovies);
-      console.log("selected Movies, time filtered: ", this.selectedMovies);
+      let filteredArr = arr.map(result=> {
+        //let screenings = shows[0].show;
+        result.shows[0].show =  result.shows[0].show.filter(screening=>ranges.includes(this.hoursConvert(screening.timestamp)))
+        return result;
+      });
+      this.timeFilteredMovies = filteredArr;
+      this.eventService.addFilteredMoviesToEvent(this.timeFilteredMovies);
+      console.log("time filtered: ", this.timeFilteredMovies);
+      console.log("original filtered: ", this.filteredMovies);
     
   }
 
