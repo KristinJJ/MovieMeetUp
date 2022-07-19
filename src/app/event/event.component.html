@@ -51,6 +51,10 @@
         <button mat-fab class="filter" (click)="filterMoviesByTime('evening')" color="accent">5pm-Mid</button>
       </div>
 
+      <div class="filter-button-row">
+        <button mat-stroked-button class="clearfilter" (click)="resetFilters()">Clear time ranges</button>
+      </div>
+
       <h3 style="color: red">
         {{ errormsg }}
       </h3>
@@ -95,18 +99,31 @@
   <!-- GRID TO DISPLAY MOVIES -->
     <div class="content">
       <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div *ngIf="eventDate !== ''; else elseBlock">
-          <div class="content" *ngFor="let movie of filteredMovies">
-            <app-movie-card [movie]="movie"> </app-movie-card>
-            <div class="movieTitle">{{ movie.title }}</div>
+        <div *ngIf="eventDate !== ''; else elseBlock;">
+          <ng-container *ngIf="timeFilteredMovies.length > 0; then timeFilt; else altBlock;"></ng-container>
+            <ng-template #timeFilt> 
+            <div class="content" *ngFor="let movie of timeFilteredMovies">
+              <app-movie-card [movie]="movie"> </app-movie-card>
+              <div class="movieTitle">{{ movie.title }}</div>
+              <div class="moviesTitle" *ngFor="let item of movie.shows[0].show">
+                <div class="moviesTitle">{{ unixConvert(item.timestamp) }} - Screen {{item.screen}}</div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template #altBlock>
+            <div class="content" *ngFor="let movie of filteredMovies">
+              <app-movie-card [movie]="movie"> </app-movie-card>
+              <div class="movieTitle">{{ movie.title }}</div>
             <!-- <div class="movieTitle">{{ if (movie.shows.show[0].timestamp || movie.shows.show }}</div> -->
             <!-- <div class="moviesTitle">{{ Object.prototype.toString.call(movie.shows.show) !== '[object Array]' ? [movie.shows.show] : movie.shows.show[0].timestamp }}</div> -->
             <!-- if shows is an array, then show the first one, otherwise show the single show -->
-            <div class="moviesTitle" *ngFor="let item of movie.shows[0].show"> <!-- {{ movie.shows[0].show[0].timestamp }}</div> -->
-                <div class="moviesTitle" *ngIf="unixConvert(item.timestamp).substring(0,11) === eventDate.substring(0,11)">{{ unixConvert(item.timestamp) }} - Screen {{item.screen}}</div>
+                <div class="moviesTitle" *ngFor="let item of movie.shows[0].show"> <!-- {{ movie.shows[0].show[0].timestamp }}</div> -->
+                  <div class="moviesTitle" *ngIf="unixConvert(item.timestamp).substring(0,11) === eventDate.substring(0,11)">{{ unixConvert(item.timestamp) }} - Screen {{item.screen}}</div>
+                </div>
             </div>
+          </ng-template>
+          
           </div>
-        </div>
         <ng-template #elseBlock>
           <div class="content" *ngFor="let movie of eventMovies">
             <app-movie-card [movie]="movie"> </app-movie-card>
@@ -121,6 +138,7 @@
           </div>
         </ng-template>
       </div>
-    </div>
+      </div>
+    <!--</div>-->
   </mat-sidenav-content>
 </mat-sidenav-container>

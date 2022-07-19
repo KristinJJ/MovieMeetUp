@@ -59,6 +59,7 @@ export class EventComponent implements OnInit {
   date = new FormControl(new Date());
   gridColumns = 3;
   minDate = new Date();
+  rangeActive = false;
   //objCheck: Shows[] = [];
 
   constructor(public apicall: ApicallService, private eventService: EventService, private httpClient: HttpClient) {}
@@ -181,8 +182,12 @@ export class EventComponent implements OnInit {
   //filter all movies based on selected date
   // will update the shows[0].show scrrenings array with just the ones for the date selected
   filterMovies(eventDate: string) {
+    // clear timefiltered selections from a previous date selection
+    if (this.timeFilteredMovies.length > 0) {
+      this.timeFilteredMovies.length = 0;
+    }
     console.log('filteredMovies() triggered')
-    let filtered = this.eventMovies;
+    let filtered: EWMovieItem[] = JSON.parse(JSON.stringify(this.eventMovies));
     let target = eventDate.substring(0,11);
     console.log('target date: ', target)
     // this will filter for the selected date:
@@ -226,7 +231,7 @@ export class EventComponent implements OnInit {
       return;
     }
     let targetRange = '';
-    let timeFiltered = this.filteredMovies;
+    let timeFiltered: EWMovieItem[] = JSON.parse(JSON.stringify(this.filteredMovies));
     let start: number, end: number;
     let ranges:number[] = [];
     if (range === "morning") {
@@ -260,6 +265,12 @@ export class EventComponent implements OnInit {
       console.log("time filtered: ", this.timeFilteredMovies);
       console.log("original filtered: ", this.filteredMovies);
     
+  }
+
+  resetFilters() {
+    this.timeFilteredMovies.length = 0;
+    this.filterMovies(this.eventDate);
+    console.log('filters reset');
   }
 
   confmessage(): void {
@@ -321,8 +332,15 @@ export class EventComponent implements OnInit {
     this.date = new FormControl(new Date());
     //this.labelReset();
     this.eventService.resetMovieArray();
+    this.filteredMovies.length = 0;
+    this.timeFilteredMovies.length = 0;
+    this.loadEWMovies();
     this.confmsg = `Your event for "${newEvent.eventDate}" has been created!`;
     this.confmessage();
+    console.log("timefilt: ", this.timeFilteredMovies);
+    console.log("datefilt: ", this.filteredMovies);
+    console.log('date',this.eventDate);
+    console.log('selectedMovs', this.selectedMovies);
     //return newEvent;
   }
 
