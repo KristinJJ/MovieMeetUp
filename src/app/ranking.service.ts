@@ -15,14 +15,18 @@ export class RankingService {
 
   loadMovieEventsByHostID(demoID: String): MovieEvent[] {
     this.apicall.getMovieEvents().subscribe((data) => {
-      //console.log(data);
+      console.log('lmebi: ', data);
       for (let index in data) {
         // make sure the hostID equals the demoID, and that the id does not already exist in the movieEvents array
         if ((data[index].hostID == demoID) && (data[index].id != (this.movieEvents.find(event => event.id == data[index].id))?.id)) {
+          console.log(data[index].eventDate);
+          console.log(Date.parse(data[index].eventDate));
           this.movieEvents.push(data[index]);
         }
       }
     });
+ 
+    
     console.log('RankingService-getMovieEventsByHostID completed: ' + this.movieEvents); 
     return this.movieEvents;
   }
@@ -42,6 +46,12 @@ export class RankingService {
   }*/
 
   getMovieEvents(){
+    //this.movieEvents.sort((a,b) => (a.eventDate > b.eventDate) ? 1 : ((b.eventDate > a.eventDate) ? -1 : 0));
+    this.movieEvents.sort((a,b) => {
+      var dateA = Date.parse(a.eventDate);
+      var dateB = Date.parse(b.eventDate);
+      return dateA < dateB ? 1 : -1;
+    })
     return this.movieEvents;
   }
 }

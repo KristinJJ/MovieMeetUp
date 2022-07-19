@@ -50,6 +50,7 @@ export class EventComponent implements OnInit {
   events = new Map();
   eventMovies: EWMovieItem[] = [];
   filteredMovies: EWMovieItem[] = [];
+  timeFilteredMovies: EWMovieItem[] = [];
   invitees = [];
   movieRankings = [];
   errormsg = '';
@@ -58,6 +59,7 @@ export class EventComponent implements OnInit {
   date = new FormControl(new Date());
   gridColumns = 3;
   minDate = new Date();
+  rangeActive = false;
   //objCheck: Shows[] = [];
 
   constructor(public apicall: ApicallService, private eventService: EventService, private httpClient: HttpClient) {}
@@ -88,6 +90,7 @@ export class EventComponent implements OnInit {
       //console.log(this.eventMovies[2].shows[0].show);
       //console.log('2 typeof', typeof this.eventMovies[2].shows[0].show[0]);
       let seconds = "1652383800"
+      let altSec = "1657911417"
       //let time = (s: any) => new Date(s * 1e3).toISOString(); //.slice(-13, -8);
       // YYYY-MM-DDTHH:mm:ss.sssZ
       // .slice(-13, -5) = 19:30:00
@@ -98,19 +101,40 @@ export class EventComponent implements OnInit {
       //let test = new Date(attempt);   // new Date(parseInt(seconds)*1000)
       //this.convertToDate(test);
       console.log("tada?: ", this.unixConvert(seconds));
+      let secTest = new Date(parseInt(seconds) * 1e3).toISOString().substring(0,23);
+      console.log(secTest);
+      let altTest = new Date(parseInt(altSec) * 1e3).toISOString().substring(0,23);
+      console.log(altTest);
+      console.log('compare? ', secTest < altTest);
+      console.log('getHours: ', this.hoursConvert(seconds));
       //console.log(test);
       })
   }
 
-  // above converts seconds string to ISO date string, then stips the Z off the end,
+  // partial convert to get comparable date info for determing time ranges?
+  //  May want to make this a 'time of day' specific thing?
+  //  output:  2022-05-12T19:30:00.000
+  //  perhaps getting a substring of 11,16, --> getHours()?
+
+  hoursConvert(unix: string): number {
+    let show = new Date(parseInt(unix) * 1e3).toISOString().substring(0, 23);
+    console.log(show);
+    let date = new Date(show);
+    console.log(date);
+    return date.getHours();
+  }
+  
+  // below converts seconds string to ISO date string, then stips the Z off the end,
   // then converts to a Date object.
   // what is next: strip off the day/month/date, then strip off the time and convert to AM/PM
   unixConvert(unix: string): string {
     let show = new Date(parseInt(unix) * 1e3).toISOString().substring(0, 23);
+    //console.log('show: ', show);
     let showTime = new Date(show).toString();
     //console.log("showTime: " + showTime);
     let strDay = showTime.substring(0, 3);
     let date = new Date(show);
+    //console.log('date: ', date);
     //let day = date.getDate();
     let day = showTime.substring(8, 10);
     //let month = date.getMonth() + 1;
@@ -143,6 +167,10 @@ export class EventComponent implements OnInit {
 
 
   setDate(event: MatDatepickerInputEvent<Date>) {
+    if (this.eventDate !== '') {
+      console.log("reloading movies")
+      this.loadEWMovies();
+    }
     console.log(event.value);
     this.eventDate = `${event.value}`.substring(0, 15);
     console.log("New EventDate: " + this.eventDate);
@@ -151,18 +179,23 @@ export class EventComponent implements OnInit {
     this.errormsg = '';
   }
 
+  //filter all movies based on selected date
+  // will update the shows[0].show scrrenings array with just the ones for the date selected
   filterMovies(eventDate: string) {
+    // clear timefiltered selections from a previous date selection
+    if (this.timeFilteredMovies.length > 0) {
+      this.timeFilteredMovies.length = 0;
+    }
     console.log('filteredMovies() triggered')
-    let filtered = this.eventMovies;
+    let filtered: EWMovieItem[] = JSON.parse(JSON.stringify(this.eventMovies));
     let target = eventDate.substring(0,11);
     console.log('target date: ', target)
+    // this will filter for the selected date:
     let arr = filtered.filter(film => {
       //return film.shows[0].show.includes()
-
-
       let screenings = film.shows[0].show;
       //console.log('screenings?: ', screenings)
-      console.log('target chk : ', this.unixConvert(screenings[0].timestamp));
+      //console.log('target chk : ', this.unixConvert(screenings[0].timestamp));
       return screenings.some((entry) => this.unixConvert(entry.timestamp).substring(0,11) === target)
       /*for (let scr of screenings) {
         let temptime = this.unixConvert(scr.timestamp);
@@ -172,10 +205,72 @@ export class EventComponent implements OnInit {
         } */
     });
     console.log('arr?: ', arr);
-    this.filteredMovies = arr;
+    let selectedDate = [target];
+    //this will update the shows listings for just the selected date instead of passing all screenings
+    let filteredArr = arr.map(result=> {
+      //let screenings = shows[0].show;
+      result.shows[0].show =  result.shows[0].show.filter(screening=>selectedDate.includes(this.unixConvert(screening.timestamp).substring(0,11)))
+      return result;
+    });
+    this.filteredMovies = filteredArr;
     this.eventService.addFilteredMoviesToEvent(this.filteredMovies);
+    /* this.filteredMovies = arr;
+    this.eventService.addFilteredMoviesToEvent(this.filteredMovies);
+    */
     //this.selectedMovies = this.filteredMovies;
-    console.log("selected Movies: ", this.selectedMovies);
+    console.log("filtered Movies: ", this.filteredMovies);
+    console.log("original Movies: ", this.eventMovies);
+  }
+
+  // function for filtering by daytime ranges:
+  //  clicking range button will further filter filteredMovies only showing screening times in that range
+
+    filterMoviesByTime(range: string) {  //morning/afternoon/evening
+    if (this.eventDate === '') {
+      this.errormsg = "Please select a Date first.";
+      return;
+    }
+    let targetRange = '';
+    let timeFiltered: EWMovieItem[] = JSON.parse(JSON.stringify(this.filteredMovies));
+    let start: number, end: number;
+    let ranges:number[] = [];
+    if (range === "morning") {
+      start = 6;
+      end = 11;
+      ranges = Array.from({length: 6}, (x,i) => i + start); //6-11
+    } else if (range === "afternoon") {
+      start = 12;
+      end = 16;
+      ranges = Array.from({length: 5}, (x,i) => i + start); //12-16
+    } else if (range === "evening") {
+      start = 17;
+      end = 23;
+      ranges = Array.from({length: 8}, (x,i) => i + start); //17-24
+    }
+    console.log(range, ranges);
+      let arr = timeFiltered.filter(scr => {
+        let screenings = scr.shows[0].show;
+        console.log(this.hoursConvert(screenings[0].timestamp));
+        console.log('range? ',this.hoursConvert(screenings[0].timestamp))//.substr(-2,2));
+        return screenings.some((entry) => this.hoursConvert(entry.timestamp) >= start && this.hoursConvert(entry.timestamp) <= end)
+        //if(this.unixConvert(entry.timestamp).substring(13) > start && this.unixConvert(entry.timestamp).substring(13) < end) {
+      });
+      let filteredArr = arr.map(result=> {
+        //let screenings = shows[0].show;
+        result.shows[0].show =  result.shows[0].show.filter(screening=>ranges.includes(this.hoursConvert(screening.timestamp)))
+        return result;
+      });
+      this.timeFilteredMovies = filteredArr;
+      this.eventService.addFilteredMoviesToEvent(this.timeFilteredMovies);
+      console.log("time filtered: ", this.timeFilteredMovies);
+      console.log("original filtered: ", this.filteredMovies);
+    
+  }
+
+  resetFilters() {
+    this.timeFilteredMovies.length = 0;
+    this.filterMovies(this.eventDate);
+    console.log('filters reset');
   }
 
   confmessage(): void {
@@ -235,14 +330,26 @@ export class EventComponent implements OnInit {
     this.eventDate = '';
     this.errormsg = '';
     this.date = new FormControl(new Date());
+    //this.labelReset();
     this.eventService.resetMovieArray();
+    this.filteredMovies.length = 0;
+    this.timeFilteredMovies.length = 0;
+    this.loadEWMovies();
     this.confmsg = `Your event for "${newEvent.eventDate}" has been created!`;
     this.confmessage();
+    console.log("timefilt: ", this.timeFilteredMovies);
+    console.log("datefilt: ", this.filteredMovies);
+    console.log('date',this.eventDate);
+    console.log('selectedMovs', this.selectedMovies);
     //return newEvent;
   }
-}
 
 
+  /* labelReset() {
+    const app = document.getElementById('default') as HTMLDivElement;
+    app.textContent = 'Choose a Date';
+  } */
+} 
 
 // Pipe added to get ngFor to work with mab iterables
 @Pipe({

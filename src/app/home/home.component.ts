@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApicallService } from '../apicall.service';
 import { HttpClient } from '@angular/common/http';
-import { MovieEvent } from '../event/event.component';
+import { MovieEvent, EventComponent } from '../event/event.component';
 import { RankingService } from '../ranking.service';
 import { environment } from 'src/environments/environment';
 import jwtDecode, { JwtPayload }  from "jwt-decode";
@@ -15,6 +15,7 @@ export interface JwtPayloadCognito extends JwtPayload {
 }
 
 @Component({
+  providers:[EventComponent],
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
@@ -26,8 +27,10 @@ export class HomeComponent implements OnInit {
   // url that gets sent in the email for users to rank selected movies in events
   //url = 'https://moviemeetup.com/ranking/';
   url = 'https://localhost:4200/ranking/';
+  //today: any;
+  //date = new Date();
 
-  constructor(public apicall: ApicallService, private router: Router, private rankingService: RankingService, private httpClient: HttpClient, private route: ActivatedRoute) {
+  constructor(private eventComponent: EventComponent, public apicall: ApicallService, private router: Router, private rankingService: RankingService, private httpClient: HttpClient, private route: ActivatedRoute) {
     };
 
     
@@ -37,9 +40,9 @@ export class HomeComponent implements OnInit {
     console.log("session storage-host: "+ sessionStorage.getItem('hostID'));
     this.rankingService.loadMovieEventsByHostID(String(sessionStorage.getItem('hostID')));
     this.movieEvents = this.rankingService.getMovieEvents();
-
-    
-    
+     
+    //this.today = this.eventComponent.hoursConvert(this.date.getTime().toString());
+    //console.log("today?: ", this.today);
   }
 
 }

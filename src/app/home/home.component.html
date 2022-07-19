@@ -37,55 +37,64 @@
         <tr>
           <!-- <th scope="col">Event ID</th> -->
           <th scope="col">Event Date</th>
-          <th scope="col">Date</th>
+          <!-- <th scope="col">Date</th> -->
           <th scope="col">Movies</th>
-          <th scope="col">Votes Submitted</th>
           <th scope="col">Invite Guests</th>
+          <th scope="col">Votes Submitted</th>
+          <th scope="col">Delete Event</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let viewing of movieEvents">
+          <!-- <div *ngIf="viewing.eventDate<this.today"> -->
           <!-- <td>{{ viewing.id }}</td> -->
           <td>
             <a
               mat-raised-button
-              color="warn"
+              color="basic"
               [routerLink]="['/ranking', viewing.id]"
               >{{ viewing.eventDate }}</a
             >
           </td>
-          <td>{{ viewing.eventDate }}</td>
+          <!-- <td>{{ viewing.eventDate }}</td> -->
           <td>
             <ul class="movies" *ngFor="let movie of viewing.eventMovies">
               <li>{{ movie.title }}</li>
             </ul>
           </td>
-          <!-- <td *ngIf="viewing.eventRankings; else dispZero">
-            {{ viewing.eventRankings?.length }}
-          </td> -->
+          
+          <td>
+            <a
+              mat-raised-button
+              color="primary"
+              href="mailto:?subject=You\'ve%20been%20invited%20to%20a%20gathering%20at%20Circle%20Cinema%20on%20'{{
+                viewing.eventDate
+              }}'&body=This tool will allow you to select which screenings are your favorites!%0A The movies showing on {{viewing.eventDate}} are:%0A{{viewing.eventMovies}}
+              
+              Before%20{{
+                viewing.eventDate
+              }},%20rank%20the%20screening%20options%20at:%0A%0A{{ this.url }}{{
+                viewing.id
+              }}%0A%0AThanks!"
+            >
+              Invite
+            </a>
+          </td>
           <td *ngIf="viewing.eventRankings; else dispZero">
+            {{ viewing.eventRankings?.length }}
+          </td>
+          <!-- <td *ngIf="viewing.eventRankings; else dispZero">
             <ul class="no-bullets" *ngFor="let ranking of viewing.eventRankings">
               <li>{{ ranking.userID }}</li>
             </ul>
-          </td>
+          </td> -->
           <ng-template #dispZero>
             <td>0</td>
           </ng-template>
           <td>
-            <a
-              mat-raised-button
-              color="accent"
-              href="mailto:?subject=Vote%20for%20which%20movie%20to%20watch%20on%20'{{
-                viewing.eventDate
-              }}'&body=Before%20{{
-                viewing.eventDate
-              }},%20rank%20the%20movies%20at:%0A%0A{{ this.url }}{{
-                viewing.id
-              }}%0A%0AThanks!"
-            >
-              email
-            </a>
+            <a class="flex-item"><mat-icon>delete</mat-icon></a>
           </td>
+        <!-- </div> -->
         </tr>
       </tbody>
     </table>

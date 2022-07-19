@@ -41,14 +41,14 @@ app-topnav {
 }
 
 mat-form-field {
-  padding-top: 15%;
+  padding-top: 5%;
   width: 90%;
 
 
 }
 
 h3 {
-  padding: 0 5%;
+  padding: 5%;
 }
 .fixedHead {
     top: 37px;
@@ -97,9 +97,19 @@ mat-datepicker-toggle {
   z-index: 9999;
 }
 
+.filter {
+  font-size: smaller;
+  margin: 0px 3px;
+}
 
+.filter-button-row {
+  padding: 5%;
+}
 
-
+.clearfilter {
+  font-size: smaller;
+  margin: 3px;
+}
 
 .clickable {
   cursor: pointer;

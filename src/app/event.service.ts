@@ -10,7 +10,11 @@ export class EventService {
   constructor(private http: HttpClient) {}
 
   getNumSelected() {
-    return this.movies.length;
+    let count = 0;
+    this.movies.forEach(movie=> count += movie.shows[0].show.length);
+    //return this.movies.length;
+    console.log("getNumSelected: ", count);
+    return count;
   }
 
   getSelectedMovies() {
