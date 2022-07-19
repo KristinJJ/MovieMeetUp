@@ -13,7 +13,7 @@
 <h3 style="color: red">
   {{ errorMsg }}
 </h3>
-
+ 
 <h2>Rank the Movies!</h2>
 <p>
   First choice goes on the top of the list, last choice goes on the bottom of
@@ -28,16 +28,23 @@
         ? "Loading..."
         : movieItemArray.length === 0
         ? "No results"
-        : movieItemArray[0].title
+        : movieItemArray[0].title + ' - ' + this.rankingConvert(movieItemArray[0].shows[0].show[0].timestamp)
     }}
   </h2>
 </div>
 
 <!-- Adjust this so they are dragging movie posters? -->
 <div *ngIf="movieEvents" cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-  <div class="example-box" *ngFor="let movie of movieItemArray" cdkDrag>
-    {{ movie.title }}
-    <img *cdkDragPreview [src]="movie.poster" [alt]="movie.title" />
+  <div class="example-box" *ngFor="let movie of movieItemArray"cdkDrag>
+    <!--<div class="example-box" *ngFor="let screening of movie.shows[0].show" cdkDrag> -->
+      <div class="example-custom-placeholder" *cdkDragPlaceholder>
+      </div>
+      <img src= "{{ movie.poster}}">
+      {{ movie.title }}
+      {{ this.rankingConvert(movie.shows[0].show[0].timestamp) }}
+      {{ movie.shows[0].show[0].room }}
+      
+    
   </div>
 </div>
 

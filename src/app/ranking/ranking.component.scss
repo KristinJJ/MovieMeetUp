@@ -7,6 +7,16 @@ h1 {
   padding-top: 1em;
 }
 
+img {
+  max-height: 30%;
+  max-width: 30%;
+  margin: 0;
+  display: block;
+  //overflow: hidden;
+  object-fit: cover;
+  object-position: bottom;
+}
+
 .example-list {
   width: 500px;
   max-width: 100%;
@@ -17,7 +27,7 @@ h1 {
   border-radius: 4px;
   overflow: hidden;
   margin: 0 auto;
-}
+} 
 
 .example-box {
   padding: 20px 10px;
@@ -54,6 +64,13 @@ h1 {
 }
 
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-custom-placeholder {
+  background: #ccc;
+  border: dotted 3px #999;
+  min-height: 60px;
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 

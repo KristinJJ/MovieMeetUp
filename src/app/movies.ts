@@ -53,7 +53,7 @@ export interface EWMovieItem {
 }
 
 export interface Shows {
-    show: any[];
+    show: Screening[];
 }
 
 export interface Screening {
