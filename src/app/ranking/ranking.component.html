@@ -3,18 +3,18 @@
 
 <p>
   <mat-form-field appearance="fill">
-    <mat-label>Enter User ID</mat-label>
+    <mat-label>Enter your name</mat-label>
     <input matInput type="text" [(ngModel)]="userID" />
   </mat-form-field>
 </p>
 
-<h3>User ID: {{ userID === "" ? "No User ID entered" : userID }}</h3>
+<!-- <h3>Your name: {{ userID === "" ? "No name entered" : userID }}</h3> -->
 
 <h3 style="color: red">
   {{ errorMsg }}
 </h3>
  
-<h2>Rank the Movies!</h2>
+<h2>Rank the Screening Options!</h2>
 <p>
   First choice goes on the top of the list, last choice goes on the bottom of
   the list
@@ -37,12 +37,13 @@
 <div *ngIf="movieEvents" cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
   <div class="example-box" *ngFor="let movie of movieItemArray"cdkDrag>
     <!--<div class="example-box" *ngFor="let screening of movie.shows[0].show" cdkDrag> -->
-      <div class="example-custom-placeholder" *cdkDragPlaceholder>
-      </div>
+      <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
       <img src= "{{ movie.poster}}">
-      {{ movie.title }}
-      {{ this.rankingConvert(movie.shows[0].show[0].timestamp) }}
-      {{ movie.shows[0].show[0].room }}
+      <div class="example-box-text">
+        <h3>{{ movie.title }}</h3>
+        <p>{{ this.rankingConvert(movie.shows[0].show[0].timestamp) }}</p>
+        <p>{{ movie.shows[0].show[0].room }}</p>
+      </div>
       
     
   </div>
