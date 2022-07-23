@@ -159,7 +159,7 @@ export class ApicallService {
       pipe(
         map((data) => {
           console.log(data);
-          console.log("getFinalRankings() data: " + data);
+          console.log("getFinalRankings() data: " + JSON.stringify(data));
           return data ?? [];
         })
       )
