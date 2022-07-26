@@ -12,8 +12,8 @@
         There is a {{ topChoices.length }}-way tie!
       </div>
       <div class="cardHeader">
-        {{ topChoices }}
-        <!--{{ finalRankings[0].title }}-->
+        <p>{{ topChoices }}</p>
+        <p>{{ this.rankingConvert(finalRankings[0].timestamp!) }}</p>
       </div>
       <mat-card *ngIf="rankings" class="movie-card">
         <!--<div class="content" *ngIf="finalRankings">
@@ -27,6 +27,7 @@
           />
         </div>
       </mat-card>
+      <a href="{{ finalRankings[0].screeninglink! }}" target="_blank">Buy Tickets!</a>
     </div>
   </ng-container>
 

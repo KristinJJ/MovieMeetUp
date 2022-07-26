@@ -40,13 +40,33 @@ table {
 
 .movie-card {
   //padding: auto;
-  width: 250px;
-  height: 450px;
+  width: 50%;
+  //width: 250px;
+  //height: 450px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f5f5f5;
   margin: auto;
+}
+
+a {
+  margin: 1em;
+  padding: .5em 1em;
+  width: 50%;
+}
+a:link, a:visited {
+  background-color:darkgreen;
+  color: white;
+  font-weight:bold;
+  text-align:center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 10px;
+}
+
+a:hover, a:active {
+  background-color: forestgreen;
 }
 
 .points {

@@ -83,7 +83,7 @@ export class FinalRankingComponent implements OnInit {
   }
 
   checkPointTie() {
-    console.log("???", this.finalRankings[0].timestamp);
+    console.log("???", this.finalRankings[0].screeninglink!);
     let max = this.finalRankings[0].points;
     for (let finalRanking in this.finalRankings) {
       if (max == this.finalRankings[finalRanking].points) {
