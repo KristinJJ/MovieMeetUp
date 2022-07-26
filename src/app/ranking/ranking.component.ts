@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { MovieEvent } from '../event/event.component';
 import { ActivatedRoute } from '@angular/router';
 import { RankingService } from '../ranking.service';
+//import { EventComponent } from '../event/event.component';
 
 
 export interface RankUp {
@@ -57,7 +58,9 @@ export class RankingComponent implements OnInit {
     private rankingService: RankingService, 
     private router: Router, 
     private httpClient: HttpClient, 
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    //public eventComponent: EventComponent
+    ) {
   }
 
   ngOnInit() {
@@ -72,6 +75,7 @@ export class RankingComponent implements OnInit {
     //this.findMovieEventByEventID();
     
     this.loadMoviesFromEvent();
+    
   }
 
   findMovieEventByEventID() {
@@ -107,8 +111,8 @@ export class RankingComponent implements OnInit {
     if (this.movieEvent != undefined) {
       //this.eventTitle = this.movieEvent.eventTitle;
       this.eventDate = this.movieEvent.eventDate;
-      this.movieItemArray = this.movieEvent.eventMovies;
-      
+      this.movieItemArray = this.rankingService.separateScreenings(this.movieEvent.eventMovies!);
+      console.log('LMFE:', this.movieItemArray[0].shows[0].show[0].timestamp);
       if (this.movieEvent.id) {
         this.id = this.movieEvent.id;
         this.url = this.url + this.id;
@@ -116,6 +120,10 @@ export class RankingComponent implements OnInit {
     }
     
 
+  }
+
+  rankingConvert(unix: string): string {
+    return this.rankingService.unixConvert(unix);
   }
 
   getDifferenceInDays(date1: Date, date2: Date) {
