@@ -10,6 +10,8 @@ import { MovieEvent } from '../event/event.component';
 import { ActivatedRoute } from '@angular/router';
 import { RankingService } from '../ranking.service';
 //import { EventComponent } from '../event/event.component';
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import { NameDialogComponent } from '../name-dialog/name-dialog.component';
 
 
 export interface RankUp {
@@ -59,6 +61,7 @@ export class RankingComponent implements OnInit {
     private router: Router, 
     private httpClient: HttpClient, 
     private route: ActivatedRoute,
+    private dialog: MatDialog
     //public eventComponent: EventComponent
     ) {
   }
@@ -75,7 +78,25 @@ export class RankingComponent implements OnInit {
     //this.findMovieEventByEventID();
     
     this.loadMoviesFromEvent();
+    this.openDialog();
     
+  }
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      title: 'Enter the name you want in the voting results:'
+    };
+
+    this.dialog.open(NameDialogComponent, dialogConfig);
+
+    const dialogRef = this.dialog.open(NameDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => console.log("Dialog output:", data)
+    );
   }
 
   findMovieEventByEventID() {

@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Enter the name you want in the voting results:</h2>
+
+<mat-dialog-content>
+  
+    
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your name</mat-label>
+            <!-- <input matInput type="text" [(ngModel)]="userID" /> -->
+            <input matInput formControlName="description">
+        </mat-form-field>
+    </p>
+    
+ 
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Cancel</button>
+    <button class="mat-raised-button mat-primary"(click)="save()">Use Name</button>
+</mat-dialog-actions>
