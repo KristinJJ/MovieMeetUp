@@ -146,10 +146,10 @@ export class RankingComponent implements OnInit {
   confmessage(): void {
     this.confirmed = true;
     console.log("confirmed: " + this.confirmed);
-    setTimeout(() => {
+    /* setTimeout(() => {
       this.confirmed = false;
       console.log("confirmed: " + this.confirmed);
-    }, 4000);
+    }, 4000); */
   }
 
   submitRanking() {
@@ -183,7 +183,7 @@ export class RankingComponent implements OnInit {
     this.apicall.addUserRankings(rankingUpdate).subscribe(data => console.log(data));
     this.userID = "";
 
-    this.confmsg = `Your movie ranking has been submitted!`;
+    this.confmsg = `Your movie ranking has been submitted! You can close the tab.`;
     this.confmessage();
   }
 
