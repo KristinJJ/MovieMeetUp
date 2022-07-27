@@ -12,8 +12,8 @@
         There is a {{ topChoices.length }}-way tie!
       </div>
       <div class="cardHeader">
-        {{ topChoices }}
-        <!--{{ finalRankings[0].title }}-->
+        <p>{{ topChoices }}</p>
+        <p>{{ this.rankingConvert(finalRankings[0].timestamp!) }}</p>
       </div>
       <mat-card *ngIf="rankings" class="movie-card">
         <!--<div class="content" *ngIf="finalRankings">
@@ -27,6 +27,7 @@
           />
         </div>
       </mat-card>
+      <a href="{{ finalRankings[0].screeninglink! }}" target="_blank">Buy Tickets!</a>
     </div>
   </ng-container>
 
@@ -42,7 +43,7 @@
       <tbody>
         <ng-container *ngIf="rankings">
           <tr *ngFor="let movie of finalRankings; let i = index">
-            <td>{{ movie.title }}</td>
+            <td>{{ movie.title}} - {{ rankingConvert(movie.timestamp!) }} </td>
             <td class="points">{{ movie.points }}</td>
           </tr>
         </ng-container>

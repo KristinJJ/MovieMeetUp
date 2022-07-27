@@ -49,7 +49,10 @@ export interface EWMovieItem {
     title: string;
     type: string;
     writer: string;
-    points?: number;   
+    points?: number;
+    timestamp?: string;
+    screeningid?: string;
+    screeninglink?: string;   
 }
 
 export interface Shows {

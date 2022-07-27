@@ -38,7 +38,8 @@ export class FinalRankingComponent implements OnInit {
 
   constructor(
     public apicall: ApicallService, 
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private rankingService: RankingService
   ) {}
 
   ngOnInit() {
@@ -67,7 +68,7 @@ export class FinalRankingComponent implements OnInit {
 
       if (this.movieEvent.finalRankings != undefined) {
         this.finalRankings = this.movieEvent.finalRankings;
-        //console.log("finalRanking: ", this.finalRanking);
+        console.log("finalRanking: ", JSON.stringify(this.movieEvent.finalRankings));
       }
       
       if (this.movieEvent.id) {
@@ -82,6 +83,7 @@ export class FinalRankingComponent implements OnInit {
   }
 
   checkPointTie() {
+    console.log("???", this.finalRankings[0].screeninglink!);
     let max = this.finalRankings[0].points;
     for (let finalRanking in this.finalRankings) {
       if (max == this.finalRankings[finalRanking].points) {
@@ -89,6 +91,10 @@ export class FinalRankingComponent implements OnInit {
         console.log("top choices: ", this.topChoices);
       }
     }
+  }
+
+  rankingConvert(unix: string): string {
+    return this.rankingService.unixConvert(unix);
   }
 }
 
