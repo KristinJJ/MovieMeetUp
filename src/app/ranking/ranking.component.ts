@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Inject, NgZone} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { ApicallService } from '../apicall.service';
 import { OnInit } from '@angular/core';
@@ -10,6 +10,8 @@ import { MovieEvent } from '../event/event.component';
 import { ActivatedRoute } from '@angular/router';
 import { RankingService } from '../ranking.service';
 //import { EventComponent } from '../event/event.component';
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import { NameDialogComponent } from '../name-dialog/name-dialog.component';
 
 
 export interface RankUp {
@@ -59,6 +61,8 @@ export class RankingComponent implements OnInit {
     private router: Router, 
     private httpClient: HttpClient, 
     private route: ActivatedRoute,
+    private zone: NgZone,
+    private dialog: MatDialog
     //public eventComponent: EventComponent
     ) {
   }
@@ -75,7 +79,31 @@ export class RankingComponent implements OnInit {
     //this.findMovieEventByEventID();
     
     this.loadMoviesFromEvent();
+    this.openDialog();
     
+  }
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = "200";
+    dialogConfig.width = "300";
+
+    dialogConfig.data = {
+      title: 'Enter the name you want in the voting results:'
+    };
+
+    //this.zone.run(() => this.dialog.open(NameDialogComponent, dialogConfig));
+
+    const dialogRef = this.zone.run(() => this.dialog.open(NameDialogComponent, dialogConfig));
+    //const dialogRef = this.dialog.open(NameDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        console.log(`Dialog output: ${data}`)
+        this.userID = data;
+        console.log(`entered name: ${this.userID}`);
+      });
   }
 
   findMovieEventByEventID() {
@@ -146,10 +174,10 @@ export class RankingComponent implements OnInit {
   confmessage(): void {
     this.confirmed = true;
     console.log("confirmed: " + this.confirmed);
-    setTimeout(() => {
+    /* setTimeout(() => {
       this.confirmed = false;
       console.log("confirmed: " + this.confirmed);
-    }, 4000);
+    }, 4000); */
   }
 
   submitRanking() {
@@ -183,7 +211,7 @@ export class RankingComponent implements OnInit {
     this.apicall.addUserRankings(rankingUpdate).subscribe(data => console.log(data));
     this.userID = "";
 
-    this.confmsg = `Your movie ranking has been submitted!`;
+    this.confmsg = `Your movie ranking has been submitted! You can close the tab.`;
     this.confmessage();
   }
 

@@ -20,6 +20,8 @@ import { IntroComponent } from './intro/intro.component';
 import { HeaderInterceptor } from './auth-interceptor';
 import { DeferLoadModule } from '@trademe/ng-defer-load';
 import { SideNavComponent } from './side-nav/side-nav.component';
+import { NameDialogComponent } from './name-dialog/name-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     IterablePipe,
     FinalRankingComponent,
     IntroComponent,
-    SideNavComponent
+    SideNavComponent,
+    NameDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -43,13 +46,15 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     DemoMaterialModule,
     FormsModule,
     FlexLayoutModule, 
-    DeferLoadModule
+    DeferLoadModule,
+    MatDialogModule
   ],
   providers: [
     ApicallService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     //{ provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  //entryComponents: [NameDialogComponent]
 })
 export class AppModule { }

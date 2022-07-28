@@ -1,11 +1,11 @@
 <!-- <h1>Event Title: {{ eventTitle }}</h1> -->
-<h2>Event Date: {{ eventDate }}</h2>
+<!-- <h2>Event Date: {{ eventDate }}</h2> -->
 
 <p>
-  <mat-form-field appearance="fill">
+  <!-- <mat-form-field appearance="fill">
     <mat-label>Enter your name</mat-label>
     <input matInput type="text" [(ngModel)]="userID" />
-  </mat-form-field>
+  </mat-form-field> -->
 </p>
 
 <!-- <h3>Your name: {{ userID === "" ? "No name entered" : userID }}</h3> -->
@@ -16,26 +16,36 @@
  
 <h2>Rank the Screening Options!</h2>
 <p>
-  First choice goes on the top of the list, last choice goes on the bottom of
-  the list
+  Drag the movie screenings to rank the options for {{ eventDate }}.
+</p>
+<p>
+  When you're done, hit 'Submit'.
 </p>
 
 <div>
   <h2 >
-    {{ userID === "" ? "Your" : userID + "'s" }} Current Top Choice:
+    {{ userID === "" || userID === undefined ? "Your" : userID + "'s" }} Current Top Choice:
+    <p>
     {{
       movieItemArray === undefined
         ? "Loading..."
         : movieItemArray.length === 0
         ? "No results"
-        : movieItemArray[0].title + ' - ' + this.rankingConvert(movieItemArray[0].shows[0].show[0].timestamp)
+        : '"' + movieItemArray[0].title + '" - ' + this.rankingConvert(movieItemArray[0].shows[0].show[0].timestamp)
     }}
+    </p>
   </h2>
 </div>
+<button mat-raised-button color="primary" (click)="submitRanking()">
+  Submit
+</button>
+<p *ngIf="confirmed" class="confirmation" style="color: green">
+  <strong>{{ confmsg }}</strong>
+</p>
 
 <!-- Adjust this so they are dragging movie posters? -->
 <div *ngIf="movieEvents" cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-  <div class="example-box" *ngFor="let movie of movieItemArray"cdkDrag>
+  <div class="example-box" *ngFor="let movie of movieItemArray, let indexOfElement=index"cdkDrag>
     <!--<div class="example-box" *ngFor="let screening of movie.shows[0].show" cdkDrag> -->
       <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
       <img src= "{{ movie.poster}}">
@@ -44,16 +54,21 @@
         <p>{{ this.rankingConvert(movie.shows[0].show[0].timestamp) }}</p>
         <p>{{ movie.shows[0].show[0].room }}</p>
       </div>
+      <div class="rankdisplay">
+        <ng-container *ngIf="indexOfElement === 0; then topchoice else numRank;"></ng-container>
+        <ng-template #topchoice>
+          Top<br>Choice
+        </ng-template>
+        <ng-template #numRank>
+          {{ indexOfElement+1 }}
+        </ng-template>
+        
+      </div>
       
     
   </div>
 </div>
 
-<button mat-raised-button color="primary" (click)="submitRanking()">
-  Submit
-</button>
-<p *ngIf="confirmed" class="confirmation" style="color: green">
-  <strong>{{ confmsg }}</strong>
-</p>
+
 
 
