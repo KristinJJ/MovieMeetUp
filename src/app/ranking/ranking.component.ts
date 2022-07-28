@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Inject, NgZone} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { ApicallService } from '../apicall.service';
 import { OnInit } from '@angular/core';
@@ -61,6 +61,7 @@ export class RankingComponent implements OnInit {
     private router: Router, 
     private httpClient: HttpClient, 
     private route: ActivatedRoute,
+    private zone: NgZone,
     private dialog: MatDialog
     //public eventComponent: EventComponent
     ) {
@@ -85,18 +86,24 @@ export class RankingComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.height = "200";
+    dialogConfig.width = "300";
 
     dialogConfig.data = {
       title: 'Enter the name you want in the voting results:'
     };
 
-    this.dialog.open(NameDialogComponent, dialogConfig);
+    //this.zone.run(() => this.dialog.open(NameDialogComponent, dialogConfig));
 
-    const dialogRef = this.dialog.open(NameDialogComponent, dialogConfig);
+    const dialogRef = this.zone.run(() => this.dialog.open(NameDialogComponent, dialogConfig));
+    //const dialogRef = this.dialog.open(NameDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-      data => console.log("Dialog output:", data)
-    );
+      data => {
+        console.log(`Dialog output: ${data}`)
+        this.userID = data;
+        console.log(`entered name: ${this.userID}`);
+      });
   }
 
   findMovieEventByEventID() {

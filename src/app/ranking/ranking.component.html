@@ -2,10 +2,10 @@
 <!-- <h2>Event Date: {{ eventDate }}</h2> -->
 
 <p>
-  <mat-form-field appearance="fill">
+  <!-- <mat-form-field appearance="fill">
     <mat-label>Enter your name</mat-label>
     <input matInput type="text" [(ngModel)]="userID" />
-  </mat-form-field>
+  </mat-form-field> -->
 </p>
 
 <!-- <h3>Your name: {{ userID === "" ? "No name entered" : userID }}</h3> -->
@@ -24,7 +24,7 @@
 
 <div>
   <h2 >
-    {{ userID === "" ? "Your" : userID + "'s" }} Current Top Choice:
+    {{ userID === "" || userID === undefined ? "Your" : userID + "'s" }} Current Top Choice:
     <p>
     {{
       movieItemArray === undefined

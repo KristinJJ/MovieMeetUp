@@ -55,6 +55,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     //{ provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [NameDialogComponent]
+  //entryComponents: [NameDialogComponent]
 })
 export class AppModule { }
