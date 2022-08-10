@@ -92,10 +92,39 @@ h3 {
   width: 200px;
   background: yellow;
 }
+.mobile-menu {
+  background: white;
+  color: black;
+  padding: 8px;
+  position:fixed;
+  top: 4em;
+  width:2%;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content:flex-start;
+  .menu-button {
+      margin-right: 24px;
+      min-width: 0;
+      padding: 0;
+      line-height: normal;
+  }
+}
 
 mat-datepicker-toggle {
   z-index: 9999;
 }
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 0em 3em;
+  align-items: flex-start;
+}
+
+mat-radio-button {
+  margin: 5px;
+}
+
 
 .filter {
   font-size: smaller;
@@ -124,11 +153,17 @@ mat-datepicker-toggle {
 
 
 .content {
-  margin: 16px;
-  font-size: medium;
+  margin: 16px 0px;
+  font-size: small;
   font-weight: bold;
-  padding: 20px;
+  padding: 10px;
   overflow-wrap: normal;
+}
+
+.flex-test {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .createBox p {
@@ -147,6 +182,8 @@ mat-datepicker-toggle {
   word-wrap: normal;
 }
 
+
+
 @media only screen and (max-width: 600px) {
   .movie-card {
     //padding: auto;
@@ -159,6 +196,94 @@ mat-datepicker-toggle {
 
   .movieTitle {
     font-size: x-small;
+  }
+  .fixedHead {
+    width: 100%;
+    height: 30%;
+    //display: flex;
+    //flex-direction: column;
+  }
+
+  /*
+  }*/
+
+  .content {
+    margin-top:110px;
+  }
+  
+      // all elements within will need to be rearranged and sized
+    
+  .example-button-row filter {
+    display: block; // block?
+  }
+  .desktop p {
+    display: none;
+  }
+  mat-form-field {
+    width: 40%;
+    padding: 0;
+    font-size: xx-small;
+    margin-bottom: -1em;
+  }
+  h3 {
+    font-size:small;
+    font-weight: bold;
+    padding: 10px 0 0 0;
+    margin-bottom: 0px;
+  }
+  .trim {
+    padding: 0px;
+  }
+  
+  
+  .example-sidenav {
+    width: 0px;
+    background: white;
+  }
+  
+  .example-content {
+    margin-left: 0;
+  }
+  mat-radio-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0.5em auto;
+    align-items: flex-start;
+  }
+  
+  mat-radio-button {
+    margin: 0px 5px;
+  }
+}
+
+@media only screen and (max-width:380px) {
+  h3 {
+    font-size: x-small;
+  }
+  mat-radio-button {
+    font-size: x-small;
+  }
+}
+
+/* @media only screen and (max-width:412px) {
+  .content > .content:first-of-type {
+  margin-top: 110px;
+}
+ .flex-test .content {
+  margin: 16px 0px;
+}
+} */
+
+/*@media only screen and (min-width:413px) and (max-width: 600px) {
+  .content {
+    margin: 110px;
+  }
+} */
+
+@media only screen and (min-width:740px) {
+  .mobile-menu {
+    display: none;
   }
 }
 

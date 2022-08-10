@@ -23,6 +23,7 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { NameDialogComponent } from './name-dialog/name-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     FlexLayoutModule, 
     DeferLoadModule,
     MatDialogModule
+
   ],
   providers: [
     ApicallService,

@@ -7,18 +7,20 @@
 <div> <!-- class="fixedNav" -->
   <!-- <mat-sidenav-container></mat-sidenav-container> -->
   <app-topNav></app-topNav>
+  
 </div>
+
 <mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" opened class="example-sidenav" >
+  <mat-sidenav mode="side" [(opened)]="isMenuOpen" class="example-sidenav" >
     
     <!--<div class="fixedNav">
       
-      <app-topNav></app-topNav>
+      <app-topNav></app-topNav> 
     </div> -->
     <div class="fixedHead">
     <!--   <p>Logged in HostID: {{ sessionhostID }}</p>
     -->
-    <h3>Select a date for your Event to see what's playing that day!</h3>
+    <h3>1. Select a date for your Event to see what's playing that day!</h3>
       <div class="desktop">
         <p>
           <!-- <mat-form-field appearance="fill">
@@ -42,20 +44,29 @@
         </mat-form-field>
       </div>
 
-      <h3>Filter the selected day by time ranges, if desired!</h3>
+      <h3 class="trim">2. Filter the selected day by time ranges, if desired!</h3>
 
       <!-- Angular Material button examples -->
-      <div class="example-button-row">
+      <!--<div class="example-button-row">  
         <button mat-fab class="filter" (click)="filterMoviesByTime('morning')">8am-Noon</button>
         <button mat-fab class="filter" (click)="filterMoviesByTime('afternoon')" color="primary">Noon-5pm</button>
         <button mat-fab class="filter" (click)="filterMoviesByTime('evening')" color="accent">5pm-Mid</button>
-      </div>
+      </div> -->
+      <mat-radio-group aria-label="Select a time filter option">
+        <!-- <mat-radio-button value=""color="primary" checked>none</mat-radio-button> -->
+        <mat-radio-button value="morning" (change)="filterMoviesByTime($event.value)">morning</mat-radio-button>
+        <mat-radio-button value="afternoon" (change)="filterMoviesByTime($event.value)">afternoon</mat-radio-button>
+        <mat-radio-button value="evening" (change)="filterMoviesByTime($event.value)">evening</mat-radio-button>
+        <mat-radio-button value="clear times" (change)="resetFilters()" checked>clear filters</mat-radio-button>
+        <!-- <mat-radio-button value="afternoon">afternoon</mat-radio-button>
+        <mat-radio-button value="evening">evening</mat-radio-button> -->
+      </mat-radio-group>
 
-      <div class="filter-button-row">
+      <!-- <div class="filter-button-row">
         <button mat-stroked-button class="clearfilter" (click)="resetFilters()">Clear time ranges</button>
-      </div>
+      </div> -->
 
-      <h3 style="color: red">
+      <h3 class="trim" style="color: red">
         {{ errormsg }}
       </h3>
       <div class="createBox">
@@ -96,10 +107,16 @@
   </table>
 </div>-->
   <mat-sidenav-content class="example-content">
+    
   <!-- GRID TO DISPLAY MOVIES -->
     <div class="content">
+      <!--<div class="mobile-menu">
+      <button mat-button class="menu-button" (click)="isMenuOpen = !isMenuOpen">
+        <mat-icon>{{ isMenuOpen ? 'menu_open' : 'menu' }}</mat-icon>
+      </button>
+    </div> -->
       <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div *ngIf="eventDate !== ''; else elseBlock;">
+        <div class="flex-test" *ngIf="eventDate !== ''; else elseBlock;">
           <ng-container *ngIf="timeFilteredMovies.length > 0; then timeFilt; else altBlock;"></ng-container>
             <ng-template #timeFilt> 
             <div class="content" *ngFor="let movie of timeFilteredMovies">
@@ -123,7 +140,7 @@
             </div>
           </ng-template>
           
-          </div>
+        </div>
         <ng-template #elseBlock>
           <div class="content" *ngFor="let movie of eventMovies">
             <app-movie-card [movie]="movie"> </app-movie-card>

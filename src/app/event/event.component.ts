@@ -9,6 +9,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EventService } from "../event.service";
 import { RankUpdate } from '../ranking/ranking.component';
+import { MatSidenavModule, MatDrawerToggleResult } from "@angular/material/sidenav";
+
 
 // @ts-ignore
 //import { onScan } from "../../../popMoviesScan.js";
@@ -61,6 +63,7 @@ export class EventComponent implements OnInit {
   minDate = new Date();
   rangeActive = false;
   //objCheck: Shows[] = [];
+  public isMenuOpen: boolean = true;
 
   constructor(public apicall: ApicallService, private eventService: EventService, private httpClient: HttpClient) {}
 
