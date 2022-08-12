@@ -20,7 +20,7 @@
     <div class="fixedHead">
     <!--   <p>Logged in HostID: {{ sessionhostID }}</p>
     -->
-    <h3>1. Select a date for your Event to see what's playing that day!</h3>
+    <h3>1. Select a date for your gathering to see what's playing that day.</h3>
       <div class="desktop">
         <p>
           <!-- <mat-form-field appearance="fill">
@@ -54,10 +54,10 @@
       </div> -->
       <mat-radio-group aria-label="Select a time filter option">
         <!-- <mat-radio-button value=""color="primary" checked>none</mat-radio-button> -->
-        <mat-radio-button value="morning" (change)="filterMoviesByTime($event.value)">morning</mat-radio-button>
-        <mat-radio-button value="afternoon" (change)="filterMoviesByTime($event.value)">afternoon</mat-radio-button>
-        <mat-radio-button value="evening" (change)="filterMoviesByTime($event.value)">evening</mat-radio-button>
-        <mat-radio-button value="clear times" (change)="resetFilters()" checked>clear filters</mat-radio-button>
+        <mat-radio-button value="morning" (change)="filterMoviesByTime($event.value)" >Morning only</mat-radio-button>
+        <mat-radio-button value="afternoon" (change)="filterMoviesByTime($event.value)" >Afternoon only</mat-radio-button>
+        <mat-radio-button value="evening" (change)="filterMoviesByTime($event.value)" >Evening only</mat-radio-button>
+        <mat-radio-button value="clear times" (change)="resetFilters()" [checked]="timeFilteredMovies.length === 0">All Day</mat-radio-button>
         <!-- <mat-radio-button value="afternoon">afternoon</mat-radio-button>
         <mat-radio-button value="evening">evening</mat-radio-button> -->
       </mat-radio-group>
@@ -72,7 +72,7 @@
       <div class="createBox">
         <p>
           <button mat-raised-button color="primary" (click)="createEvent()">
-            Create Event
+            Use these movie options
           </button>
         </p>
         <p *ngIf="confirmed" class="confirmation" style="color: green">
