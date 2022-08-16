@@ -9,6 +9,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EventService } from "../event.service";
 import { RankUpdate } from '../ranking/ranking.component';
+import { MatSidenavModule, MatDrawerToggleResult } from "@angular/material/sidenav";
+
 
 // @ts-ignore
 //import { onScan } from "../../../popMoviesScan.js";
@@ -61,11 +63,12 @@ export class EventComponent implements OnInit {
   minDate = new Date();
   rangeActive = false;
   //objCheck: Shows[] = [];
+  public isMenuOpen: boolean = true;
 
   constructor(public apicall: ApicallService, private eventService: EventService, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    this.loadEWMovies();
+    //this.loadEWMovies();
     // set minDate for datepicker to be 'tomorrow'--no past dates or picking today.
     this.minDate.setDate(this.minDate.getDate() +1);
     
@@ -74,7 +77,7 @@ export class EventComponent implements OnInit {
   // CALL SCAN API GATEWAY HERE? --> https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/popMovies
   // Attempt to create a function that references the getPopMovies from the apicallservice. This is probably the wrong way?
   // Current gives CORS error and the GET fails.
-  loadEWMovies() {
+  loadEWMovies() { //async(): Promise<Array<EWMovieItem> | any> => {
     console.log("loadEWMovies called");
     return this.apicall.getEWMovies().subscribe((data) => {
       this.eventMovies = data;
@@ -118,9 +121,9 @@ export class EventComponent implements OnInit {
 
   hoursConvert(unix: string): number {
     let show = new Date(parseInt(unix) * 1e3).toISOString().substring(0, 23);
-    console.log(show);
+    //console.log(show);
     let date = new Date(show);
-    console.log(date);
+    //console.log(date);
     return date.getHours();
   }
   
@@ -167,16 +170,30 @@ export class EventComponent implements OnInit {
 
 
   setDate(event: MatDatepickerInputEvent<Date>) {
-    if (this.eventDate !== '') {
+    this.loadEWMovies();
+    /* if (this.eventDate !== '') {
       console.log("reloading movies")
       this.loadEWMovies();
-    }
+    } */
     console.log(event.value);
     this.eventDate = `${event.value}`.substring(0, 15);
     console.log("New EventDate: " + this.eventDate);
-    this.filterMovies(this.eventDate);
+    //this.loadEWMovies().then(() => this.filterMovies(this.eventDate));
+    
+    
+    //let timeoutID = setTimeout(this.filterMovies(this.eventDate), 300);
+    let test = setTimeout(() => {
+      console.log("attempting to filter eventMovies")
+      this.filterMovies(this.eventDate);
+    }, 500);  
     // clear error message if there was one from a previous date selection and attempted event creation.
     this.errormsg = '';
+
+    /*if (this.eventMovies != []) {
+      console.log("clearing Tiemout");
+      clearTimeout(test);
+    } */
+    //return this.filteredMovies;
   }
 
   //filter all movies based on selected date
@@ -226,9 +243,12 @@ export class EventComponent implements OnInit {
   //  clicking range button will further filter filteredMovies only showing screening times in that range
 
     filterMoviesByTime(range: string) {  //morning/afternoon/evening
+      this.errormsg = '';
     if (this.eventDate === '') {
       this.errormsg = "Please select a Date first.";
-      return;
+      //this.resetFilters();
+      //this.timeFilteredMovies.length = 0;
+      //return;
     }
     let targetRange = '';
     let timeFiltered: EWMovieItem[] = JSON.parse(JSON.stringify(this.filteredMovies));
@@ -255,13 +275,25 @@ export class EventComponent implements OnInit {
         return screenings.some((entry) => this.hoursConvert(entry.timestamp) >= start && this.hoursConvert(entry.timestamp) <= end)
         //if(this.unixConvert(entry.timestamp).substring(13) > start && this.unixConvert(entry.timestamp).substring(13) < end) {
       });
+      console.log('arr=', arr);
+      if (arr.length == 0) {
+        this.errormsg = `No movies are showing in the ${range}. Try another time range.`;
+        //this.resetFilters();
+        //return;
+      }
       let filteredArr = arr.map(result=> {
         //let screenings = shows[0].show;
         result.shows[0].show =  result.shows[0].show.filter(screening=>ranges.includes(this.hoursConvert(screening.timestamp)))
         return result;
       });
       this.timeFilteredMovies = filteredArr;
-      this.eventService.addFilteredMoviesToEvent(this.timeFilteredMovies);
+      /*if (this.timeFilteredMovies.length == 0) {
+        this.errormsg = "no movies are showing for that time range.";
+        this.resetFilters();
+        //return;
+      } else {*/
+        this.eventService.addFilteredMoviesToEvent(this.timeFilteredMovies);
+      //}
       console.log("time filtered: ", this.timeFilteredMovies);
       console.log("original filtered: ", this.filteredMovies);
     
