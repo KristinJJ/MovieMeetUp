@@ -277,7 +277,7 @@ export class EventComponent implements OnInit {
       });
       console.log('arr=', arr);
       if (arr.length == 0) {
-        this.errormsg = `No movies are showing in the ${range}. Try another time range.`;
+        this.errormsg = `No movies are showing in the ${range}. Try another time range.`
         //this.resetFilters();
         //return;
       }

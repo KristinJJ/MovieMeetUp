@@ -12,9 +12,10 @@
   >
 </div>-->
 <div class="body">
-  <h1>Your Events</h1>
-  <a mat-raised-button color="primary" routerLink="/event">Build an Event</a>
-  <h2>Click on a link below to go to your Events</h2>
+  <h1>Your Gatherings</h1>
+  
+  <!-- <h2>Click on a link below to go to your Gathering:</h2> -->
+  
   <!-- <div *ngFor="let event of movieEvents">
     <a mat-raised-button color="warn" [routerLink]="['/ranking', event.id]">{{
       event.eventTitle
@@ -29,19 +30,22 @@
       >{{ event.eventTitle }}</a
     >
   </div> -->
-
+  <div class="table-align">
+    <a mat-raised-button color="primary" class="createButton" routerLink="/event">Create a Gathering</a>
+  </div>
   <!-- TABLE TO DISPLAY CREATED EVENTS -->
   <div class="col-md-12">
+    
     <table class="table table-bordered">
       <thead>
         <tr>
           <!-- <th scope="col">Event ID</th> -->
-          <th scope="col">Event Date</th>
+          <th scope="col">Gathering Date</th>
           <!-- <th scope="col">Date</th> -->
           <th scope="col">Movies</th>
           <th scope="col">Invite Guests</th>
           <th scope="col">Votes Submitted</th>
-          <th scope="col">Delete Event</th>
+          <th scope="col">Delete Gathering</th>
         </tr>
       </thead>
       <tbody>
@@ -49,28 +53,32 @@
           <!-- <div *ngIf="viewing.eventDate<this.today"> -->
           <!-- <td>{{ viewing.id }}</td> -->
           <td>
+            {{ viewing.eventDate }}
             <a
               mat-raised-button
               color="basic"
               [routerLink]="['/ranking', viewing.id]"
-              >{{ viewing.eventDate }}</a
+              >Vote</a
             >
           </td>
           <!-- <td>{{ viewing.eventDate }}</td> -->
           <td>
-            <ul class="movies" *ngFor="let movie of viewing.eventMovies">
+            <!-- <ul class="movies" *ngFor="let movie of viewing.eventMovies">
               <li>{{ movie.title }}</li>
-            </ul>
+            </ul> -->
+
+            <!-- May need to create a function to grab al the titles and joins them with a comma to get a more "paragraph" look... -->
+            <div class="td-listing" *ngFor="let movie of viewing.eventMovies, let last=last">{{ movie.title }} {{last?'':', '}} </div>
           </td>
           
           <td>
-            <a
+            <a 
               mat-raised-button
               color="primary"
               target="_blank"
-              href="mailto:?subject=You\'ve%20been%20invited%20to%20a%20gathering%20at%20Circle%20Cinema%20on%20'{{
+              href="mailto:?subject={{viewing.hostID}}%20has%20invited%20you%20to%20a%20gathering%20at%20Circle%20Cinema%20on%20'{{
                 viewing.eventDate
-              }}'&body=This tool will allow you to select which screenings are your favorites!%0A The movies showing on {{viewing.eventDate}} are:%0A{{viewing.eventMovies}}%0A%0ABefore%20{{
+              }}'&body=This tool will allow you to select which screenings are your favorites!%0A The movies showing on {{viewing.eventDate}} are:%0A%0A{{getEventTitles(viewing.id)}}%0A%0ABefore%20{{
                 viewing.eventDate
               }},%20rank%20the%20screening%20options%20at:%0A%0A{{ this.url }}{{
                 viewing.id

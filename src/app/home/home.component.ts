@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   url = 'https://localhost:4200/ranking/';
   //today: any;
   //date = new Date();
+  
 
   constructor(private eventComponent: EventComponent, public apicall: ApicallService, private router: Router, private rankingService: RankingService, private httpClient: HttpClient, private route: ActivatedRoute) {
     };
@@ -40,9 +41,26 @@ export class HomeComponent implements OnInit {
     console.log("session storage-host: "+ sessionStorage.getItem('hostID'));
     this.rankingService.loadMovieEventsByHostID(String(sessionStorage.getItem('hostID')));
     this.movieEvents = this.rankingService.getMovieEvents();
-     
+    setTimeout(() => { 
+      console.log(this.getEventTitles("ulscnsf5f5"));
+    }, 4000);  
     //this.today = this.eventComponent.hoursConvert(this.date.getTime().toString());
     //console.log("today?: ", this.today);
+  }
+
+  getEventTitles(eventID: string | undefined): string {
+    let movietitles: any[] = [];
+    let targetEvent = this.movieEvents.filter((elem) => elem.id === eventID);
+    console.log(targetEvent);
+    let targetmovs = targetEvent[0].eventMovies;
+    for (let title of targetmovs!) {
+      movietitles.push(title.title);
+    }
+    console.log("title array?", movietitles);
+
+    return movietitles.join(', ');
+    //}
+
   }
 
 }

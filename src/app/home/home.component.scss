@@ -18,6 +18,20 @@ h2 {
   max-width: 800px;
 }
 
+.table-align {
+  //width: 90%;
+  //margin-right: 2em auto;
+  height: 3em;
+  margin: 0 3em -2em;
+}
+
+.createButton {
+  //display: flex;
+  //justify-content: flex-end;
+  //width: 5em;
+  float: right;
+}
+
 .logoutButton {
   position: absolute;
   top: 0;
@@ -61,6 +75,11 @@ td {
   border: 1px solid #000;
   padding: 0.5em;
   vertical-align: middle;
+}
+.td-listing {
+  text-align:left;
+  margin: 1em;
+  padding: 0;
 }
 ul.movies {
   list-style-type: none;

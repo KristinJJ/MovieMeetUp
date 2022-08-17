@@ -121,14 +121,19 @@ export class ApicallService {
 
   // get Event data from DynamoDB for home page
   getMovieEvents() : Observable<MovieEvent[]> {
+    
+
+    
     return this.http.get<MovieEvents>('https://j6ywe1e02a.execute-api.us-west-2.amazonaws.com/ewmovieevents-scan').
       pipe(
+
         map((data) => {
           //console.log(data);
           console.log("ApiService- getMovieEvents() completed");
           return data.Items ?? [];
         })
       )
+    
   }
 
   // get Event data from DynamoDB for ranking page
