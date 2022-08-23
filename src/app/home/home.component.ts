@@ -42,7 +42,8 @@ export class HomeComponent implements OnInit {
     this.rankingService.loadMovieEventsByHostID(String(sessionStorage.getItem('hostID')));
     this.movieEvents = this.rankingService.getMovieEvents();
     setTimeout(() => { 
-      console.log(this.getEventTitles("ulscnsf5f5"));
+      //console.log(this.getEventTitles("ulscnsf5f5"));
+      console.log('user events: ', this.movieEvents.length);
     }, 4000);  
     //this.today = this.eventComponent.hoursConvert(this.date.getTime().toString());
     //console.log("today?: ", this.today);

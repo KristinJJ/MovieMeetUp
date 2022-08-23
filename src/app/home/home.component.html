@@ -52,7 +52,7 @@
         <tr *ngFor="let viewing of movieEvents">
           <!-- <div *ngIf="viewing.eventDate<this.today"> -->
           <!-- <td>{{ viewing.id }}</td> -->
-          <td>
+          <td class="date-display">
             {{ viewing.eventDate }}
             <a
               mat-raised-button
@@ -62,13 +62,14 @@
             >
           </td>
           <!-- <td>{{ viewing.eventDate }}</td> -->
-          <td>
+          <td class="td-listing">
             <!-- <ul class="movies" *ngFor="let movie of viewing.eventMovies">
               <li>{{ movie.title }}</li>
             </ul> -->
 
             <!-- May need to create a function to grab al the titles and joins them with a comma to get a more "paragraph" look... -->
-            <div class="td-listing" *ngFor="let movie of viewing.eventMovies, let last=last">{{ movie.title }} {{last?'':', '}} </div>
+            <!--<div class="td-listing" *ngFor="let movie of viewing.eventMovies, let last=last">{{ movie.title }} {{last?'':', '}} </div>-->
+            {{getEventTitles(viewing.id)}}
           </td>
           
           <td>
