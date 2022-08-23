@@ -14,8 +14,8 @@ export class RankingService {
   constructor(public apicall: ApicallService, private http: HttpClient) {}
 
   // Loads all events created by hostID for the homepage
-  async loadMovieEventsByHostID(demoID: String): Promise<MovieEvent[]> {
-    (await this.apicall.getMovieEvents()).subscribe((data) => {
+  async loadMovieEventsByHostID(demoID: String) { //: Promise<MovieEvent[]>
+    this.apicall.getMovieEvents().subscribe((data) => {
       console.log('lmebi: ', data);
       for (let index in data) {
         // make sure the hostID equals the demoID, and that the id does not already exist in the movieEvents array

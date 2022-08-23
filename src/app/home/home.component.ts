@@ -51,12 +51,12 @@ export class HomeComponent implements OnInit {
   getEventTitles(eventID: string | undefined): string {
     let movietitles: any[] = [];
     let targetEvent = this.movieEvents.filter((elem) => elem.id === eventID);
-    console.log(targetEvent);
+    //console.log(targetEvent);
     let targetmovs = targetEvent[0].eventMovies;
     for (let title of targetmovs!) {
       movietitles.push(title.title);
     }
-    console.log("title array?", movietitles);
+    //console.log("title array?", movietitles);
 
     return movietitles.join(', ');
     //}
