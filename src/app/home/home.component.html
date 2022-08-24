@@ -12,99 +12,118 @@
   >
 </div>-->
 <div class="body">
-  <h1>Your Gatherings</h1>
   
-  <!-- <h2>Click on a link below to go to your Gathering:</h2> -->
-  
-  <!-- <div *ngFor="let event of movieEvents">
-    <a mat-raised-button color="warn" [routerLink]="['/ranking', event.id]">{{
-      event.eventTitle
-    }}</a>
-  </div>
+  <ng-container *ngIf="firstLoad == true; then loaddisplay; else newdisplay;"></ng-container>
+    <ng-template #loaddisplay>
+      <h1>Welcome to IKE!</h1>
+      <p>Loading your information...</p>
+    </ng-template>
+    <ng-template #newdisplay>
+      <div class="intro-text"*ngIf="movieEvents.length==0; else eventdisplay">
+        <h1>Welcome {{host}}!</h1>
+        <p>Use IKE to create a "gathering" - a selection of movies and screening times for your selected date!</p>
+        <p>Select a date and range of time to see the movies showing that day. Invite your friends by email to rank their choices, and a ranked-choice voting algorithm determines the best option for all to see!</p>
+        <p>Get started by creating a gathering below:</p>
+        <div class="first-event">
+          <a mat-raised-button color="primary" routerLink="/event">Create a Gathering</a>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #eventdisplay>
+      <h1>Your Gatherings</h1>
+      
+      <!-- <h2>Click on a link below to go to your Gathering:</h2> -->
+      
+      <!-- <div *ngFor="let event of movieEvents">
+        <a mat-raised-button color="warn" [routerLink]="['/ranking', event.id]">{{
+          event.eventTitle
+        }}</a>
+      </div>
 
-  <div *ngFor="let event of movieEvents">
-    <a
-      mat-raised-button
-      color="accent"
-      [routerLink]="['/finalranking', event.id]"
-      >{{ event.eventTitle }}</a
-    >
-  </div> -->
-  <div class="table-align">
-    <a mat-raised-button color="primary" class="createButton" routerLink="/event">Create a Gathering</a>
-  </div>
-  <!-- TABLE TO DISPLAY CREATED EVENTS -->
-  <div class="col-md-12">
-    
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <!-- <th scope="col">Event ID</th> -->
-          <th scope="col">Gathering Date</th>
-          <!-- <th scope="col">Date</th> -->
-          <th scope="col">Movies</th>
-          <th scope="col">Invite Guests</th>
-          <th scope="col">Votes Submitted</th>
-          <th scope="col">Delete Gathering</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let viewing of movieEvents">
-          <!-- <div *ngIf="viewing.eventDate<this.today"> -->
-          <!-- <td>{{ viewing.id }}</td> -->
-          <td class="date-display">
-            {{ viewing.eventDate }}
-            <a
-              mat-raised-button
-              color="basic"
-              [routerLink]="['/ranking', viewing.id]"
-              >Vote</a
-            >
-          </td>
-          <!-- <td>{{ viewing.eventDate }}</td> -->
-          <td class="td-listing">
-            <!-- <ul class="movies" *ngFor="let movie of viewing.eventMovies">
-              <li>{{ movie.title }}</li>
-            </ul> -->
+      <div *ngFor="let event of movieEvents">
+        <a
+          mat-raised-button
+          color="accent"
+          [routerLink]="['/finalranking', event.id]"
+          >{{ event.eventTitle }}</a
+        >
+      </div> -->
+      <div class="table-align">
+        <a mat-raised-button color="primary" class="createButton" routerLink="/event">Create a Gathering</a>
+      </div>
+      <!-- TABLE TO DISPLAY CREATED EVENTS -->
+      <div class="col-md-12">
+        
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <!-- <th scope="col">Event ID</th> -->
+              <th scope="col">Gathering Date</th>
+              <!-- <th scope="col">Date</th> -->
+              <th scope="col">Movies</th>
+              <th scope="col">Invite Guests</th>
+              <th scope="col">Votes Submitted</th>
+              <th scope="col">Delete Gathering</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let viewing of movieEvents">
+              <!-- <div *ngIf="viewing.eventDate<this.today"> -->
+              <!-- <td>{{ viewing.id }}</td> -->
+              <td class="date-display">
+                {{ viewing.eventDate }}
+                <a
+                  mat-raised-button
+                  color="basic"
+                  [routerLink]="['/ranking', viewing.id]"
+                  >Vote</a
+                >
+              </td>
+              <!-- <td>{{ viewing.eventDate }}</td> -->
+              <td class="td-listing">
+                <!-- <ul class="movies" *ngFor="let movie of viewing.eventMovies">
+                  <li>{{ movie.title }}</li>
+                </ul> -->
 
-            <!-- May need to create a function to grab al the titles and joins them with a comma to get a more "paragraph" look... -->
-            <!--<div class="td-listing" *ngFor="let movie of viewing.eventMovies, let last=last">{{ movie.title }} {{last?'':', '}} </div>-->
-            {{getEventTitles(viewing.id)}}
-          </td>
-          
-          <td>
-            <a 
-              mat-raised-button
-              color="primary"
-              target="_blank"
-              href="mailto:?subject={{viewing.hostID}}%20has%20invited%20you%20to%20a%20gathering%20at%20Circle%20Cinema%20on%20'{{
-                viewing.eventDate
-              }}'&body=This tool will allow you to select which screenings are your favorites!%0A The movies showing on {{viewing.eventDate}} are:%0A%0A{{getEventTitles(viewing.id)}}%0A%0ABefore%20{{
-                viewing.eventDate
-              }},%20rank%20the%20screening%20options%20at:%0A%0A{{ this.url }}{{
-                viewing.id
-              }}%0A%0AThanks!"
-            >
-              Invite
-            </a>
-          </td>
-          <td *ngIf="viewing.eventRankings; else dispZero">
-            {{ viewing.eventRankings?.length }}
-          </td>
-          <!-- <td *ngIf="viewing.eventRankings; else dispZero">
-            <ul class="no-bullets" *ngFor="let ranking of viewing.eventRankings">
-              <li>{{ ranking.userID }}</li>
-            </ul>
-          </td> -->
-          <ng-template #dispZero>
-            <td>0</td>
-          </ng-template>
-          <td>
-            <a class="flex-item"><mat-icon>delete</mat-icon></a>
-          </td>
-        <!-- </div> -->
-        </tr>
-      </tbody>
-    </table>
-  </div>
+                <!-- May need to create a function to grab al the titles and joins them with a comma to get a more "paragraph" look... -->
+                <!--<div class="td-listing" *ngFor="let movie of viewing.eventMovies, let last=last">{{ movie.title }} {{last?'':', '}} </div>-->
+                {{getEventTitles(viewing.id)}}
+              </td>
+              
+              <td>
+                <a 
+                  mat-raised-button
+                  color="primary"
+                  target="_blank"
+                  href="mailto:?subject={{viewing.hostID}}%20has%20invited%20you%20to%20a%20gathering%20at%20Circle%20Cinema%20on%20'{{
+                    viewing.eventDate
+                  }}'&body=This tool will allow you to select which screenings are your favorites!%0A The movies showing on {{viewing.eventDate}} are:%0A%0A{{getEventTitles(viewing.id)}}%0A%0ABefore%20{{
+                    viewing.eventDate
+                  }},%20rank%20the%20screening%20options%20at:%0A%0A{{ this.url }}{{
+                    viewing.id
+                  }}%0A%0AThanks!"
+                >
+                  Invite
+                </a>
+              </td>
+              <td *ngIf="viewing.eventRankings; else dispZero">
+                {{ viewing.eventRankings?.length }}
+              </td>
+              <!-- <td *ngIf="viewing.eventRankings; else dispZero">
+                <ul class="no-bullets" *ngFor="let ranking of viewing.eventRankings">
+                  <li>{{ ranking.userID }}</li>
+                </ul>
+              </td> -->
+              <ng-template #dispZero>
+                <td>0</td>
+              </ng-template>
+              <td>
+                <a class="flex-item"><mat-icon>delete</mat-icon></a>
+              </td>
+            <!-- </div> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
 </div>
