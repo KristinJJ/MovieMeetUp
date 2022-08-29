@@ -5,6 +5,7 @@ import { MovieEvent } from './event/event.component';
 import { ApicallService } from './apicall.service';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
+import { promises } from 'dns';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class RankingService {
   constructor(public apicall: ApicallService, private http: HttpClient) {}
 
   // Loads all events created by hostID for the homepage
-  loadMovieEventsByHostID(demoID: String): MovieEvent[] {
+  loadMovieEventsByHostID(demoID: String) { //: Promise<MovieEvent[]>
     this.apicall.getMovieEvents().subscribe((data) => {
       console.log('lmebi: ', data);
       for (let index in data) {
@@ -26,9 +27,10 @@ export class RankingService {
         }
       }
     });
- 
-    
     console.log('RankingService-getMovieEventsByHostID completed: ' + this.movieEvents); 
+    console.log('movieEvents[] length:', this.movieEvents.length);
+    
+    
     return this.movieEvents;
   }
 
