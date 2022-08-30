@@ -22,6 +22,7 @@ import { DeferLoadModule } from '@trademe/ng-defer-load';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { NameDialogComponent } from './name-dialog/name-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ImageHeaderComponent } from './image-header/image-header.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     FinalRankingComponent,
     IntroComponent,
     SideNavComponent,
-    NameDialogComponent
+    NameDialogComponent,
+    ImageHeaderComponent
   ],
   imports: [
     BrowserModule,

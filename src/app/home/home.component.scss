@@ -1,10 +1,21 @@
-.nav {
+/* .nav {
   padding-top: 15px;
   margin: 0em -1.5em auto;
+} */
+app-topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: revert;
+  width: 100%;
+  z-index: 8;
+  
+  justify-content: space-between;
 }
 
 h1 {
-  padding-top: 1em;
+  padding-top: 3em;
 }
 
 h2 {
@@ -25,12 +36,12 @@ h2 {
   margin: 0 3em -2em;
 }
 
-.createButton {
+/*.createButton {
   //display: flex;
   //justify-content: flex-end;
   //width: 5em;
   float: right;
-}
+} */
 
 .logoutButton {
   position: absolute;
@@ -179,5 +190,12 @@ ul.no-bullets {
   }
   td:nth-of-type(5):before {
     content: "Delete Event:";
+  }
+
+  
+}
+@media all and (min-width: 851px) {
+  .createButton {
+    float: right;
   }
 }
