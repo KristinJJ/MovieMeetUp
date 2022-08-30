@@ -18,14 +18,20 @@ export class RankingService {
   loadMovieEventsByHostID(demoID: String) { //: Promise<MovieEvent[]>
     this.apicall.getMovieEvents().subscribe((data) => {
       console.log('lmebi: ', data);
+      const today = Date.parse(Date().toString().substring(0, 15));
+      console.log('today: ', today);
       for (let index in data) {
+        let dateCheck = Date.parse(data[index].eventDate);
+        console.log('dateCheck: ', dateCheck)
         // make sure the hostID equals the demoID, and that the id does not already exist in the movieEvents array
-        if ((data[index].hostID == demoID) && (data[index].id != (this.movieEvents.find(event => event.id == data[index].id))?.id)) {
+        // also compares eventDate to today, and removes past events
+        if ((data[index].hostID == demoID) && (data[index].id != (this.movieEvents.find(event => event.id == data[index].id))?.id) && (dateCheck >= today)) {
           console.log(data[index].eventDate);
           console.log(Date.parse(data[index].eventDate));
           this.movieEvents.push(data[index]);
         }
       }
+      this.sortMovieEvents();
     });
     console.log('RankingService-getMovieEventsByHostID completed: ' + this.movieEvents); 
     console.log('movieEvents[] length:', this.movieEvents.length);
@@ -48,14 +54,10 @@ export class RankingService {
     return temp;
   }*/
 
-  // attempt to sort movie events on the homepage by date of event -- no luck, however...
-  getMovieEvents(){
-    //this.movieEvents.sort((a,b) => (a.eventDate > b.eventDate) ? 1 : ((b.eventDate > a.eventDate) ? -1 : 0));
-    this.movieEvents.sort((a,b) => {
-      var dateA = Date.parse(a.eventDate);
-      var dateB = Date.parse(b.eventDate);
-      return dateA < dateB ? 1 : -1;
-    })
+  // sort movie events on the homepage by date of event, with closest dates at the bottom
+  // to have closest date at the top, change the '<' to '>'.
+  sortMovieEvents(){
+    this.movieEvents.sort((a,b) => (Date.parse(a.eventDate) < Date.parse(b.eventDate)) ? 1 :  -1 );
     return this.movieEvents;
   }
 
