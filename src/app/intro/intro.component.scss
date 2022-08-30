@@ -1,8 +1,19 @@
+.description {
+  display: block;
+  text-align: center;
+  margin: auto;
+  max-width: 50%;
+}
+
+.description p {
+  font-size: medium;
+}
+
 h1 {
   font-size: 2.5rem;
   font-weight: bold;
   //font-family: 'Arial Black', sans-serif;
-  padding: .5em 0em;
+  padding-top: 1.5em;
 }
 
 h2 {
@@ -13,7 +24,7 @@ h2 {
 
 .row {
   display: flex;
-  justify-content: center;
+  justify-content:center;
   margin:auto;
   max-width: 60%;
   //align-items: center;
@@ -22,6 +33,13 @@ h2 {
 .column {
   //flex: 50%;
   padding: 5px;
+}
+
+figure {
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: 10px;
+  margin-inline-end: 10px;
 }
 
 figcaption {
@@ -37,16 +55,6 @@ img {
   /* max-height: 20%;  */
 }
 
-.description {
-  display: block;
-  text-align: center;
-  margin: auto;
-  max-width: 50%;
-}
-
-.description p {
-  font-size: medium;
-}
 
 .introButton {
   display: flex;
@@ -62,4 +70,36 @@ footer {
   margin: auto;
   max-width: 50%;
   font-size: small;
+}
+
+@media all and (max-width: 850px) {
+  .description {
+    max-width: 90%;
+  }
+
+  .row {
+    max-width: 90%;
+    //align-items: center;
+  }
+}
+
+@media all and (max-width: 475px) {
+  h1 {
+    font-size: 1.5em;
+    padding-top: 2.2em;
+  }
+  h2 {
+    font-size: medium;
+    margin-bottom: 0;
+  }
+  .description p {
+    font-size:small;
+  }
+  .row {
+    display: block;
+  }
+
+  footer p {
+    font-size: smaller;
+  }
 }

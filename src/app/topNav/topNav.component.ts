@@ -32,7 +32,23 @@ export class TopNavComponent implements OnInit {
     this.checkLoggedInStatus();
     console.log("topNav ngOnit: checkLoggedInStatus: "+ this.loggedUser);
     this.ref.detectChanges(); */
-    
+    window.onload = function() {
+      /*let topnavs = document.querySelectorAll('.topnav-item');
+      if (window.location.href.indexOf('/home') || window.location.href.indexOf('/event')) {
+        topnavs.forEach(item => { 
+          item.classList.remove('topnav-item');
+        });
+      } else {
+        topnavs.forEach(item => { 
+          item.classList.add('topnav-item');
+        });
+      };
+        //for (let i = 0, len=items.length; i <len; i++) {
+        //  items[i].classList.remove('topnav-item');   //.style.removeProperty("visibility");
+        //}
+           //.querySelectorAll('.topnav-item')[0].style.display = 'none';
+      */
+    };
   }
   
 

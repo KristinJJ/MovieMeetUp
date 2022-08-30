@@ -10,10 +10,20 @@
     background-color: white;
 }
 
+.topnav-item {
+    visibility: hidden;
+}
+
 .flex-item {
     width: 100px;
     margin-top: 10px;
     align-items: center;
+    text-align: center;
+}
+
+.logo {
+    height: 80%;
+    margin: 5px;
 }
 
 .logoutButton {
