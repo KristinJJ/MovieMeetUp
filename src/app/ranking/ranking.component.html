@@ -14,31 +14,35 @@
   {{ errorMsg }}
 </h3>
  
-<h2>Rank the Screening Options!</h2>
+<h2 class="h2-intro">Rank the Screening Options!</h2>
 <p>
-  Drag the movie screenings to rank the options for {{ eventDate }}.
+  <strong>Drag the movie screenings to rank the options for {{ eventDate }}.</strong>
 </p>
-<p>
-  When you're done, hit 'Submit'.
-</p>
+
 
 <div>
   <h2 >
-    {{ userID === "" || userID === undefined ? "Your" : userID + "'s" }} Current Top Choice:
+    <!--{{ userID === "" || userID === undefined ? "Your" : userID + "'s" }} Current Top Choice: -->
+    Your Top Choice Is
     <p>
     {{
       movieItemArray === undefined
         ? "Loading..."
         : movieItemArray.length === 0
         ? "No results"
-        : '"' + movieItemArray[0].title + '" - ' + this.rankingConvert(movieItemArray[0].shows[0].show[0].timestamp)
+        : '"' + movieItemArray[0].title + '" - ' + this.rankingConvert(movieItemArray[0].shows[0].show[0].timestamp) + ' - ' + movieItemArray[0].shows[0].show[0].room
     }}
     </p>
   </h2>
 </div>
-<button mat-raised-button color="primary" (click)="submitRanking()">
-  Submit
-</button>
+<div class="align-table">
+  <p>
+    When you're done dragging and ranking, hit Submit' &rarr;
+  </p>
+  <button mat-raised-button color="primary" (click)="submitRanking()">
+    Submit
+  </button>
+</div>
 <p *ngIf="confirmed" class="confirmation" style="color: green">
   <strong>{{ confmsg }}</strong>
 </p>
