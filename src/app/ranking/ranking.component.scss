@@ -3,8 +3,8 @@
   text-align: center;
 }
 
-h1 {
-  padding-top: 1em;
+.h2-intro {
+  padding-top: 2em;
 }
 
 img {
@@ -88,8 +88,27 @@ img {
   //font-size: large;
 }
 
-button {
+.align-table {
+  width: 500px;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items:center;
+}
+
+.align-table p {
+  margin-right: 0.25em;
+}
+
+.align-table button {
+  margin-bottom: 3px;
+  padding-left: 1em;
+}
+
+/* button {
   margin: 0 auto;
   margin-top: 1em;
   display: block;
-}
+} */
