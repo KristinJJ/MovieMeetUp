@@ -94,7 +94,10 @@ export class FinalRankingComponent implements OnInit {
   }
 
   rankingConvert(unix: string): string {
-    return this.rankingService.unixConvert(unix);
+    let fullstring = this.rankingService.unixConvert(unix);
+    let timeOnly = fullstring.substring(13);
+    //console.log(timeOnly);
+    return timeOnly;
   }
 }
 
