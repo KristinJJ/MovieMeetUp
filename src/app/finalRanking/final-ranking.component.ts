@@ -10,6 +10,8 @@ import { MovieEvent } from '../event/event.component';
 import { ActivatedRoute } from '@angular/router';
 import { RankingService } from '../ranking.service';
 import { RankUpdate } from '../ranking/ranking.component';
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import { NameDialogComponent } from '../name-dialog/name-dialog.component';
 
 
 @Component({
@@ -39,7 +41,8 @@ export class FinalRankingComponent implements OnInit {
   constructor(
     public apicall: ApicallService, 
     private route: ActivatedRoute,
-    private rankingService: RankingService
+    private rankingService: RankingService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -51,7 +54,7 @@ export class FinalRankingComponent implements OnInit {
     // KEEP THIS ONE
     this.movieEvent = this.route.snapshot.data.finalRanking;
     //console.log("this.movieEvent", this.movieEvent);
-    
+    this.dialog.closeAll();
     this.loadMoviesFromEvent();
   }
 

@@ -141,6 +141,14 @@ export class RankingComponent implements OnInit {
       this.eventDate = this.movieEvent.eventDate;
       this.movieItemArray = this.rankingService.separateScreenings(this.movieEvent.eventMovies!);
       console.log('LMFE:', this.movieItemArray[0].shows[0].show[0].timestamp);
+/*
+      const testdate = new Date( Date.parse(this.movieEvent.eventDate) )
+      const today = new Date();
+      console.log("TESTDATE?: " + testdate);
+      if (this.getDifferenceInDays(today,testdate) < 2) {
+        this.router.navigateByUrl(`finalranking/${this.eventIDFromRoute}`);       
+      }
+*/
       if (this.movieEvent.id) {
         this.id = this.movieEvent.id;
         this.url = this.url + this.id;
