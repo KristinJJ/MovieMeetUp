@@ -2,6 +2,9 @@ h1 {
   padding-top: 1em;
 }
 
+.pageTop {
+  margin-top: 2em;
+}
 h3 {
   text-align: center;
   padding-top: 20px;
@@ -20,6 +23,10 @@ img {
 table {
   margin-left: auto;
   margin-right: auto;
+}
+
+.left-aligned {
+  text-align: left;
 }
 
 .cardHeader {
@@ -67,6 +74,10 @@ a:link, a:visited {
 
 a:hover, a:active {
   background-color: forestgreen;
+}
+
+.movie-data {
+  text-align: left;
 }
 
 .points {

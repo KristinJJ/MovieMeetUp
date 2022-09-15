@@ -1,9 +1,9 @@
 <app-image-header></app-image-header>
 <div class="container">
   <!-- <h1>Event Title: {{ eventTitle }}</h1> -->
-  <h2>Event Date: {{ eventDate }}</h2>
+  <!-- <h2>Event Date: {{ eventDate }}</h2> -->
 
-  <h3>Top Selected Movie(s):</h3>
+  <h3 class="pageTop">Top Selected Movie(s):</h3>
   <ng-container *ngIf="finalRankings">
     <div class="content">
       <div *ngIf="finalRankings.length == 0"> 
@@ -15,6 +15,7 @@
       <div class="cardHeader">
         <p>{{ topChoices }}</p>
         <p>{{ this.rankingConvert(finalRankings[0].timestamp!) }}</p>
+        <p>{{ finalRankings[0].room }}</p>
       </div>
       <mat-card *ngIf="rankings" class="movie-card">
         <!--<div class="content" *ngIf="finalRankings">
@@ -37,15 +38,29 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th scope="col">Movie Title</th>
+          <th class="left-aligned" scope="col">Movie Title</th>
           <th scope="col">Points</th>
         </tr>
       </thead>
       <tbody>
         <ng-container *ngIf="rankings">
           <tr *ngFor="let movie of finalRankings; let i = index">
-            <td>{{ movie.title}} - {{ rankingConvert(movie.timestamp!) }} </td>
+            <td class="movie-data">{{ movie.title}} - {{ rankingConvert(movie.timestamp!) }} - {{ movie.room }} </td>
             <td class="points">{{ movie.points }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+    <table class="voter-table">
+      <thead>
+        <tr>
+          <th class="left-aligned" scope="col">Voters</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="rankings">
+          <tr *ngFor="let ranking of rankings; let i = index">
+            <td class="movie-data">{{ ranking.userID }}</td>
           </tr>
         </ng-container>
       </tbody>
