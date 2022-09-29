@@ -97,23 +97,11 @@
                   target="_blank"
                   href="mailto:?subject={{viewing.hostID}}%20has%20invited%20you%20to%20a%20gathering%20at%20Circle%20Cinema%20on%20'{{
                     viewing.eventDate
-                  }}'&body=We are planning a gathering to watch a movie at Circle Cinema on {{viewing.eventDate}}.%0A%0A
-
-                  You are invited to vote on which movies and screening times are your top choices.%0A%0A
-                  
-                  The movies showing on {{viewing.eventDate}} are:%0A%0A
-                  
-                  {{getEventTitles(viewing.id)}%0A%0A
-                  
-                  Before {{viewing.eventDate}}, please click on the link below and rank the screening options:%0A%0A
-                  
-                  {{this.url}}{{viewing.id}}%0A%0A
-                  
-                  I'll let you know when the voting has ended.  You can use this same link to purchase tickets to our chosen film.%0A%0A 
-                  
-                  Thanks for your input - looking forward to seeing you at Circle Cinema!%0A%0A
-                  
-                  {{viewing.hostID}}' "
+                  }}'&body=We are planning a gathering to watch a movie at Circle Cinema on {{viewing.eventDate}}.%0AYou are invited to vote on which movies and screening times are your top choices.%0AThe movies showing on {{viewing.eventDate}} are:%0A%0A{{getEventTitles(viewing.id)}}%0A%0ABefore%20{{
+                    viewing.eventDate
+                  }}, please click on the link below and rank the screening options:%0A%0A{{ this.url }}{{
+                    viewing.id
+                  }}%0A%0AI'll let you know when the voting has ended. You can use this same link to purchase tickets to our chosen film.%0A%0AThanks for your input - looking forward to seeing you at Circle Cinema!%0A%0A{{viewing.hostID}}%0A%0A"
                 >
                   Invite
                 </a>
